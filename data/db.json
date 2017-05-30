@@ -17,57 +17,148 @@
             "note": "a admin"
         },
         {
-            "id": "2",
-            "password": "2",
-            "department": "2ww",
-            "role": "2"
+            "id": "4333",
+            "password": "435",
+            "department": "345",
+            "role": "435"
         },
         {
-            "id": "2332323",
-            "password": "2",
-            "department": "2www",
-            "role": "2"
+            "id": "3324er",
+            "password": "er",
+            "department": "re",
+            "role": "er"
         },
         {
-            "id": "qw",
-            "password": "wq",
-            "department": "wq",
-            "role": "qw"
-        },
-        {
-            "id": "3",
-            "password": "32",
-            "department": "32",
-            "role": "32"
+            "id": "d",
+            "password": "d",
+            "department": "d",
+            "role": "d"
         }
     ],
-    "exam": [
-    	{
-    		"id": "001",
-    		"name": "1月技术考核",
-    		"time": "60",
-    		"isStart": "yes",
-    		"content": {
-    			"selects": [
-    				{
-    					"sid": "1",
-    					"question": "下列哪一项为正确答案？",
-    					"list": [
-    						 "选项一",
-    						 "选项二",
-    						 "选项三"
-    					],
-    					"answer":[1]
-
-    				}
-
-    			],
-    			"judges": [
-    			],
-    			"texts": [
-    			],
-    		}
-
-    	}
-    ]
+    "exam": {
+        "exam_args": {},
+        "exam_list": {
+            "exam_list_args": {},
+            "exam_list_content": [
+                {
+                    "id": "001",
+                    "name": "1月技术考核",
+                    "time": "60",
+                    "isStart": "no",
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1
+                                ],
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1,
+                                    2
+                                ],
+                                "value": 2
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "answer": 0,
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案（判断题）？",
+                                "answer": 0,
+                                "value": 2
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "下图问题出在哪？",
+                                "pic": "c://example.jgp",
+                                "value": 2
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "002",
+                    "name": "2月技术考核",
+                    "time": "60",
+                    "isStart": "no",
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1
+                                ],
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1,
+                                    2
+                                ],
+                                "value": 2
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "answer": 0,
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案（判断题）？",
+                                "answer": 0,
+                                "value": 2
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "下图问题出在哪？",
+                                "pic": "c://example.jgp",
+                                "value": 2
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
 }

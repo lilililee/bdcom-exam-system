@@ -16,6 +16,11 @@ html,body {
 	
 }
 
+header {
+	max-width: 1080px;
+	margin: auto;
+}
+
 /*public*/
 header h1{
 	padding: 30px 0;
@@ -46,7 +51,7 @@ header h1{
 	/*text-align: center;*/
 }
 
-.admin-content .admin-users-list .glyphicon{
+.admin-content  .glyphicon{
 	vertical-align: -3px;
 	cursor: pointer;
 }
