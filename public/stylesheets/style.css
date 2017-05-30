@@ -1,0 +1,63 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+/*public*/
+.wrap {
+  max-width: 1200px;
+  margin: auto;
+
+}
+
+html,body {
+	height: 100%;
+	width: 100%;
+	
+}
+
+/*public*/
+header h1{
+	padding: 30px 0;
+}
+
+/*index*/
+.index-content .login .control-label {
+  padding-top: 7px;
+  text-align: right;
+  color: #eee;
+}
+
+.index-content h1 {
+	padding: 50px 0;
+	color: #b5b5b5;
+}
+
+.submit-result {
+	padding: 0 10px;
+}
+
+
+/*admin*/
+.admin-content .admin-menu {
+	display: block;
+	width: 80%;
+	margin: 20px auto;
+	/*text-align: center;*/
+}
+
+.admin-content .admin-users-list .glyphicon{
+	vertical-align: -3px;
+	cursor: pointer;
+}
+
+.admin-content  .input-group{
+	margin: 10px;
+}
+
+.admin-content .add-user-button input,
+.admin-content .add-user-button button {
+	margin: 0 10px;
+}
+
+

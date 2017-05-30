@@ -1,0 +1,73 @@
+{
+    "admin": [
+        {
+            "id": "lee",
+            "password": "123",
+            "department": "qudao",
+            "role": "技术经理",
+            "note": "a admin"
+        }
+    ],
+    "users": [
+        {
+            "id": "lisi",
+            "password": "12343tert",
+            "department": "qudaorete",
+            "role": "技术支持",
+            "note": "a admin"
+        },
+        {
+            "id": "2",
+            "password": "2",
+            "department": "2ww",
+            "role": "2"
+        },
+        {
+            "id": "2332323",
+            "password": "2",
+            "department": "2www",
+            "role": "2"
+        },
+        {
+            "id": "qw",
+            "password": "wq",
+            "department": "wq",
+            "role": "qw"
+        },
+        {
+            "id": "3",
+            "password": "32",
+            "department": "32",
+            "role": "32"
+        }
+    ],
+    "exam": [
+    	{
+    		"id": "001",
+    		"name": "1月技术考核",
+    		"time": "60",
+    		"isStart": "yes",
+    		"content": {
+    			"selects": [
+    				{
+    					"sid": "1",
+    					"question": "下列哪一项为正确答案？",
+    					"list": [
+    						 "选项一",
+    						 "选项二",
+    						 "选项三"
+    					],
+    					"answer":[1]
+
+    				}
+
+    			],
+    			"judges": [
+    			],
+    			"texts": [
+    			],
+    		}
+
+    	}
+    ]
+}

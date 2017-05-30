@@ -1,0 +1,44 @@
+{
+	"admin": [
+		{
+			"id": "lee",
+			"password": "123",
+			"department": "qudao",
+			"role":"技术经理",
+			"note": "a admin"
+		}
+		
+	],
+	"users": [
+		{
+			"id": "zhangsan",
+			"password": "123",
+			"department": "qudao",
+			"role":"技术支持",
+			"note": "a user"
+		},
+		{	
+			"id": "lisi",
+			"password": "123",
+			"department": "qudao",
+			"role":"技术支持",
+			"note": "a admin"
+		},
+		{		
+			"id": "lisisss",
+			"password": "123",
+			"department": "qudao",
+			"role":"技术支持",
+			"note": "a admin"
+		}
+
+	],
+	"exam": [
+		{
+			"id": "001",
+			"time": "60",
+			
+		}
+		
+	]
+}
