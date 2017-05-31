@@ -1,44 +1,164 @@
 {
-	"admin": [
-		{
-			"id": "lee",
-			"password": "123",
-			"department": "qudao",
-			"role":"技术经理",
-			"note": "a admin"
-		}
-		
-	],
-	"users": [
-		{
-			"id": "zhangsan",
-			"password": "123",
-			"department": "qudao",
-			"role":"技术支持",
-			"note": "a user"
-		},
-		{	
-			"id": "lisi",
-			"password": "123",
-			"department": "qudao",
-			"role":"技术支持",
-			"note": "a admin"
-		},
-		{		
-			"id": "lisisss",
-			"password": "123",
-			"department": "qudao",
-			"role":"技术支持",
-			"note": "a admin"
-		}
-
-	],
-	"exam": [
-		{
-			"id": "001",
-			"time": "60",
-			
-		}
-		
-	]
+    "admin": [
+        {
+            "id": "lee",
+            "password": "123",
+            "department": "qudao",
+            "role": "技术经理",
+            "note": "a admin"
+        }
+    ],
+    "users": [
+        {
+            "id": "lisi",
+            "password": "12343tert",
+            "department": "qudaorete",
+            "role": "技术支持",
+            "note": "a admin"
+        },
+        {
+            "id": "4333",
+            "password": "435",
+            "department": "345",
+            "role": "435"
+        },
+        {
+            "id": "3324er",
+            "password": "er",
+            "department": "re",
+            "role": "er"
+        },
+        {
+            "id": "d",
+            "password": "d",
+            "department": "d",
+            "role": "d"
+        }
+    ],
+    "exam": {
+        "exam_args": {},
+        "exam_list": {
+            "exam_list_args": {},
+            "exam_list_content": [
+                {
+                    "id": "001",
+                    "name": "1月技术考核",
+                    "time": "60",
+                    "isStart": "no",
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1
+                                ],
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1,
+                                    2
+                                ],
+                                "value": 2
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "answer": 0,
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案（判断题）？",
+                                "answer": 0,
+                                "value": 2
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "下图问题出在哪？",
+                                "pic": "c://example.jgp",
+                                "value": 2
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "002",
+                    "name": "2月技术考核",
+                    "time": "60",
+                    "isStart": "no",
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1
+                                ],
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案？",
+                                "list": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1,
+                                    2
+                                ],
+                                "value": 2
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "answer": 0,
+                                "value": 2
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案（判断题）？",
+                                "answer": 0,
+                                "value": 2
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "下图问题出在哪？",
+                                "pic": "c://example.jgp",
+                                "value": 2
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
 }

@@ -26,6 +26,21 @@ header h1{
 	padding: 30px 0;
 }
 
+.glyphicon-edit {
+	color: #3D79D2;
+}
+
+.glyphicon-remove {
+	color: #EA4949;
+}
+.glyphicon-ban-circle{
+	color: #7B7777;
+}
+
+.glyphicon-ok-sign {
+	color: #2DB965;
+}
+
 /*index*/
 .index-content .login .control-label {
   padding-top: 7px;
