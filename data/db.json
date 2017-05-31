@@ -10,35 +10,10 @@
     ],
     "users": [
         {
-            "id": "16",
-            "password": "435",
-            "department": "345",
-            "role": "435"
-        },
-        {
-            "id": "24",
-            "password": "12343tertert",
-            "department": "qudaorete",
-            "role": "技术支持",
-            "note": "a admin"
-        },
-        {
-            "id": "25",
-            "password": "435",
-            "department": "345",
-            "role": "435"
-        },
-        {
-            "id": "31",
-            "password": "er",
-            "department": "re",
-            "role": "er"
-        },
-        {
             "id": "34",
-            "password": "er",
+            "password": "er868",
             "department": "rewerwe",
-            "role": "erwerew"
+            "role": "erwerew34"
         },
         {
             "id": "21",
@@ -48,12 +23,6 @@
         },
         {
             "id": "212",
-            "password": "12343tertert",
-            "department": "12",
-            "role": "12"
-        },
-        {
-            "id": "21223",
             "password": "12343tertert",
             "department": "12",
             "role": "12"
@@ -93,6 +62,18 @@
             "password": "12343tertert",
             "department": "12",
             "role": "12"
+        },
+        {
+            "id": "2",
+            "password": "32",
+            "department": "32",
+            "role": "32"
+        },
+        {
+            "id": "67",
+            "password": "657",
+            "department": "65",
+            "role": "567"
         }
     ],
     "exam": {
@@ -104,7 +85,7 @@
                     "id": "001",
                     "name": "1月技术考核",
                     "time": "60",
-                    "isStart": "no",
+                    "is_start": "yes",
                     "content": {
                         "selects": [
                             {
@@ -163,7 +144,7 @@
                     "id": "002",
                     "name": "2月技术考核",
                     "time": "60",
-                    "isStart": "no",
+                    "is_start": "yes",
                     "content": {
                         "selects": [
                             {

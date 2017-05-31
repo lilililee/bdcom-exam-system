@@ -251,6 +251,8 @@ $(function() {
 
 
 
+
+
     // 考试相关操作
     //根据get请求获取的数据来渲染列表
     function joinExamString(data) {
@@ -259,10 +261,14 @@ $(function() {
       //console.log(data)
 
       data.forEach(function(user, index) {
+        if(user.is_start === 'no') {}
+
+        var glyphicon_start = user.is_start === 'yes'? 'glyphicon-ok-sign' : 'glyphicon-ban-circle';
+
         result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.id + '</td><td>' + user.name + '</td>\
         <td> \
         \
-        <span class="glyphicon glyphicon-ban-circle glyphicon-exam-start" aria-hidden="true" title="发布考试" data-is-start="no"></span>\
+        <span class="glyphicon '+ glyphicon_start +' glyphicon-exam-start" aria-hidden="true" title="发布考试" data-is-start="' + user.is_start +'"></span>\
         <div class="modal fade model-exam-start" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
         <div class="modal-dialog" role="document">\
         <div class="modal-content">\
@@ -411,7 +417,8 @@ $(function() {
                    //    updateExamList(server_url,joinString, list_container)
                    //  }, 300)
                     //updateExamList()
-                  })
+                    console.log(data)
+              })
 
 
 

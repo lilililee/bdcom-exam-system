@@ -6,7 +6,7 @@
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                      <h4 class="modal-title" id="myModalLabel">在线考试</h4>
                   </div> 
 
                   <div class="modal-body">
@@ -25,8 +25,9 @@
                           <a href="#admin_exam_query" aria-controls="profile" role="tab" data-toggle="tab">成绩查询</a>
                         </li>
                       </ul>
-                      <!-- Tab panes -->
-                      <div class="tab-content">
+                     
+                      <div class="tab-content"> 
+                        <!-- Tab panes  考试列表 -->
                         <div role="tabpanel" class="tab-pane active admin-exam-list" id="admin-exam-list">
                           <div class="panel panel-default">
                             <!-- Default panel contents -->
@@ -54,22 +55,38 @@
                             </table>
                           </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane admin_users_add" id="admin_users_add">
+
+                        <!-- Tab panes end 考试列表 -->
+
+
+                        <!-- Tab panes  新增考试 -->
+                        <div role="tabpanel" class="tab-pane admin_exam_add" id="admin_exam_add">
                           <form method="post">
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon1">帐 号：</span>
-                              <input type="text" name="user_id" class="form-control" aria-describedby="basic-addon1"></div>
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon1">密 码：</span>
-                              <input type="text" name="user_password" class="form-control" aria-describedby="basic-addon1"></div>
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon2">部 门：</span>
-                              <input type="text" name="user_department" class="form-control" aria-describedby="basic-addon2"></div>
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon3">职 位：</span>
-                              <input type="text" name="user_role" class="form-control" aria-describedby="basic-addon3"></div>
-                            <input type="hidden" name="add_user" value="yes">
-                            <div class="submit-result"></div>
+                            <div class="alert alert-success" role="alert">正在开始创建一场新的考试...</div>
+                            <div class="well">
+                            <div class="panel panel-info add-selects-area">
+                              <div class="panel-heading"><h4>选择题</h4></div>
+                              <div class="panel-body">
+                                 
+                              </div>
+                            </div>
+                            <div class="panel panel-info add-judges-area">
+                              <div class="panel-heading"><h4>判断题</h4></div>
+                              <div class="panel-body">
+                                Panel content
+                              </div>
+                            </div>
+                            <div class="panel panel-info add-texts-area">
+                              <div class="panel-heading"><h4>问答题</h4></div>
+                              <div class="panel-body">
+                                Panel content
+                              </div>
+                            </div>
+                            </div>
+
+                            
+
+                            
                             <div class="text-center add-user-button">
                               <input type="reset" class="btn btn-default add-user-reset" value="重 置"></input>
                               <input type="submit" class="btn btn-danger add-user-submit" value="确 认"></input>
@@ -83,8 +100,9 @@
 
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button></div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭窗口</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
                   </div>
                 </div>
               </div>
