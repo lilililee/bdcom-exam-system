@@ -482,7 +482,7 @@ $(function() {
 
 
 
-    var temp_exam = temp_exam = {
+    var temp_exam = {
           id: '000',
           name: '',
           time: '',
@@ -491,49 +491,71 @@ $(function() {
             'selects': [],
             'judges': [],
             'texts': []
+          },
+          count: {
+            selects: {
+              sum: 0,
+              score: 0,
+            },
+            judges: {
+              sum: 0,
+              score: 0,
+            },
+            texts: {
+              sum: 0,
+              score: 0,
+            }
           }
-        };    
+        }; 
+
 
     //添加考试 
     function addASelect(){
+      temp_exam.count.selects.sum ++;
+      $('.selects-count-sum').html(temp_exam.count.selects.sum);
+      temp_exam.count.selects.score += 2;
+      $('.selects-count-score').html(temp_exam.count.selects.score);
       var a_select_str =   '<div class="panel panel-success single-select">\
                                   <div class="panel-heading form-horizontal single-select-top">\
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="题目">\
+                                     <div class="input-group">\
+                                        <span class="input-group-addon" id="basic-addon1"><strong class="selects-order">'+temp_exam.count.selects.sum+'.</strong></span>\
+                                        <input type="text" class="form-control" placeholder="题目" aria-describedby="basic-addon1">\
+                                      </div>\
                                   </div>\
 \
                                   <div class="panel-body ">\
                                     <div class="form-horizontal single-select-center">\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">A</span>\
-                                        <input type="text" class="form-control" placeholder="选型A" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control" placeholder="选项A" aria-describedby="basic-addon1">\
                                       </div>\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">B</span>\
-                                        <input type="text" class="form-control" placeholder="选型B" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control" placeholder="选项B" aria-describedby="basic-addon1">\
                                       </div>\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">C</span>\
-                                        <input type="text" class="form-control" placeholder="选型C" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control" placeholder="选项C" aria-describedby="basic-addon1">\
                                       </div>\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">D</span>\
-                                        <input type="text" class="form-control" placeholder="选型D" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control" placeholder="选项D" aria-describedby="basic-addon1">\
                                       </div>\
                                     </div>\
                                     <div class="form-inline single-select-bottom">\
                                       <div class="form-group">\
-                                        <label for="new-exam-start" class="control-label">正确答案</label>\
-                                        <input type="checkbox" id="inlineCheckbox1" value="option1"> A\
+                                        <label class="control-label">正确答案</label>\
+                                        <input type="checkbox" id="inlineCheckbox1" value="a"> A\
                                         \
-                                        <input type="checkbox" id="inlineCheckbox2" value="option2"> B\
-                                        <input type="checkbox" id="inlineCheckbox3" value="option3"> C\
-                                        <input type="checkbox" id="inlineCheckbox3" value="option3"> D\
+                                        <input type="checkbox" id="inlineCheckbox2" value="b"> B\
+                                        <input type="checkbox" id="inlineCheckbox3" value="c"> C\
+                                        <input type="checkbox" id="inlineCheckbox3" value="d"> D\
                                         \
                                       </div>\
 \
                                       <div class="form-group">\
                                         <label for="exampleInputName2">分值</label>\
-                                        <input type="text" class="form-control input-sm" id="exampleInputName2" value="2">\
+                                        <input type="number" class="form-control input-sm single-select-value" id="exampleInputName2" value="2">\
 \
                                       </div>\
 \
@@ -552,10 +574,49 @@ $(function() {
     // $('.delete-single-select').on('click',function(){
      
     // })
-
+    //删除一个选择题
     $(document).on('click','.delete-single-select',function(){
-       console.log(11)
+       
       $(this).parents('.single-select').remove();
+      //更新选择题个数统计
+      temp_exam.count.selects.sum--;
+      $('.selects-count-sum').html(temp_exam.count.selects.sum);
+      //更新题号
+      $('.selects-order').each(function(index){
+          this.innerHTML = index + 1 + '.';
+      })
+
+      //更新选择题总分统计
+      var score = 0;
+      $('.single-select-value').each(function(){
+        score += parseInt(this.value);
+      })
+      temp_exam.count.selects.score = parseFloat(score.toFixed(2));   //toFixed返回一个字符
+       $('.selects-count-score').html(score);
+    })
+
+    //改变单个题目分数时触发总分计算
+    $(document).on('change','.single-select-value',function(){
+      var score = 0;
+       
+      if(!/^[1-9]\d*(\.\d+)?$/.test(this.value)){
+        
+
+        alert('请输入一个正确的分值！');
+        this.focus();
+        this.value = '2';
+      }
+
+      // console.log(this.value)
+      // if(this.value == ''){
+      //   this.value == '2';
+      // }
+      $('.single-select-value').each(function(){
+       
+        score += parseFloat(this.value);
+      })
+      temp_exam.count.selects.score = parseFloat(score.toFixed(2));   //toFixed返回一个字符
+      $('.selects-count-score').html(score);
     })
 
 

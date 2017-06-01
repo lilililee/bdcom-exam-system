@@ -144,7 +144,7 @@
                     "id": "002",
                     "name": "2月技术考核",
                     "time": "60",
-                    "is_start": "no",
+                    "is_start": "yes",
                     "content": {
                         "selects": [
                             {
