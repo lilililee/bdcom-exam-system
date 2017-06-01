@@ -81,3 +81,17 @@ header h1{
 }
 
 
+.admin-content .admin_exam_add .glyphicon{
+	vertical-align: 0;
+	margin: 4px 10px 7px 10px;
+}
+
+.admin-content .admin_exam_add .single-select-bottom .form-group {
+	margin-left: 20px;
+}
+
+.admin-content .admin_exam_add .single-select-bottom input[type="checkbox"]{
+	vertical-align: -3px;
+}
+
+

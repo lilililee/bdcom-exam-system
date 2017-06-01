@@ -18,7 +18,7 @@
         {
             "id": "21",
             "password": "12343tertert",
-            "department": "12",
+            "department": "12324",
             "role": "12"
         },
         {
@@ -85,7 +85,7 @@
                     "id": "001",
                     "name": "1月技术考核",
                     "time": "60",
-                    "is_start": "yes",
+                    "is_start": "no",
                     "content": {
                         "selects": [
                             {
@@ -144,7 +144,7 @@
                     "id": "002",
                     "name": "2月技术考核",
                     "time": "60",
-                    "is_start": "yes",
+                    "is_start": "no",
                     "content": {
                         "selects": [
                             {

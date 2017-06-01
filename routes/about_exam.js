@@ -47,9 +47,10 @@ router.post('/', function(req, res, next) {
         //先从数据库获取考试列表
         var db_exam_list = db.exam.exam_list.exam_list_content; 
         //当为发布考试操作时
-        console.log('正在进行发布考试操作')
-        if(typeof req.body.start_exam_id !== 'undefined'){
-          console.log(req.body.start_exam_id)
+       
+        if(typeof req.body.start_exam_id !== 'undefined'){ 
+          console.log('正在进行发布考试(' + req.body.start_exam_id + ')操作')
+
           for(var j = 0; j < db_exam_list.length; j++){
             if(db_exam_list[j].id == req.body.start_exam_id){
                 db_exam_list[j].is_start = 'yes';
@@ -57,15 +58,16 @@ router.post('/', function(req, res, next) {
             }
               
           }
-          //res.send([db_exam_list,db.exam.exam_list.exam_list_content])
-          res.send('exam '+ req.body.start_exam_id + ' is start!');
-          return; //及时return，不然后续有setHeader操作会报错
+          res.send([db_exam_list,db.exam.exam_list.exam_list_content])
+          //res.send('exam '+ req.body.start_exam_id + ' is start!');
+          //return; //及时return，不然后续有setHeader操作会报错
         } 
 
         //当为取消考试操作时
-        console.log('正在进行取消考试操作')
-        if(typeof req.body.cancel_exam_id !== 'undefined'){
-          console.log(req.body.cancel_exam_id)
+       
+        else if( typeof req.body.cancel_exam_id !== 'undefined'){
+          console.log('正在进行取消考试(' + req.body.cancel_exam_id + ')操作');
+         
           for(var j = 0; j < db_exam_list.length; j++){
             if(db_exam_list[j].id == req.body.cancel_exam_id){
                 db_exam_list[j].is_start = 'no';
@@ -76,12 +78,12 @@ router.post('/', function(req, res, next) {
           }
           
           res.send('exam '+ req.body.cancel_exam_id + ' is cancel!');
-          return; //及时return，不然后续有setHeader操作会报错
+          //return; //及时return，不然后续有setHeader操作会报错
         } 
 
 
         //当为新增用户时
-        else if(typeof req.body.add_exam_id !== 'undefined'){
+        else if( typeof req.body.add_exam_id !== 'undefined'){
           console.log('正在进行取消考试操作')
           for(var j = 0; j < db.users.length; j++){
              if(db.users[j].id === req.body.user_id){
@@ -99,7 +101,7 @@ router.post('/', function(req, res, next) {
           //return;
         }
         //当为修改用户操作时
-        else{
+        else {
           console.log('正在进行修改用户操作')
           for(var j = 0; j < db.users.length; j++){
              if(db.users[j].id === req.body.user_id){
