@@ -119,7 +119,7 @@ html{-webkit-text-size-adjust:none;}
 .contact_right input.sub_mit{ width:150px; height:29px; border:none; background:url(../images/site_bg.png) 0 -850px no-repeat; }
 .contact_right input.sub_mit:hover{ background:url(../images/site_bg.png) 0 -879px no-repeat; cursor:pointer;}
 /*--login--*/
-.login_m{ max-width:403px; margin:0 auto; height:375px; margin-top:50px; /*position: absolute;left:50%;top:50%;margin-left:-202px;margin-top:-188px;*/}
+.login_m{ max-width:403px; margin:0 auto; height:375px; margin-top:10%; /*position: absolute;left:50%;top:50%;margin-left:-202px;margin-top:-188px;*/}
 .login_logo{ text-align:center; margin-bottom:25px;}
 /*.login_boder{ background: url(login_m_bg.png) no-repeat;background-size: contain; height:302px; overflow:hidden;}*/
 .login_boder{padding: 0 10px;}

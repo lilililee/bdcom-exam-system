@@ -510,16 +510,17 @@ $(function() {
 
 
     //添加考试 
+    //1. 添加选择题
     function addASelect(){
       temp_exam.count.selects.sum ++;
       $('.selects-count-sum').html(temp_exam.count.selects.sum);
-      temp_exam.count.selects.score += 2;
+      temp_exam.count.selects.score = parseFloat((temp_exam.count.selects.score + 2).toFixed(1));
       $('.selects-count-score').html(temp_exam.count.selects.score);
       var a_select_str =   '<div class="panel panel-success single-select">\
                                   <div class="panel-heading form-horizontal single-select-top">\
                                      <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1"><strong class="selects-order">'+temp_exam.count.selects.sum+'.</strong></span>\
-                                        <input type="text" class="form-control" placeholder="题目" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control single-select-title" placeholder="题目" aria-describedby="basic-addon1">\
                                       </div>\
                                   </div>\
 \
@@ -571,9 +572,6 @@ $(function() {
     //添加一个选择题
     $('.add-a-select').click(addASelect);
 
-    // $('.delete-single-select').on('click',function(){
-     
-    // })
     //删除一个选择题
     $(document).on('click','.delete-single-select',function(){
        
@@ -589,10 +587,11 @@ $(function() {
       //更新选择题总分统计
       var score = 0;
       $('.single-select-value').each(function(){
-        score += parseInt(this.value);
+        console.log(this.value)
+        score += parseFloat(this.value);
       })
-      temp_exam.count.selects.score = parseFloat(score.toFixed(2));   //toFixed返回一个字符
-       $('.selects-count-score').html(score);
+      temp_exam.count.selects.score = parseFloat(score.toFixed(1));   //toFixed返回一个字符
+       $('.selects-count-score').html(temp_exam.count.selects.score);
     })
 
     //改变单个题目分数时触发总分计算
@@ -615,10 +614,195 @@ $(function() {
        
         score += parseFloat(this.value);
       })
-      temp_exam.count.selects.score = parseFloat(score.toFixed(2));   //toFixed返回一个字符
-      $('.selects-count-score').html(score);
+     // console.log(parseFloat(score.toFixed(1)))
+      temp_exam.count.selects.score = parseFloat(score.toFixed(1));   //toFixed返回一个字符
+
+      $('.selects-count-score').html(temp_exam.count.selects.score);
     })
 
+
+    //2. 添加判断题
+    function addAJudge(){
+      temp_exam.count.judges.sum ++;
+      $('.judges-count-sum').html(temp_exam.count.judges.sum);
+      temp_exam.count.judges.score = parseFloat((temp_exam.count.judges.score + 2).toFixed(1));
+      $('.judges-count-score').html(temp_exam.count.judges.score);
+      var a_judge_str =   '<div class="panel panel-success single-judge">\
+                                  <div class="panel-heading form-horizontal single-judge-top">\
+                                     <div class="input-group">\
+                                        <span class="input-group-addon" id="basic-addon1"><strong class="judges-order">'+temp_exam.count.judges.sum+'.</strong></span>\
+                                        <input type="text" class="form-control single-judge-title" placeholder="题目" aria-describedby="basic-addon1">\
+                                      </div>\
+                                  </div>\
+\
+                                  <div class="panel-body ">\
+                                   \
+                                    <div class="form-inline single-judge-bottom">\
+                                      <div class="form-group">\
+                                        <label class="control-label">正确答案</label>\
+                                        <input type="radio" name="single-judge-answer" value="true"> 对\
+                                        \
+                                        <input type="radio" name="single-judge-answer" value="false"> 错\
+                                        \
+                                        \
+                                      </div>\
+\
+                                      <div class="form-group">\
+                                        <label for="exampleInputName2">分值</label>\
+                                        <input type="number" class="form-control input-sm single-judge-value" id="exampleInputName2" value="2">\
+\
+                                      </div>\
+\
+                                      <div class="btn btn-danger pull-right delete-single-judge">删除该题</div>\
+\
+                                    </div>\
+                                  </div>\
+                                </div>'
+
+      $(this).parent().before(a_judge_str);
+    }
+
+    //添加一个判断题
+    $('.add-a-judge').click(addAJudge);
+
+    //删除一个判断题
+    $(document).on('click','.delete-single-judge',function(){
+       
+      $(this).parents('.single-judge').remove();
+      //更新判断题个数统计
+      temp_exam.count.judges.sum--;
+      $('.judges-count-sum').html(temp_exam.count.judges.sum);
+      //更新题号
+      $('.judges-order').each(function(index){
+          this.innerHTML = index + 1 + '.';
+      })
+
+      //更新判断题总分统计
+      var score = 0;
+      $('.single-judge-value').each(function(){
+        console.log(this.value)
+        score += parseFloat(this.value);
+      })
+      temp_exam.count.judges.score = parseFloat(score.toFixed(1));   //toFixed返回一个字符
+       $('.judges-count-score').html(temp_exam.count.judges.score);
+    })
+
+    //改变单个题目分数时触发总分计算
+    $(document).on('change','.single-judge-value',function(){
+      var score = 0;
+       
+      if(!/^[1-9]\d*(\.\d+)?$/.test(this.value)){
+        
+
+        alert('请输入一个正确的分值！');
+        this.focus();
+        this.value = '2';
+      }
+
+      // console.log(this.value)
+      // if(this.value == ''){
+      //   this.value == '2';
+      // }
+      $('.single-judge-value').each(function(){
+       
+        score += parseFloat(this.value);
+      })
+     // console.log(parseFloat(score.toFixed(1)))
+      temp_exam.count.judges.score = parseFloat(score.toFixed(1));   //toFixed返回一个字符
+
+      $('.judges-count-score').html(temp_exam.count.judges.score);
+    })
+
+
+    //2. 添加简答题
+    function addAtext(){
+      temp_exam.count.texts.sum ++;
+      $('.texts-count-sum').html(temp_exam.count.texts.sum);
+      temp_exam.count.texts.score = parseFloat((temp_exam.count.texts.score + 10).toFixed(1));
+      $('.texts-count-score').html(temp_exam.count.texts.score);
+      var a_text_str =   '<div class="panel panel-success single-text">\
+                                  <div class="panel-heading form-horizontal single-text-top">\
+                                     <div class="input-group">\
+                                        <span class="input-group-addon" id="basic-addon1"><strong class="texts-order">'+temp_exam.count.texts.sum+'.</strong></span>\
+                                        <input type="text" class="form-control single-text-title" placeholder="题目" aria-describedby="basic-addon1">\
+                                      </div>\
+                                  </div>\
+\
+                                  <div class="panel-body ">\
+                                   \
+                                    <div class="form-inline single-text-bottom">\
+                                      <div class="form-group">\
+                                        <label class="control-label">上传图片</label>\
+                                        <input type="file" id="exampleInputFile">\
+                                        \
+                                        \
+                                      </div>\
+\
+                                      <div class="form-group">\
+                                        <label for="exampleInputName2">分值</label>\
+                                        <input type="number" class="form-control input-sm single-text-value" id="exampleInputName2" value="10">\
+\
+                                      </div>\
+\
+                                      <div class="btn btn-danger pull-right delete-single-text">删除该题</div>\
+\
+                                    </div>\
+                                  </div>\
+                                </div>'
+
+      $(this).parent().before(a_text_str);
+    }
+
+    //添加一个简答题
+    $('.add-a-text').click(addAtext);
+
+    //删除一个简答题
+    $(document).on('click','.delete-single-text',function(){
+       
+      $(this).parents('.single-text').remove();
+      //更新简答题个数统计
+      temp_exam.count.texts.sum--;
+      $('.texts-count-sum').html(temp_exam.count.texts.sum);
+      //更新题号
+      $('.texts-order').each(function(index){
+          this.innerHTML = index + 1 + '.';
+      })
+
+      //更新简答题总分统计
+      var score = 0;
+      $('.single-text-value').each(function(){
+        console.log(this.value)
+        score += parseFloat(this.value);
+      })
+      temp_exam.count.texts.score = parseFloat(score.toFixed(1));   //toFixed返回一个字符
+       $('.texts-count-score').html(temp_exam.count.texts.score);
+    })
+
+    //改变单个题目分数时触发总分计算
+    $(document).on('change','.single-text-value',function(){
+      var score = 0;
+       
+      if(!/^[1-9]\d*(\.\d+)?$/.test(this.value)){
+        
+
+        alert('请输入一个正确的分值！');
+        this.focus();
+        this.value = '10';
+      }
+
+      // console.log(this.value)
+      // if(this.value == ''){
+      //   this.value == '2';
+      // }
+      $('.single-text-value').each(function(){
+       
+        score += parseFloat(this.value);
+      })
+     // console.log(parseFloat(score.toFixed(1)))
+      temp_exam.count.texts.score = parseFloat(score.toFixed(1));   //toFixed返回一个字符
+
+      $('.texts-count-score').html(temp_exam.count.texts.score);
+    })
 
 
 })

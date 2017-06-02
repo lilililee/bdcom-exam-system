@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+	<h1><%= title %></h1>
+	<p>Welcome to <%= title %></p>
+    <!-- <form id="#myform" method="post" action="./file" enctype="multipart/form-data" > -->
+	<form id="#myform" >
+        <input type="text" name="name" value="1111">
+		<input type="text" name="name2" value="222">
+		<input type="file" name="img" >
+		<div id="submitsss">sssssssssss</div>
+        <input type="submit">
+	</form>
+	<script src="javascripts/jquery-3.2.1.min.js"></script>
+	<!-- <script src="javascripts/jquery.form.js"></script> -->
+	<script>
+    // document.getElementById('submitsss').onclick= function(e){
+    // 	console.log(111)
+
+    // 	// e.preventDefault()
+    // 		var myFormData = new FormData(document.getElementById("myform"));
+    // 		// console.log(myFormData)
+    // 		$.ajax({
+    // 			url:'./file',
+    // 			type: 'post',
+    // 			data: myFormData,
+    // 			success: function(data){
+    // 				console.log(data)
+    // 			}
+    // 		})
+    // 	return false;
+    // }
+    $('#submitsss').click(function(e){
+    	console.log(111)
+    	var myFormData = new FormData(document.getElementById("myform"));
+    	console.log(myFormData);
+        myFormData.append('ss','sss')
+    		$.ajax({
+    			url:'./file',
+    			type: 'POST',
+    			data: myFormData,
+                processData: false,    //必须
+                contentType: false,         //https://segmentfault.com/a/1190000007207128!!!!!!!
+    			success: function(data){
+    				console.log(data)
+    			}
+    		})
+
+
+    		// $.ajax({url: "./file",
+    		// 	type: "POST",
+    			
+    		// 	data: {username:1,content:2},
+    		// 	//dataType: "json",
+    		// 	success: function(data){
+    		// 		console.log(data)
+    		// 	}
+    		// });
+    		return false;
+    	})
+
+    </script>
+</body>
+</html>
