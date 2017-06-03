@@ -528,29 +528,29 @@ $(function() {
                                     <div class="form-horizontal single-select-center">\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">A</span>\
-                                        <input type="text" class="form-control" placeholder="选项A" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control single-select-option" data-value="a" placeholder="选项A" aria-describedby="basic-addon1">\
                                       </div>\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">B</span>\
-                                        <input type="text" class="form-control" placeholder="选项B" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control single-select-option" data-value="b" placeholder="选项B" aria-describedby="basic-addon1">\
                                       </div>\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">C</span>\
-                                        <input type="text" class="form-control" placeholder="选项C" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control single-select-option" data-value="c" placeholder="选项C" aria-describedby="basic-addon1">\
                                       </div>\
                                       <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1">D</span>\
-                                        <input type="text" class="form-control" placeholder="选项D" aria-describedby="basic-addon1">\
+                                        <input type="text" class="form-control single-select-option" data-value="d" placeholder="选项D" aria-describedby="basic-addon1">\
                                       </div>\
                                     </div>\
                                     <div class="form-inline single-select-bottom">\
                                       <div class="form-group">\
                                         <label class="control-label">正确答案</label>\
-                                        <input type="checkbox" id="inlineCheckbox1" value="a"> A\
+                                        <input type="checkbox" class="single-select-answer" value="a"> A\
                                         \
-                                        <input type="checkbox" id="inlineCheckbox2" value="b"> B\
-                                        <input type="checkbox" id="inlineCheckbox3" value="c"> C\
-                                        <input type="checkbox" id="inlineCheckbox3" value="d"> D\
+                                        <input type="checkbox" class="single-select-answer" value="b"> B\
+                                        <input type="checkbox" class="single-select-answer" value="c"> C\
+                                        <input type="checkbox" class="single-select-answer" value="d"> D\
                                         \
                                       </div>\
 \
@@ -627,6 +627,7 @@ $(function() {
       $('.judges-count-sum').html(temp_exam.count.judges.sum);
       temp_exam.count.judges.score = parseFloat((temp_exam.count.judges.score + 2).toFixed(1));
       $('.judges-count-score').html(temp_exam.count.judges.score);
+      var single_judge_answer_name = Math.random();    //使用随机数保证多个单选组之间的name互不干扰
       var a_judge_str =   '<div class="panel panel-success single-judge">\
                                   <div class="panel-heading form-horizontal single-judge-top">\
                                      <div class="input-group">\
@@ -640,9 +641,9 @@ $(function() {
                                     <div class="form-inline single-judge-bottom">\
                                       <div class="form-group">\
                                         <label class="control-label">正确答案</label>\
-                                        <input type="radio" name="single-judge-answer" value="true"> 对\
+                                        <input type="radio" class="single-judge-answer" name="'+single_judge_answer_name +'" value="true" checked="checked"> 对\
                                         \
-                                        <input type="radio" name="single-judge-answer" value="false"> 错\
+                                        <input type="radio" class="single-judge-answer" name="'+single_judge_answer_name +'" value="false"> 错\
                                         \
                                         \
                                       </div>\
@@ -733,7 +734,7 @@ $(function() {
                                     <div class="form-inline single-text-bottom">\
                                       <div class="form-group">\
                                         <label class="control-label">上传图片</label>\
-                                        <input type="file" id="exampleInputFile">\
+                                        <input type="file" class="single-text-img">\
                                         \
                                         \
                                       </div>\
@@ -804,5 +805,180 @@ $(function() {
       $('.texts-count-score').html(temp_exam.count.texts.score);
     })
 
+
+
+    //开始提交一场考试
+    function submitAExam(){
+        var info = $('.add-exam-submit-info');
+        $('.add-exam-submit-info').html('');   //初始化提示信息
+        // 1. 获取考试基本信息
+        var name = $('#new-exam-name').val();   //考试名称
+        if ( /^\s*$/.test(name) ) {
+          errorInfo(info, '请填写考试名称！'); return;
+        } else {
+          temp_exam.name = name; 
+        };
+
+        var time = $('#new-exam-time').val();   //考试时长
+        if ( /^\s*$/.test(time) ) {
+          errorInfo(info, '请填写考试时长！'); return;
+        } else {
+          temp_exam.time = time; 
+        }
+
+        var start = $('input[name="new-exam-start"]').filter(function(){return this.checked===true}).val(); //考试发布 
+        temp_exam.is_start = start;
+       
+        // 2. 获取选择题
+        var all_selects = $('.admin_exam_add').find('.single-select');
+        var selects = [];
+        var selects_is_error = false;
+        all_selects.each(function(index){
+          if(selects_is_error) return false;   //如果产生错误，不继续遍历选择题
+          var single_select = {};
+          single_select.sid = index + 1 + '';
+          // 2.1 获取问题
+          var question = $(this).find('.single-select-title').val();
+          if ( /^\s*$/.test(question) ) {
+            errorInfo(info, '请填写选择题<strong>'+ (index+1) + '</strong>的题目！'); selects_is_error = true; return false;   //可跳出each循环，如果不加false则不行
+          } else {
+            single_select.question = question; 
+          }
+          if(selects_is_error) return false;   //如果产生错误，不继续遍历选择题
+
+          //2.2 获取选项
+          var all_options = $(this).find('.single-select-option');  //获取当前选择题的所有选项
+          var options = [];
+          all_options.each(function (){
+              var text = this.value;
+              if ( /^\s*$/.test(text) ) {
+                errorInfo(info, '请完善选择题<strong>'+ (index+1) + '</strong>的选项内容！'); selects_is_error = true; return false;
+              } else {
+                options.push(text);
+              }
+          })
+          if(selects_is_error) return false;   //如果产生错误，不继续遍历选择题
+
+          single_select.options = options;
+
+          // 2.3 获取答案
+          var all_answer = $(this).find('.single-select-answer');  //获取当前选择题的答案
+          var answer = [];
+          all_answer.each(function (){
+             if(this.checked === true)  answer.push(this.value);
+          })
+          if(answer.length == 0) {
+            errorInfo(info, '请为选择题<strong>'+ (index+1) + '</strong>选择至少一个正确答案！'); selects_is_error = true; return false;
+          } else {
+            single_select.answer = answer;
+          }
+          // 2.4 获取分值
+          var value = $(this).find('.single-select-value').val();  //对于该字段的判断前面已经处理     
+          single_select.value = value; 
+
+          //console.log(single_select)
+          selects.push(single_select);      //将当前选择题保存到选择数组中
+
+        })
+        temp_exam.content.selects = selects;   //保存到考试对象中
+
+        // 3. 获取判断题
+        var all_judges = $('.admin_exam_add').find('.single-judge');
+        var judges = [];
+        var judges_is_error = false;
+        all_judges.each(function(index){
+          if(judges_is_error) return false;   //如果产生错误，不继续遍历选择题
+          var single_judge = {};
+          single_judge.sid = index + 1 + '';
+          // 3.1 获取问题
+          var question = $(this).find('.single-judge-title').val();
+          if ( /^\s*$/.test(question) ) {
+            errorInfo(info, '请填写判断题<strong>'+ (index+1) + '</strong>的题目！'); judges_is_error = true; return false;   //可跳出each循环，如果不加false则不行
+          } else {
+            single_judge.question = question; 
+          }
+          if(judges_is_error) return false;   //如果产生错误，不继续遍历选择题
+
+          // 3.2 获取答案
+          var all_answer = $(this).find('.single-judge-answer');  //获取当前选择题的答案
+          var answer = '';
+          all_answer.each(function (){
+             if(this.checked === true)  answer = this.value;
+          })
+          
+          // 3.3 获取分值
+          var value = $(this).find('.single-judge-value').val();  //对于该字段的判断前面已经处理     
+          single_judge.value = value; 
+
+          //console.log(single_judge)
+          judges.push(single_judge);
+
+        })
+        temp_exam.content.judges = judges;   //保存到考试对象中
+
+        //console.log(temp_exam);
+
+        // 3. 获取简答题
+        var all_texts = $('.admin_exam_add').find('.single-text');
+        var texts = [];
+        var texts_is_error = false;
+        all_texts.each(function(index){
+          if(texts_is_error) return false;   //如果产生错误，不继续遍历选择题
+          var single_text = {};
+          single_text.sid = index + 1 + '';
+          // 3.1 获取问题
+          var question = $(this).find('.single-text-title').val();
+          if ( /^\s*$/.test(question) ) {
+            errorInfo(info, '请填写简答题<strong>'+ (index+1) + '</strong>的题目！'); texts_is_error = true; return false;   //可跳出each循环，如果不加false则不行
+          } else {
+            single_text.question = question; 
+          }
+          if(texts_is_error) return false;   //如果产生错误，不继续遍历选择题
+
+          // 3.2 获取图片
+          var img = $(this).find('.single-text-img')[0].files[0];  //获取当前选择题的图片文件
+          if(typeof img == 'undefined') img = 'undefined';   //当未选择图片时，img保存为字符串的undefined
+          single_text.img = img;
+
+          
+          // 3.3 获取分值
+          var value = $(this).find('.single-text-value').val();  //对于该字段的判断前面已经处理     
+          single_text.value = value; 
+
+          //console.log(single_text)
+          texts.push(single_text);
+
+        })
+        temp_exam.content.texts = texts;   //保存到考试对象中
+        console.log(temp_exam);
+        console.log(typeof JSON.stringify(temp_exam,null,4));
+
+        //开始转换为formdata数据发送给后端
+        var formdata = new FormData();
+        formdata.append('new_exam', JSON.stringify(temp_exam))
+        for (var i = 0; i < temp_exam.content.texts.length; i++ ){
+          formdata.append('texts_img'+ (i+1), JSON.stringify(temp_exam));
+        }
+        //console.log(formdata)
+        $.ajax({
+          url: './about_exam',
+          type: 'POST',
+          data: formdata,
+          processData: false,    //必须
+          contentType: false,         //https://segmentfault.com/a/1190000007207128!!!!!!!
+          success: function(data){
+            console.log(data)
+          }
+        })
+    }
+
+    function errorInfo(traget, info){
+      traget.html('<div class="alert alert-warning" role="alert">'+ info +'</div>');
+    }
+
+    $('.add-exam-submit').click(function(){
+      submitAExam();
+      return false;
+    })
 
 })

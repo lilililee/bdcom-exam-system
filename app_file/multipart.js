@@ -6,6 +6,8 @@ var fs = require("fs");
 http.createServer(function(req, res) {
   if (req.url === '/upload' && req.method === 'POST') {
     // parse a file upload
+
+     console.log(req.files);
     var form = new multiparty.Form();
   //console.log(form)
      form.encoding = 'utf-8';

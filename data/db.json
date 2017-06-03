@@ -91,7 +91,7 @@
                             {
                                 "sid": "1",
                                 "question": "下列哪一项为正确答案？",
-                                "list": [
+                                "options": [
                                     "选项一",
                                     "选项二",
                                     "选项三"
@@ -99,12 +99,12 @@
                                 "answer": [
                                     1
                                 ],
-                                "value": 2
+                                "value": "2"
                             },
                             {
                                 "sid": "2",
                                 "question": "下列哪一项为正确答案？",
-                                "list": [
+                                "options": [
                                     "选项一",
                                     "选项二",
                                     "选项三"
@@ -113,7 +113,7 @@
                                     1,
                                     2
                                 ],
-                                "value": 2
+                                "value": "2"
                             }
                         ],
                         "judges": [
@@ -121,13 +121,13 @@
                                 "sid": "1",
                                 "question": "下列哪一项为正确答案？",
                                 "answer": 0,
-                                "value": 2
+                                "value": "2"
                             },
                             {
                                 "sid": "2",
                                 "question": "下列哪一项为正确答案（判断题）？",
                                 "answer": 0,
-                                "value": 2
+                                "value": "2"
                             }
                         ],
                         "texts": [
@@ -135,7 +135,7 @@
                                 "sid": "1",
                                 "question": "下图问题出在哪？",
                                 "pic": "c://example.jgp",
-                                "value": 2
+                                "value": "2"
                             }
                         ]
                     }
@@ -150,7 +150,7 @@
                             {
                                 "sid": "1",
                                 "question": "下列哪一项为正确答案？",
-                                "list": [
+                                "options": [
                                     "选项一",
                                     "选项二",
                                     "选项三"
@@ -158,12 +158,12 @@
                                 "answer": [
                                     1
                                 ],
-                                "value": 2
+                                "value": "2"
                             },
                             {
                                 "sid": "2",
                                 "question": "下列哪一项为正确答案？",
-                                "list": [
+                                "options": [
                                     "选项一",
                                     "选项二",
                                     "选项三"
@@ -172,7 +172,7 @@
                                     1,
                                     2
                                 ],
-                                "value": 2
+                                "value": "2"
                             }
                         ],
                         "judges": [
@@ -180,13 +180,13 @@
                                 "sid": "1",
                                 "question": "下列哪一项为正确答案？",
                                 "answer": 0,
-                                "value": 2
+                                "value": "2"
                             },
                             {
                                 "sid": "2",
                                 "question": "下列哪一项为正确答案（判断题）？",
                                 "answer": 0,
-                                "value": 2
+                                "value": "2"
                             }
                         ],
                         "texts": [
@@ -194,7 +194,7 @@
                                 "sid": "1",
                                 "question": "下图问题出在哪？",
                                 "pic": "c://example.jgp",
-                                "value": 2
+                                "value": "2"
                             }
                         ]
                     }

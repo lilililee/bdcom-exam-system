@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 /* GET users listing. */
 router.post('/', function(req, res, next) {
   //console.log(res.files);
-  //console.log(req.files);
+  console.log(req.files);
  // console.log(1111);
  // var postData = querystring.parse(req.body);
   var form = new multiparty.Form();
@@ -24,11 +24,15 @@ router.post('/', function(req, res, next) {
     form.uploadDir = "uploads";
   //设置单文件大小限制 
   form.maxFilesSize = 2 * 1024 * 1024;
+  //console.log(req.body)
   //form.maxFields = 1000;  设置所以文件的大小总和
   form.parse(req, function(err, fields, files) {
    // console.log(files.originalFilename);
-    console.log(fields);
-    console.log(files);
+    // console.log(fields);
+    // console.log(fields.ss);
+    // console.log(typeof fields.ss[0]);
+    // console.log(fields.ss[0].id);
+    // console.log(files);
     //同步重命名文件名
    //fs.renameSync(files.path,files.originalFilename);
     res.writeHead(200, {'content-type': 'text/plain'});

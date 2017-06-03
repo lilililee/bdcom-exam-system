@@ -8,10 +8,10 @@
 	<h1><%= title %></h1>
 	<p>Welcome to <%= title %></p>
     <!-- <form id="#myform" method="post" action="./file" enctype="multipart/form-data" > -->
-	<form id="#myform" >
+	<form id="myform" enctype="multipart/form-data" >
         <input type="text" name="name" value="1111">
 		<input type="text" name="name2" value="222">
-		<input type="file" name="img" >
+		<input type="file" class="imgs" name="img" >
 		<div id="submitsss">sssssssssss</div>
         <input type="submit">
 	</form>
@@ -36,15 +36,20 @@
     // }
     $('#submitsss').click(function(e){
     	console.log(111)
-    	var myFormData = new FormData(document.getElementById("myform"));
-    	console.log(myFormData);
-        myFormData.append('ss','sss')
+        var myFormData = new FormData(document.getElementById("myform"));//获取文件法一
+    	//var myFormData = new FormData();//获取文件法一
+    	//formdata.append("file" , $("imgs")[0].files[0]);//获取文件法二
+        myFormData.append('ss','zzzzzzzzzzzzzzzzzz');
+
+
+        console.log(myFormData);
     		$.ajax({
     			url:'./file',
     			type: 'POST',
     			data: myFormData,
                 processData: false,    //必须
                 contentType: false,         //https://segmentfault.com/a/1190000007207128!!!!!!!
+                //contentType: 'multipart/form-data',         //https://segmentfault.com/a/1190000007207128!!!!!!!
     			success: function(data){
     				console.log(data)
     			}
