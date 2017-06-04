@@ -880,6 +880,7 @@ $(function() {
           selects.push(single_select);      //将当前选择题保存到选择数组中
 
         })
+        if(selects_is_error) return false;   //如果产生错误，不继续后续操作
         temp_exam.content.selects = selects;   //保存到考试对象中
 
         // 3. 获取判断题
@@ -914,6 +915,7 @@ $(function() {
           judges.push(single_judge);
 
         })
+        if(judges_is_error) return false;   //如果产生错误，不继续后续操作
         temp_exam.content.judges = judges;   //保存到考试对象中
 
         //console.log(temp_exam);
@@ -949,6 +951,7 @@ $(function() {
           texts.push(single_text);
 
         })
+        if(texts_is_error) return false;   //如果产生错误，不继续后续操作
         temp_exam.content.texts = texts;   //保存到考试对象中
         console.log(temp_exam);
         console.log(typeof JSON.stringify(temp_exam,null,4));
@@ -957,11 +960,12 @@ $(function() {
         var formdata = new FormData();
         formdata.append('new_exam', JSON.stringify(temp_exam))
         for (var i = 0; i < temp_exam.content.texts.length; i++ ){
-          formdata.append('texts_img'+ (i+1), JSON.stringify(temp_exam));
+          console.log(temp_exam.content.texts.img)
+          formdata.append('texts_img'+ (i+1), temp_exam.content.texts[i].img);
         }
         //console.log(formdata)
         $.ajax({
-          url: './about_exam',
+          url: './about_exam/upload',
           type: 'POST',
           data: formdata,
           processData: false,    //必须

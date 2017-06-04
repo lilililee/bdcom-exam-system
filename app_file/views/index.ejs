@@ -36,10 +36,11 @@
     // }
     $('#submitsss').click(function(e){
     	console.log(111)
-        var myFormData = new FormData(document.getElementById("myform"));//获取文件法一
-    	//var myFormData = new FormData();//获取文件法一
-    	//formdata.append("file" , $("imgs")[0].files[0]);//获取文件法二
+        //var myFormData = new FormData(document.getElementById("myform"));//获取文件法一
+    	var myFormData = new FormData();//获取文件法一
+    	//formdata.append("file" , $(".imgs")[0].files[0]);//获取文件法二
         myFormData.append('ss','zzzzzzzzzzzzzzzzzz');
+        myFormData.append('ssii',$(".imgs")[0].files[0]);
 
 
         console.log(myFormData);

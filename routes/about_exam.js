@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var file ="../data/db.json";
-
+var multiparty = require('multiparty');
+var util = require('util');
 
 /* GET admin listing. */
 router.get('/', function(req, res, next) {
@@ -41,7 +42,7 @@ router.post('/', function(req, res, next) {
   //先验证管理员身份
   if(db.admin){
   	for(var i = 0; i < db.admin.length; i++) {
-      console.log(req.body.login_id)
+      console.log(req.body)
   		console.log(req.body.login_password)
   		if(req.body.login_id === db.admin[i].id && req.body.login_password === db.admin[i].password){
         //先从数据库获取考试列表
@@ -123,6 +124,29 @@ router.post('/', function(req, res, next) {
   			//res.send(db);
   			return;
   		}
+
+      // var form = new multiparty.Form();
+      // //设置编辑
+      // form.encoding = 'utf-8';
+      // //设置文件存储路径
+      // form.uploadDir = "uploads";
+      // //设置单文件大小限制 
+      // form.maxFilesSize = 2 * 1024 * 1024;
+      // //console.log(req.body)
+      // //form.maxFields = 1000;  设置所以文件的大小总和
+      // form.parse(req, function(err, fields, files) {
+      // // console.log(files.originalFilename);
+      // // console.log(fields);
+      // // console.log(fields.ss);
+      // // console.log(typeof fields.ss[0]);
+      // // console.log(fields.ss[0].id);
+      // // console.log(files);
+      // //同步重命名文件名
+      // //fs.renameSync(files.path,files.originalFilename);
+      // res.writeHead(200, {'content-type': 'text/plain'});
+      // res.write('received upload:\n\n');
+      // res.end(util.inspect({fields: fields, files: files}));  //将一个对象转成字符串
+      // });
   	}
   }else {
   	res.send('数据库出错！');
@@ -135,5 +159,31 @@ router.post('/', function(req, res, next) {
 
   
 });
+
+
+router.post('/upload',function(req, res, next) {
+  var form = new multiparty.Form();
+    //设置编辑
+  form.encoding = 'utf-8';
+  //设置文件存储路径
+  form.uploadDir = "../uploads";   //！！！！！！！！！！！！！！！！！路径问题
+  //设置单文件大小限制 
+  form.maxFilesSize = 2 * 1024 * 1024;
+  //console.log(req.body)
+  //form.maxFields = 1000;  设置所以文件的大小总和
+  form.parse(req, function(err, fields, files) {
+  // console.log(files.originalFilename);
+  // console.log(fields);
+  // console.log(fields.ss);
+  // console.log(typeof fields.ss[0]);
+  // console.log(fields.ss[0].id);
+  // console.log(files);
+  //同步重命名文件名
+  //fs.renameSync(files.path,files.originalFilename);
+  res.writeHead(200, {'content-type': 'text/plain'});
+  res.write('received upload:\n\n');
+  res.end(util.inspect({fields: fields, files: files}));  //将一个对象转成字符串
+  });
+})
 
 module.exports = router;

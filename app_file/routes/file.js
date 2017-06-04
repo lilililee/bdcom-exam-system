@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
    //设置文件存储路径
     form.uploadDir = "uploads";
   //设置单文件大小限制 
-  form.maxFilesSize = 2 * 1024 * 1024;
+  form.maxFilesSize = 2000 * 1024 * 1024;
   //console.log(req.body)
   //form.maxFields = 1000;  设置所以文件的大小总和
   form.parse(req, function(err, fields, files) {
