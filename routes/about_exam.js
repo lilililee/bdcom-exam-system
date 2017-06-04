@@ -162,27 +162,82 @@ router.post('/', function(req, res, next) {
 
 
 router.post('/upload',function(req, res, next) {
+  //读取数据库文件
+  var db =JSON.parse(fs.readFileSync(file));
+
   var form = new multiparty.Form();
     //设置编辑
   form.encoding = 'utf-8';
   //设置文件存储路径
-  form.uploadDir = "../uploads";   //！！！！！！！！！！！！！！！！！路径问题
+  form.uploadDir = "../public/uploadimages";   //！！！！！！！！！！！！！！！！！路径问题
   //设置单文件大小限制 
   form.maxFilesSize = 2 * 1024 * 1024;
   //console.log(req.body)
   //form.maxFields = 1000;  设置所以文件的大小总和
   form.parse(req, function(err, fields, files) {
   // console.log(files.originalFilename);
-  // console.log(fields);
+  //获取提交的考试信息
+  var new_exam = JSON.parse(fields.new_exam[0]);  //及时只有一个数据，也是保存在一个数组中
+   // console.log(typeof fields.new_exam[0]);
+   // console.log(fields.new_exam);
+   // console.log(typeof JSON.parse(fields.new_exam));
+   // console.log(JSON.parse(fields.new_exam));
+
+
+   // 1. 判断是否为新增考试
+   // id为00000时表明是新加的考试
+   //console.log(new_exam.id)
+   if(new_exam.id === '00000'){
+   // console.log(db.exam_list)
+      // 1.1 为当前考试生成一个5位的id
+      db.exam.exam_list.exam_list_args.sum++;
+      new_exam.id = fiveExamId(db.exam.exam_list.exam_list_args.sum);
+      function fiveExamId(num) {
+        var id = '00000' + num;
+        return id.slice(id.length - 5, id.length);
+      }
+      
+
+      // 1.2 为简答题图片处理文件路径
+      console.log(files)
+
+      var have_file_index = 0;  //表示
+      for(var i = 0; i < new_exam.content.texts.length; i++){
+          // 1.2.1 判断是否添加了文件
+          if(typeof new_exam.content.texts[i].img == 'object') {  
+            //console.log(new_exam.content.texts[i])
+            new_exam.content.texts[i].pic = files['texts_img'+(i+1)][0].path.replace('.\\public','');
+            //have_file_index++;
+            //files['texts_img'+(i+1)][0].path是一个相对路径
+            //..\public\uploadimages\Fp_azolWAjbBqpuCooJMn9KG.jpg
+            //需替换成前台可用的路径
+            console.log(new_exam.content.texts[i].pic);
+          } else {
+             new_exam.content.texts[i].pic = 'undefined';
+          }
+      } 
+
+     
+
+      // 2. 加入数据库
+      db.exam.exam_list.exam_list_content.push(new_exam);
+      // 3. 写入修改后的数据
+      fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));   
+      res.send({
+        status: 'success',
+        info: '添加考试（'+ new_exam.id +'）成功！<br>题目总共为'+new_exam.count.all.sum+'个，总分为'+ new_exam.count.all.score + '分！<br>如需继续添加考试，请刷新界面！'
+      });
+      return;
+   }
   // console.log(fields.ss);
   // console.log(typeof fields.ss[0]);
   // console.log(fields.ss[0].id);
   // console.log(files);
   //同步重命名文件名
   //fs.renameSync(files.path,files.originalFilename);
-  res.writeHead(200, {'content-type': 'text/plain'});
-  res.write('received upload:\n\n');
-  res.end(util.inspect({fields: fields, files: files}));  //将一个对象转成字符串
+  // res.writeHead(200, {'content-type': 'text/plain'});
+  // res.write('received upload:\n\n');
+  // res.end(util.inspect({fields: fields, files: files}));  //将一个对象转成字符串
   });
 })
 

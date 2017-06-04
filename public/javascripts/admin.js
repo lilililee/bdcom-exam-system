@@ -483,28 +483,33 @@ $(function() {
 
 
     var temp_exam = {
-          id: '000',
+          id: '00000',
           name: '',
           time: '',
           is_start: '',
+          
+          count: {
+            selects: {
+              sum: 0,
+              score: 0
+            },
+            judges: {
+              sum: 0,
+              score: 0
+            },
+            texts: {
+              sum: 0,
+              score: 0
+            },
+            all: {
+              sum: 0,
+              score: 0
+            }
+          },
           content: {
             'selects': [],
             'judges': [],
             'texts': []
-          },
-          count: {
-            selects: {
-              sum: 0,
-              score: 0,
-            },
-            judges: {
-              sum: 0,
-              score: 0,
-            },
-            texts: {
-              sum: 0,
-              score: 0,
-            }
           }
         }; 
 
@@ -627,7 +632,7 @@ $(function() {
       $('.judges-count-sum').html(temp_exam.count.judges.sum);
       temp_exam.count.judges.score = parseFloat((temp_exam.count.judges.score + 2).toFixed(1));
       $('.judges-count-score').html(temp_exam.count.judges.score);
-      var single_judge_answer_name = Math.random();    //使用随机数保证多个单选组之间的name互不干扰
+      var single_judge_answer_name = new Date().getTime();    //使用毫秒数保证多个单选组之间的name互不干扰
       var a_judge_str =   '<div class="panel panel-success single-judge">\
                                   <div class="panel-heading form-horizontal single-judge-top">\
                                      <div class="input-group">\
@@ -725,7 +730,9 @@ $(function() {
                                   <div class="panel-heading form-horizontal single-text-top">\
                                      <div class="input-group">\
                                         <span class="input-group-addon" id="basic-addon1"><strong class="texts-order">'+temp_exam.count.texts.sum+'.</strong></span>\
-                                        <input type="text" class="form-control single-text-title" placeholder="题目" aria-describedby="basic-addon1">\
+                                        \
+                                        <textarea class="form-control single-text-title" placeholder="题目" aria-describedby="basic-addon1" rows="4" style="resize:none;"></textarea>\
+                                      \
                                       </div>\
                                   </div>\
 \
@@ -956,6 +963,10 @@ $(function() {
         console.log(temp_exam);
         console.log(typeof JSON.stringify(temp_exam,null,4));
 
+        //计算总共题目个数和分数
+        temp_exam.count.all.sum = temp_exam.count.selects.sum + temp_exam.count.judges.sum +temp_exam.count.texts.sum;
+        temp_exam.count.all.score = temp_exam.count.selects.score + temp_exam.count.judges.score +temp_exam.count.texts.score;
+
         //开始转换为formdata数据发送给后端
         var formdata = new FormData();
         formdata.append('new_exam', JSON.stringify(temp_exam))
@@ -972,6 +983,9 @@ $(function() {
           contentType: false,         //https://segmentfault.com/a/1190000007207128!!!!!!!
           success: function(data){
             console.log(data)
+            if(data.status == 'success'){
+              errorInfo(info, data.info); return;
+            }
           }
         })
     }
@@ -980,9 +994,17 @@ $(function() {
       traget.html('<div class="alert alert-warning" role="alert">'+ info +'</div>');
     }
 
+    $('.add-exam-reset').click(function(){
+      $('.single-select').remove();
+      $('.single-judge').remove();
+      $('.single-text').remove();
+    })
+
     $('.add-exam-submit').click(function(){
       submitAExam();
       return false;
     })
+
+
 
 })
