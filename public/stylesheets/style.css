@@ -75,12 +75,13 @@ header h1{
 	margin: 10px;
 }
 
+/*admin-user*/
 .admin-content .add-user-button input,
 .admin-content .add-user-button button {
 	margin: 0 10px;
 }
 
-
+/*admin-exam*/
 .admin-content .admin_exam_add .glyphicon{
 	vertical-align: 0;
 	margin: 4px 10px 7px 10px;
@@ -100,5 +101,10 @@ header h1{
 
 .admin-content .admin_exam_add .single-text-bottom input[type="file"]{
 	display: inline-block;
+}
+
+
+.admin-content .model-user-remove {
+	/*top: 200px;*/
 }
 

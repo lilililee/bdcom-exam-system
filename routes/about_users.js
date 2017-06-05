@@ -47,7 +47,7 @@ router.post('/', function(req, res, next) {
         if(typeof req.body.delete_user_id !== 'undefined'){
           console.log(req.body.delete_user_id)
            for(var j = 0; j < db.users.length; j++){
-             if(db.users[j].id == req.body.delete_user_id){
+             if(db.users[j].id === req.body.delete_user_id){
               db.users.splice(j,1);
               break;
             }

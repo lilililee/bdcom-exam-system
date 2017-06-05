@@ -13,25 +13,25 @@ $(function() {
 
             // var uesrs_glyphicon_edit = $('.admin-users-list .glyphicon-edit'); //所有修改按钮  show_controller
             // var model_user_change = $('.model-user-change'); //所有单个用户信息  traget_model
-
-            //打开修改用户信息界面
+            //console.log('正在执行innerModelHander...')
+            //打开提示界面
             show_controller.click(function() {
-              console.log(show_controller.index(this))
+              //console.log(show_controller.index(this))
 
               traget_model.eq(show_controller.index(this)).animate({
                 'opacity': '1'
               }).css('opacity', '0').css('display', 'block');
             })
-            //关闭修改用户信息界面
+            //关闭提示界面
             traget_model.find('.close-innermodel').click(function() {
 
               traget_model.fadeOut();
             })
-            console.log(222)
+            //console.log(222)
 
-            //提交修改用户信息
+            //提交提示
             traget_model.find('.submit-innermodel').on('click',function() {
-              console.log(111)
+              //console.log(111)
                 post_fn.call(this,traget_model);     //执行一次post并更新列表，this指向提交按钮
                 
               })
@@ -87,7 +87,7 @@ $(function() {
         <h4 class="modal-title" id="myModalLabel">删除用户</h4>\
         </div>\
         <div class="modal-body">\
-        确认删除' + user.id + '？\
+        确认删除用户（' + user.id + '）？\
         </div>\
         <div class="modal-footer">\
         <button type="button" class="btn btn-default close-innermodel" >取消</button>\
@@ -262,7 +262,7 @@ $(function() {
 
       data.forEach(function(user, index) {
         if(user.is_start === 'no') {}
-
+          console.log(user.id)
         var glyphicon_start = user.is_start === 'yes'? 'glyphicon-ok-sign' : 'glyphicon-ban-circle';
         var text_start = user.is_start === 'yes'? '取消' : '发布';
 
@@ -324,8 +324,8 @@ $(function() {
         \
         </div>\
         \
-        <span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除用户" ></span>\
-        <div class="modal fade model-user-remove" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+        <span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除考试" ></span>\
+        <div class="modal fade model-exam-remove" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
         <div class="modal-dialog" role="document">\
         <div class="modal-content">\
         <div class="modal-header">\
@@ -333,11 +333,11 @@ $(function() {
         <h4 class="modal-title" id="myModalLabel">删除用户</h4>\
         </div>\
         <div class="modal-body">\
-        确认删除' + user.id + '？\
+        确认删除考试（' + user.id + '）？\
         </div>\
         <div class="modal-footer">\
         <button type="button" class="btn btn-default close-innermodel" >取消</button>\
-        <button type="button" class="btn btn-danger submit-innermodel" data-user-id="' + user.id + '">确认</button>\
+        <button type="button" class="btn btn-danger submit-innermodel" data-exam-id="' + user.id + '">确认</button>\
         </div>\
         </div>\
         </div>\
@@ -355,7 +355,7 @@ $(function() {
         $.get( server_url+'?login_id='+admin.id+'&login_password='+admin.password,
           function(data, status) {
             var result = '';
-            console.log(data);
+            //console.log(data);
             if (Array.isArray(data)) {
               result = joinString(data);
 
@@ -371,7 +371,7 @@ $(function() {
             innerModelHander($(list_container + ' .glyphicon-exam-start'),$('.model-exam-start'),function(traget_model){
                //this指向提交按钮，会有data-id属性
                var exam_id = $(this).attr('data-exam-id');
-
+              //console.log(exam_id)
                var post_data = {
                 login_id: admin.id,
                 login_password: admin.password,
@@ -427,7 +427,7 @@ $(function() {
                 //$(this).removeClass('glyphicon-ok-sign').addClass('glyphicon-ban-circle');
               })
 
-            // 修改用户
+            // 修改考试    //未实现。。。。
             innerModelHander($(list_container + ' .glyphicon-edit'),$('.model-user-change'),function(traget_model){
              var form = $(this).parents('form')[0];
 
@@ -449,17 +449,18 @@ $(function() {
                   })
            })
             
-            //删除用户
-            innerModelHander($('.admin-users-list .glyphicon-remove'),$('.model-user-remove'),function(traget_model){
+            //删除考试
+            innerModelHander($('.admin-exam-list .glyphicon-remove'),$('.model-exam-remove'),function(traget_model){
                //this指向提交按钮，会有data-id属性
-               var user_id = $(this).attr('data-user-id');
-
+               var exam_id = $(this).attr('data-exam-id');
+               console.log(typeof exam_id)
                $.post(server_url, {
                 login_id: admin.id,
                 login_password: admin.password,
-                delete_user_id: user_id
+                delete_exam_id: exam_id
               },
               function(data, status) {
+                console.log('success')
                traget_model.fadeOut();
                setTimeout(function(){
                 updateExamList(server_url,joinString, list_container)

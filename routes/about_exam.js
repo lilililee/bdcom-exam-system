@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
   if(db.admin){
     for(var i = 0; i < db.admin.length; i++) {
-      
+
       // 
       // console.log(db.admin[i].id)
       if(req.query.login_id == db.admin[i].id && req.query.login_password == db.admin[i].password){
@@ -43,21 +43,21 @@ router.post('/', function(req, res, next) {
   if(db.admin){
   	for(var i = 0; i < db.admin.length; i++) {
       console.log(req.body)
-  		console.log(req.body.login_password)
-  		if(req.body.login_id === db.admin[i].id && req.body.login_password === db.admin[i].password){
+      console.log(req.body.login_password)
+      if(req.body.login_id === db.admin[i].id && req.body.login_password === db.admin[i].password){
         //先从数据库获取考试列表
         var db_exam_list = db.exam.exam_list.exam_list_content; 
         //当为发布考试操作时
-       
+
         if(typeof req.body.start_exam_id !== 'undefined'){ 
           console.log('正在进行发布考试(' + req.body.start_exam_id + ')操作')
 
           for(var j = 0; j < db_exam_list.length; j++){
             if(db_exam_list[j].id == req.body.start_exam_id){
-                db_exam_list[j].is_start = 'yes';
-                break;
+              db_exam_list[j].is_start = 'yes';
+              break;
             }
-              
+
           }
           res.send([db_exam_list,db.exam.exam_list.exam_list_content])
           //res.send('exam '+ req.body.start_exam_id + ' is start!');
@@ -65,17 +65,17 @@ router.post('/', function(req, res, next) {
         } 
 
         //当为取消考试操作时
-       
+
         else if( typeof req.body.cancel_exam_id !== 'undefined'){
           console.log('正在进行取消考试(' + req.body.cancel_exam_id + ')操作');
-         
+
           for(var j = 0; j < db_exam_list.length; j++){
             if(db_exam_list[j].id == req.body.cancel_exam_id){
-                db_exam_list[j].is_start = 'no';
+              db_exam_list[j].is_start = 'no';
 
-                break;
+              break;
             }
-              
+
           }
           
           res.send('exam '+ req.body.cancel_exam_id + ' is cancel!');
@@ -83,45 +83,89 @@ router.post('/', function(req, res, next) {
         } 
 
 
-        //当为新增用户时
-        else if( typeof req.body.add_exam_id !== 'undefined'){
-          console.log('正在进行取消考试操作')
-          for(var j = 0; j < db.users.length; j++){
-             if(db.users[j].id === req.body.user_id){
-                res.send({exists:true,info:'该帐号已存在！'});
-                return;
-              }
-          }
-          db.users.push({
-            id: req.body.user_id,
-            password: req.body.user_password,
-            department: req.body.user_department,
-            role: req.body.user_role,
-          });
-          res.send({exists:false,info:'成功添加新用户'+req.body.user_id+'!'});
-          //return;
-        }
-        //当为修改用户操作时
-        else {
-          console.log('正在进行修改用户操作')
-          for(var j = 0; j < db.users.length; j++){
-             if(db.users[j].id === req.body.user_id){
-              db.users[j].password = req.body.user_password;
-              db.users[j].department = req.body.user_department;
-              db.users[j].role = req.body.user_role;
-              //console.log(typeof req.body.user_password)
-              break;
+        //当为删除考试时
+        else if( typeof req.body.delete_exam_id !== 'undefined'){
+          console.log('正在进行删除考试操作')
+          var exam_list_content = db.exam.exam_list.exam_list_content;
+          for(var j = 0; j < exam_list_content.length; j++){
+              //console.log(exam_list_content[j].id)
+              //console.log(req.body.delete_exam_id)
+             if(exam_list_content[j].id === req.body.delete_exam_id){
+              //console.log(exam_list_content)
+              //console.log(j + ' ---11111111111111')
+              //console.log(i)
+              // 1. 删除该考试的图片
+              exam_list_content[j].content.texts.forEach(function(item, index){
+                if(item.pic !== 'undefined'){
+
+                    console.log(item.pic)
+                    console.log(item.pic.replace('.\\','..\\public\\'))
+                    deleteFolderRecursive(item.pic.replace('.\\','..\\public\\'));
+                }
+              })
+
+              // 2. 删除考试的所有信息
+              exam_list_content.splice(j,1);
+               //console.log(exam_list_content)
+              //return;
+             
+
+              // 删除文件价
+              function deleteFolderRecursive(url) {
+                //判断给定的路径是否存在
+                if( fs.existsSync(url) ) {
+                  
+                   console.log(1111)
+                   // 当为文件夹时，需要逐一删除内部文件夹和文件
+                   if(fs.statSync(url).isDirectory()){
+                      //返回文件和子目录的数组
+                      var files = [];
+                      files = fs.readdirSync(url);
+                       console.log(files)
+                      files.forEach(function(file,index){
+                        //var files = [];
+                        var curPath = url + "/" + file; 
+                        //console.log(curPath)
+                        //fs.statSync同步读取文件夹文件，如果是文件夹，在重复触发函数                   
+                        deleteFolderRecursive(curPath);
+                       
+                      });
+                      //清除文件夹
+                      fs.rmdirSync(url);
+                   }
+                   // 2. 当为文件时，直接删除 
+                   else {
+                      fs.unlinkSync(url);
+                   }
+                 
+                }else{
+                  console.log("给定的路径不存在，请给出正确的路径");
+                }
+              };
+              //deleteFolderRecursive("./test");
+
+              res.send({
+                status: 'success',
+                info: 'exam '+ req.body.delete_exam_id + ' is delete!'
+              });
+
+
             }
-            
           }
-          res.send(db);
+
+        }
+        //当为所有操作都验证不通过时
+        else {
+          console.log('正在执行非法的操作！')
+          
+          res.send('正在执行非法的操作！');
         }
 
         //db.exam.exam_list.exam_list_content = db_exam_list;
-        console.log(db.exam.exam_list.exam_list_content)
+        //console.log(db.exam.exam_list.exam_list_content)
         //写入修改后的数据
         fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
-  			//res.send(db);
+  			
   			return;
   		}
 
@@ -147,7 +191,7 @@ router.post('/', function(req, res, next) {
       // res.write('received upload:\n\n');
       // res.end(util.inspect({fields: fields, files: files}));  //将一个对象转成字符串
       // });
-  	}
+    }
   }else {
   	res.send('数据库出错！');
   	return;
@@ -167,7 +211,7 @@ router.post('/upload',function(req, res, next) {
 
   var form = new multiparty.Form();
     //设置编辑
-  form.encoding = 'utf-8';
+    form.encoding = 'utf-8';
   //设置文件存储路径
   form.uploadDir = "../public/uploadimages";   //！！！！！！！！！！！！！！！！！路径问题
   //设置单文件大小限制 
@@ -213,11 +257,11 @@ router.post('/upload',function(req, res, next) {
             //需替换成前台可用的路径
             console.log(new_exam.content.texts[i].pic);
           } else {
-             new_exam.content.texts[i].pic = 'undefined';
-          }
-      } 
+           new_exam.content.texts[i].pic = 'undefined';
+         }
+       } 
 
-     
+
 
       // 2. 加入数据库
       db.exam.exam_list.exam_list_content.push(new_exam);
@@ -228,7 +272,7 @@ router.post('/upload',function(req, res, next) {
         info: '添加考试（'+ new_exam.id +'）成功！<br>题目总共为'+new_exam.count.all.sum+'个，总分为'+ new_exam.count.all.score + '分！<br>如需继续添加考试，请刷新界面！'
       });
       return;
-   }
+    }
   // console.log(fields.ss);
   // console.log(typeof fields.ss[0]);
   // console.log(fields.ss[0].id);
@@ -238,7 +282,7 @@ router.post('/upload',function(req, res, next) {
   // res.writeHead(200, {'content-type': 'text/plain'});
   // res.write('received upload:\n\n');
   // res.end(util.inspect({fields: fields, files: files}));  //将一个对象转成字符串
-  });
+});
 })
 
 module.exports = router;
