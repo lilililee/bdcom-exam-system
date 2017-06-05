@@ -146,7 +146,7 @@
                     "id": "002",
                     "name": "2月技术考核",
                     "time": "60",
-                    "is_start": "no",
+                    "is_start": "yes",
                     "content": {
                         "selects": [
                             {
@@ -205,7 +205,7 @@
                     "id": "00014",
                     "name": "34",
                     "time": "432",
-                    "is_start": "no",
+                    "is_start": "yes",
                     "count": {
                         "selects": {
                             "sum": 0,
@@ -447,6 +447,26 @@
                             }
                         ]
                     }
+                }
+            ]
+        }
+    },
+    "course": {
+        "course_args": {},
+        "course_list": {
+            "course_list_args": {},
+            "course_list_content": [
+                {
+                    "id": "10002",
+                    "name": "交换机知识详解56456546",
+                    "type": "交换机",
+                    "src": "./file"
+                },
+                {
+                    "id": "10004",
+                    "name": "交换机知识详解56456546",
+                    "type": "交换机",
+                    "src": "./file"
                 }
             ]
         }

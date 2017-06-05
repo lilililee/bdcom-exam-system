@@ -991,6 +991,9 @@ $(function() {
         })
     }
 
+
+
+
     function errorInfo(traget, info){
       traget.html('<div class="alert alert-warning" role="alert">'+ info +'</div>');
     }
@@ -1005,6 +1008,154 @@ $(function() {
       submitAExam();
       return false;
     })
+
+
+
+
+    // 课件相关操作
+    //根据get请求获取的数据来渲染列表
+    function joinCourseString(data) {
+      var result = '';
+      //console.log("joinString")
+      console.log(data)
+
+      data.forEach(function(user, index) {
+        //if(user.is_start === 'no') {}
+          //console.log(user.id)
+        
+
+        result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.name + '</td>\
+        <td> \
+       \
+        \
+        <span class="glyphicon glyphicon-edit glyphicon-course-rename" title="修改信息" aria-hidden="true"  data-toggle="modal"></span> \
+        \
+        <div class="modal fade model-user-change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+        <div class="modal-dialog" role="document">\
+        <div class="modal-content">\
+        <div class="modal-header">\
+        <button type="button" class="close close-innermodel"  aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+        <h4 class="modal-title" id="myModalLabel">正在修改课件--' + user.name + '</h4>\
+        </div>\
+        <form>\
+        <div class="modal-body">\
+        <div class="input-group">\
+        <span class="input-group-addon" id="basic-addon1">新课件名：</span>\
+        <input type="text" name="course_new_name" class="form-control" value="' + user.name + '" aria-describedby="basic-addon1">\
+        </div>\
+       \
+        </div>\
+        <div class="modal-footer">\
+        <button type="button" class="btn btn-default close-innermodel">取消</button>\
+        <button type="button" class="btn btn-primary submit-innermodel">保存</button>\
+        </div>\
+        <input type="hidden" name="course_id" value="' + user.id + '">\
+        </form>\
+        </div>\
+        </div>\
+        \
+        </div>\
+        \
+        <span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除课件" ></span>\
+        <div class="modal fade model-course-remove" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+        <div class="modal-dialog" role="document">\
+        <div class="modal-content">\
+        <div class="modal-header">\
+        <button type="button" class="close close-innermodel" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+        <h4 class="modal-title" id="myModalLabel">删除课件</h4>\
+        </div>\
+        <div class="modal-body">\
+        确认删除课件（' + user.name + '）？\
+        </div>\
+        <div class="modal-footer">\
+        <button type="button" class="btn btn-default close-innermodel" >取消</button>\
+        <button type="button" class="btn btn-danger submit-innermodel" data-course-id="' + user.id + '">确认</button>\
+        </div>\
+        </div>\
+        </div>\
+        </div></td>'
+      })
+      return result;
+    }
+
+    //用来更新列表，用户，课件，课件
+    //get地址， 拼接字符串操作， 列表容器（字符串）
+    function updateCourseList(server_url, joinString, list_container, type) {
+      var data = [];
+        //console.log(admin.id)
+        //获取所用用户数据
+        console.log(server_url)
+        $.get( server_url+'?login_id='+admin.id+'&login_password='+admin.password,
+          function(data, status) {
+            var result = '';
+            //console.log(data);
+            if (Array.isArray(data)) {
+              result = joinString(data);
+
+            } else {
+              console.log('返回数据错误，应为数组！')
+
+            }
+            
+            //循环结束，开始插入html，更新表格
+            $( list_container + ' tbody').html('').append(result);
+
+            
+
+            // 修改课件    
+            innerModelHander($(list_container + ' .glyphicon-edit'),$('.model-user-change'),function(traget_model){
+             var form = $(this).parents('form')[0];
+             console.log(server_url)
+             $.post(server_url, {
+              login_id: admin.id,
+              login_password: admin.password,
+              course_id: form.course_id.value,
+              course_new_name: form.course_new_name.value,
+            },
+            function(data, status) {
+              traget_model.fadeOut();
+              setTimeout(function(){
+
+                updateCourseList(server_url,joinString, list_container);
+              }, 500)
+                    //updateCourseList()
+                  })
+           })
+            
+            //删除课件
+            innerModelHander($('.admin-course-list .glyphicon-remove'),$('.model-course-remove'),function(traget_model){
+               //this指向提交按钮，会有data-id属性
+               var course_id = $(this).attr('data-course-id');
+               console.log(typeof course_id)
+               $.post(server_url, {
+                login_id: admin.id,
+                login_password: admin.password,
+                delete_course_id: course_id
+              },
+              function(data, status) {
+                console.log('success')
+               traget_model.fadeOut();
+               setTimeout(function(){
+                updateCourseList(server_url,joinString, list_container)
+              }, 300)
+                    //updateCourseList()
+                  })
+             })
+
+            
+          })
+
+    }
+    //updateCourseList  end
+
+    //用来更新列表，用户，课件，课件
+    //get地址， 拼接字符串操作， 列表容器（字符串）
+    $('.admin-menu-course,.course-list-nav-tab').click(function(){
+      console.log(22)
+      updateCourseList('./about_course',joinCourseString, '.admin-course-list');
+    });
+
+
 
 
 
