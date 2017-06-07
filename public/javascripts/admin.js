@@ -1027,6 +1027,7 @@ $(function() {
         result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.name + '</td>\
         <td> \
        \
+        <a href="'+user.src+'" target="_blank"><span class="glyphicon glyphicon-download-alt glyphicon-course-download" title="下载课件" aria-hidden="true"  data-toggle="modal"></span></a> \
         \
         <span class="glyphicon glyphicon-edit glyphicon-course-rename" title="修改信息" aria-hidden="true"  data-toggle="modal"></span> \
         \
@@ -1156,7 +1157,43 @@ $(function() {
     });
 
 
+    $('.add-course-submit').click(function(){
+      var info = $('.add-course-submit-info');
+      var form = $('.add_course_form')[0];
+      console.log(form['new-course-file'])
+      console.log(typeof form['new-course-file'].value)
+      if( form['new-course-file'].files.length === 0 ) {
+        errorInfo(info,'请选择一个文件！');
+      }else {
+        //开始转换为formdata数据发送给后端
+        var formdata = new FormData();
+        formdata.append('course_id', '10000')
+        // formdata.append('course_name', form['new-course-name'].value)
+        formdata.append('course_type', form['new-course-type'].value)
+        formdata.append('course_file', form['new-course-file'].files[0])
+       
+        $.ajax({
+          url: './about_course/upload',
+          type: 'POST',
+          data: formdata,
+          processData: false,    //必须
+          contentType: false,         //https://segmentfault.com/a/1190000007207128!!!!!!!
+          success: function(data){
+            
+            
+              errorInfo(info, data.info); return;
+            
+          }
+        })
+      }
+      return false;
+    })
 
+
+    
+
+
+    
 
 
 })

@@ -220,6 +220,7 @@ router.post('/upload',function(req, res, next) {
   //form.maxFields = 1000;  设置所以文件的大小总和
   form.parse(req, function(err, fields, files) {
   // console.log(files.originalFilename);
+  if( typeof fields === 'undefined' ) return;
   //获取提交的考试信息
   var new_exam = JSON.parse(fields.new_exam[0]);  //及时只有一个数据，也是保存在一个数组中
    // console.log(typeof fields.new_exam[0]);

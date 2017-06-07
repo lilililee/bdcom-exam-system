@@ -41,6 +41,10 @@ header h1{
 	color: #2DB965;
 }
 
+.glyphicon-download-alt {
+	color: #555;
+}
+
 /*index*/
 .index-content .login .control-label {
   padding-top: 7px;

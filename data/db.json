@@ -454,19 +454,21 @@
     "course": {
         "course_args": {},
         "course_list": {
-            "course_list_args": {},
+            "course_list_args": {
+                "sum": 10
+            },
             "course_list_content": [
                 {
-                    "id": "10002",
-                    "name": "交换机知识详解56456546",
-                    "type": "交换机",
-                    "src": "./file"
+                    "id": "10009",
+                    "name": "cloud11.jpg",
+                    "type": "",
+                    "src": "./uploadcourses/cloud.jpg"
                 },
                 {
-                    "id": "10004",
-                    "name": "交换机知识详解56456546",
-                    "type": "交换机",
-                    "src": "./file"
+                    "id": "10010",
+                    "name": "HTML DOM 参考手册.RAR",
+                    "type": "",
+                    "src": "./uploadcourses/HTML DOM 参考手册.RAR"
                 }
             ]
         }
