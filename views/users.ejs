@@ -9,7 +9,7 @@
     </style>
   </head>
   <body style="background: url(/Wopop_files/login_bgx.gif)">
-  	<div class="users-content">
+  	<div class="users-content  admin-content">
     <div class="container-fluid wrap"> 
           
      <!--  <h1 class="text-center text-primary">博达考试系统</h1>
@@ -19,15 +19,33 @@
       </div> -->
       <%- include('inc/header',{identity:'用户'}) %>
 
+    <!-- Modal1 -->
+          <%- include( 'inc/user_users') %>
+          <!-- Modal1 end -->
 
+          <!-- Modal2 -->
+          <%- include( 'inc/user_exam') %> 
+          <!-- Modal2 end -->
+
+
+          <!-- Modal3 -->
+          <%- include( 'inc/user_course') %> 
+          <!-- Modal3 end -->
 
         
       </div>
     </div>
     
 
-    <link rel='stylesheet' href='/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js' />
-    <link rel='stylesheet' href='/bootstrap-3.3.7-dist/js/bootstrap.min.js' />
+    <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    
+    <script src="/javascripts/user.js"></script>
+     <script>
+      $(function() {
+        initUser('<%= data.id %>', '<%= data.password %>');
+      })
+    </script>
   </body>
 
 </html>
