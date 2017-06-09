@@ -98,87 +98,87 @@ return result;
             //循环结束，开始插入html，更新表格
             $( list_container + ' tbody').html('').append(result);
 
-            //发布考试
-            innerModelHander($(list_container + ' .glyphicon-exam-start'),$('.model-exam-start'),function(traget_model){
-               //this指向提交按钮，会有data-id属性
-               var exam_id = $(this).attr('data-exam-id');
-              //console.log(exam_id)
-              var post_data = {
-              	login_id: user.id,
-              	login_password: user.password,
-              };
-              var exam_start_model = $('.model-exam-start');
-                //console.log($('.model-exam-start').find('.submit-innermodel').index(this))
-                var index = exam_start_model.find('.submit-innermodel').index(this);
-                //获取对应的glyphicon按钮
-                var target_glyphicon = $(list_container + ' .glyphicon-exam-start').eq(index);
-               // exam_start_model[index].innerHTML = exam_start_model[index].innerHTML.replace('发布','取消');
-               // console.log(exam_start_model[index].innerHTML = )
-               if(target_glyphicon.attr('data-is-start') === 'no'){
-               	post_data.start_exam_id = exam_id;
-               	setTimeout(function(){
-               		target_glyphicon.removeClass('glyphicon-ban-circle').addClass('glyphicon-ok-sign').attr('title','取消考试');
-                  //exam_start_model[index].innerHTML.replace('发布','取消');
+            // //发布考试
+            // innerModelHander($(list_container + ' .glyphicon-exam-start'),$('.model-exam-start'),function(traget_model){
+            //    //this指向提交按钮，会有data-id属性
+            //    var exam_id = $(this).attr('data-exam-id');
+            //   //console.log(exam_id)
+            //   var post_data = {
+            //   	login_id: user.id,
+            //   	login_password: user.password,
+            //   };
+            //   var exam_start_model = $('.model-exam-start');
+            //     //console.log($('.model-exam-start').find('.submit-innermodel').index(this))
+            //     var index = exam_start_model.find('.submit-innermodel').index(this);
+            //     //获取对应的glyphicon按钮
+            //     var target_glyphicon = $(list_container + ' .glyphicon-exam-start').eq(index);
+            //    // exam_start_model[index].innerHTML = exam_start_model[index].innerHTML.replace('发布','取消');
+            //    // console.log(exam_start_model[index].innerHTML = )
+            //    if(target_glyphicon.attr('data-is-start') === 'no'){
+            //    	post_data.start_exam_id = exam_id;
+            //    	setTimeout(function(){
+            //    		target_glyphicon.removeClass('glyphicon-ban-circle').addClass('glyphicon-ok-sign').attr('title','取消考试');
+            //       //exam_start_model[index].innerHTML.replace('发布','取消');
 
-                  var traget_text1 = exam_start_model.eq(index).find('h4');
-                  traget_text1.html(traget_text1.html().replace('发布','取消'));
+            //       var traget_text1 = exam_start_model.eq(index).find('h4');
+            //       traget_text1.html(traget_text1.html().replace('发布','取消'));
 
-                  var traget_text2 = exam_start_model.eq(index).find('.modal-body');
-                  traget_text2.html(traget_text2.html().replace('发布','取消'));
-                  target_glyphicon.attr('data-is-start','yes');
-              },500)
+            //       var traget_text2 = exam_start_model.eq(index).find('.modal-body');
+            //       traget_text2.html(traget_text2.html().replace('发布','取消'));
+            //       target_glyphicon.attr('data-is-start','yes');
+            //   },500)
 
-               } else {
-               	post_data.cancel_exam_id = exam_id;
-               	setTimeout(function(){
-               		target_glyphicon.removeClass('glyphicon-ok-sign').addClass('glyphicon-ban-circle').attr('title','发布考试');
-                  //exam_start_model[index].innerHTML.replace('取消','发布')
-                  var traget_text1 = exam_start_model.eq(index).find('h4');
-                  console.log(traget_text1)
-                  traget_text1.html(traget_text1.html().replace('取消','发布'));
+            //    } else {
+            //    	post_data.cancel_exam_id = exam_id;
+            //    	setTimeout(function(){
+            //    		target_glyphicon.removeClass('glyphicon-ok-sign').addClass('glyphicon-ban-circle').attr('title','发布考试');
+            //       //exam_start_model[index].innerHTML.replace('取消','发布')
+            //       var traget_text1 = exam_start_model.eq(index).find('h4');
+            //       console.log(traget_text1)
+            //       traget_text1.html(traget_text1.html().replace('取消','发布'));
 
-                  var traget_text2 = exam_start_model.eq(index).find('.modal-body');
-                  traget_text2.html(traget_text2.html().replace('取消','发布'));
-                  target_glyphicon.attr('data-is-start','no');
-              },500)
+            //       var traget_text2 = exam_start_model.eq(index).find('.modal-body');
+            //       traget_text2.html(traget_text2.html().replace('取消','发布'));
+            //       target_glyphicon.attr('data-is-start','no');
+            //   },500)
 
-               }
-               $.post(server_url, post_data, function(data, status) {
-               	traget_model.fadeOut();
-                   //  setTimeout(function(){
-                   //    updateExamList(server_url,joinString, list_container)
-                   //  }, 300)
-                    //updateExamList()
-                    console.log(data)
-                })
-
-
+            //    }
+            //    $.post(server_url, post_data, function(data, status) {
+            //    	traget_model.fadeOut();
+            //        //  setTimeout(function(){
+            //        //    updateExamList(server_url,joinString, list_container)
+            //        //  }, 300)
+            //         //updateExamList()
+            //         console.log(data)
+            //     })
 
 
-                //$(this).removeClass('glyphicon-ok-sign').addClass('glyphicon-ban-circle');
-            })
+
+
+            //     //$(this).removeClass('glyphicon-ok-sign').addClass('glyphicon-ban-circle');
+            // })
 
             // 修改考试    //未实现。。。。
-            innerModelHander($(list_container + ' .glyphicon-edit'),$('.model-user-change'),function(traget_model){
-            	var form = $(this).parents('form')[0];
+            // innerModelHander($(list_container + ' .glyphicon-edit'),$('.model-user-change'),function(traget_model){
+            // 	var form = $(this).parents('form')[0];
 
-            	$.post(server_url, {
-            		login_id: user.id,
-            		login_password: user.password,
-            		user_id: form.user_id.value,
-            		user_password: form.user_password.value,
-            		user_department: form.user_department.value,
-            		user_role: form.user_role.value
-            	},
-            	function(data, status) {
-            		traget_model.fadeOut();
-            		setTimeout(function(){
+            // 	$.post(server_url, {
+            // 		login_id: user.id,
+            // 		login_password: user.password,
+            // 		user_id: form.user_id.value,
+            // 		user_password: form.user_password.value,
+            // 		user_department: form.user_department.value,
+            // 		user_role: form.user_role.value
+            // 	},
+            // 	function(data, status) {
+            // 		traget_model.fadeOut();
+            // 		setTimeout(function(){
 
-            			updateExamList(server_url,joinString, list_container);
-            		}, 500)
-                    //updateExamList()
-                })
-            })
+            // 			updateExamList(server_url,joinString, list_container);
+            // 		}, 500)
+            //         //updateExamList()
+            //     })
+            // })
             
             //开始考试
             innerModelHander($('.admin-exam-list .glyphicon-pencil'),$('.model-exam-start'),function(traget_model){
