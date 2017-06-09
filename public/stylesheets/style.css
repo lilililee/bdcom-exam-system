@@ -13,11 +13,12 @@
 html,body {
 	height: 100%;
 	width: 100%;
+	font-family: "微软雅黑",Arial;
 	
 }
 
 header {
-	max-width: 1080px;
+	max-width: 1108px;
 	margin: auto;
 }
 
@@ -45,6 +46,10 @@ header h1{
 	color: #555;
 }
 
+.glyphicon-pencil {
+	color: #C78282;
+}
+
 /*index*/
 .index-content .login .control-label {
   padding-top: 7px;
@@ -65,9 +70,45 @@ header h1{
 /*admin*/
 .admin-content .admin-menu {
 	display: block;
-	width: 80%;
+	width: 90%;
 	margin: 20px auto;
+	height: 200px;
+	border: none;
+	box-shadow: 2px 2px 10px #aaa;
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+	-o-transition: all .3s linear;
+	transition: all .3s linear;
 	/*text-align: center;*/
+}
+.admin-content .admin-menu:hover {
+	-webkit-transform:translateY(-10px);	
+	-moz-transform:translateY(-10px);
+	transform:translateY(-10px);
+	box-shadow: 3px 3px 10px #999;
+}
+
+.admin-content .admin-menu:focus {
+	outline: none;
+}
+
+.admin-content .admin-menu-users{
+	background: url(../images/menu1.jpg) center center no-repeat;
+	background-size: cover;
+}
+.admin-content .admin-menu-exam{
+	background: url(../images/menu2.jpg) center center no-repeat;
+	background-size: cover;
+}
+.admin-content .admin-menu-course{
+	background: url(../images/menu1.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+
+.admin-content .admin-menu-users:focus {
+	color: #fff;
+	border: none;
 }
 
 .admin-content  .glyphicon{

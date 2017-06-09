@@ -4,28 +4,36 @@ var fs = require('fs');
 var file ="../data/db.json";
 var multiparty = require('multiparty');
 var util = require('util');
+var checkLogin = require('./inc/checkLogin');
 
 /* GET admin listing. */
 router.get('/', function(req, res, next) {
+  //用于获取考试信息
+  //合法的管理员和用户均可获取
   //读取数据库文件
+
   var db =JSON.parse(fs.readFileSync(file));
-  //先验证管理员身份
+  //console.log('checkLogin: ')
+  //console.log('checkLogin: ' + checkLogin(db.admin,'111','222'))
+  //先验证是否为管理员身份 
+  if(checkLogin(db.admin, req.query.login_id, req.query.login_password)){
+      res.send(db.exam.exam_list.exam_list_content);
+      return;
+  }
 
-  if(db.admin){
-    for(var i = 0; i < db.admin.length; i++) {
 
-      // 
-      // console.log(db.admin[i].id)
-      if(req.query.login_id == db.admin[i].id && req.query.login_password == db.admin[i].password){
-        console.log(req.query.login_id)
-        res.send(db.exam.exam_list.exam_list_content);
-        return;
+  //再验证是否为用户
+  if(checkLogin(db.users, req.query.login_id, req.query.login_password)){
+    var result = [];
+    db.exam.exam_list.exam_list_content.forEach(function(item,index){
+      if(item.is_start==='yes'){
+        result.push(item)
       }
-    }
-  }else {
-    res.send('数据库出错！');
+    })
+    res.send(result);
     return;
   }
+
 
   //res.send(req.query);
   res.send('用户信息不匹配，请返回重新登录！');
@@ -90,7 +98,7 @@ router.post('/', function(req, res, next) {
           for(var j = 0; j < exam_list_content.length; j++){
               //console.log(exam_list_content[j].id)
               //console.log(req.body.delete_exam_id)
-             if(exam_list_content[j].id === req.body.delete_exam_id){
+              if(exam_list_content[j].id === req.body.delete_exam_id){
               //console.log(exam_list_content)
               //console.log(j + ' ---11111111111111')
               //console.log(i)
@@ -98,9 +106,9 @@ router.post('/', function(req, res, next) {
               exam_list_content[j].content.texts.forEach(function(item, index){
                 if(item.pic !== 'undefined'){
 
-                    console.log(item.pic)
-                    console.log(item.pic.replace('.\\','..\\public\\'))
-                    deleteFolderRecursive(item.pic.replace('.\\','..\\public\\'));
+                  console.log(item.pic)
+                  console.log(item.pic.replace('.\\','..\\public\\'))
+                  deleteFolderRecursive(item.pic.replace('.\\','..\\public\\'));
                 }
               })
 
@@ -108,36 +116,36 @@ router.post('/', function(req, res, next) {
               exam_list_content.splice(j,1);
                //console.log(exam_list_content)
               //return;
-             
+
 
               // 删除文件价
               function deleteFolderRecursive(url) {
                 //判断给定的路径是否存在
                 if( fs.existsSync(url) ) {
-                  
-                   console.log(1111)
+
+                 console.log(1111)
                    // 当为文件夹时，需要逐一删除内部文件夹和文件
                    if(fs.statSync(url).isDirectory()){
                       //返回文件和子目录的数组
                       var files = [];
                       files = fs.readdirSync(url);
-                       console.log(files)
+                      console.log(files)
                       files.forEach(function(file,index){
                         //var files = [];
                         var curPath = url + "/" + file; 
                         //console.log(curPath)
                         //fs.statSync同步读取文件夹文件，如果是文件夹，在重复触发函数                   
                         deleteFolderRecursive(curPath);
-                       
+
                       });
                       //清除文件夹
                       fs.rmdirSync(url);
-                   }
+                    }
                    // 2. 当为文件时，直接删除 
                    else {
-                      fs.unlinkSync(url);
-                   }
-                 
+                    fs.unlinkSync(url);
+                  }
+
                 }else{
                   console.log("给定的路径不存在，请给出正确的路径");
                 }
@@ -165,9 +173,9 @@ router.post('/', function(req, res, next) {
         //console.log(db.exam.exam_list.exam_list_content)
         //写入修改后的数据
         fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
-  			
-  			return;
-  		}
+
+        return;
+      }
 
       // var form = new multiparty.Form();
       // //设置编辑
