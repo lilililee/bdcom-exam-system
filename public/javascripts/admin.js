@@ -1,7 +1,7 @@
 var admin = {};
 
 function initAdmin (id,password){
-  console.log(id)
+  //console.log(id)
   admin.id = id;
   admin.password = password;
 }
