@@ -93,15 +93,15 @@ header h1{
 }
 
 .admin-content .admin-menu-users{
-	background: url(../images/menu1.jpg) center center no-repeat;
+	background: url(../images/menu4.jpg) center center no-repeat;
 	background-size: cover;
 }
 .admin-content .admin-menu-exam{
-	background: url(../images/menu2.jpg) center center no-repeat;
+	background: url(../images/menu1.jpg) center center no-repeat;
 	background-size: cover;
 }
 .admin-content .admin-menu-course{
-	background: url(../images/menu1.jpg) center center no-repeat;
+	background: url(../images/menu3.jpg) center center no-repeat;
 	background-size: cover;
 }
 
