@@ -185,19 +185,11 @@ return result;
                //this指向提交按钮，会有data-id属性
                var exam_id = $(this).attr('data-exam-id');
                // console.log(typeof exam_id)
-               $.post(server_url, {
-               	login_id: user.id,
-               	login_password: user.password,
-               	user_start_exam_id: exam_id
-               },
-               function(data, status) {
-               	console.log('success')
-               	traget_model.fadeOut();
-               	setTimeout(function(){
-               		updateExamList(server_url,joinString, list_container)
-               	}, 300)
-                    //updateExamList()
-                })
+               //此处post使用表单来实现页面跳转
+               var start_exam_form = document.getElementsByClassName('start_exam_form')[0];
+               start_exam_form.exam_id.value = exam_id;         
+               start_exam_form.submit();
+              
            })
 
             

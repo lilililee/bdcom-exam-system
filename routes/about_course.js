@@ -148,7 +148,7 @@ router.post('/upload',function(req, res, next) {
    //console.log(new_exam.id)
    if( typeof fields !== 'undefined' && fields.course_id[0] === '10000'){
    // console.log(db.exam_list)
-      // 1.1 为当前考试生成一个5位的id
+      // 1.1 为当前考试生成一个6位的id
       db.course.course_list.course_list_args.sum++;
       var new_course = {
         id: '',
@@ -156,10 +156,11 @@ router.post('/upload',function(req, res, next) {
         type: '',
         src: ''
       }
-      new_course.id = fiveCourseId(db.course.course_list.course_list_args.sum);
+      //1开头表示为课程id
+      new_course.id = '1' + fiveCourseId(db.course.course_list.course_list_args.sum);
       function fiveCourseId(num) {
         var id = '00000' + num;
-        return '1' + id.slice(id.length - 4, id.length);
+        return id.slice(id.length - 5, id.length);
       }
 
       // 1.2 课件名称

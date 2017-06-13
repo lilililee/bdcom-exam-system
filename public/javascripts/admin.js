@@ -871,11 +871,12 @@ return result;
 
           // 2.3 获取答案
           var all_answer = $(this).find('.single-select-answer');  //获取当前选择题的答案
-          var answer = [];
+          var answer = '';
           all_answer.each(function (){
-           if(this.checked === true)  answer.push(this.value);
+           //if(this.checked === true)  answer.push(this.value);
+           if(this.checked === true)  answer += this.value;
          })
-          if(answer.length == 0) {
+          if(answer === '') {
             errorInfo(info, '请为选择题<strong>'+ (index+1) + '</strong>选择至少一个正确答案！'); selects_is_error = true; return false;
           } else {
             single_select.answer = answer;
@@ -910,9 +911,12 @@ return result;
 
           // 3.2 获取答案
           var all_answer = $(this).find('.single-judge-answer');  //获取当前选择题的答案
-          var answer = '';
+          //var answer = '';
           all_answer.each(function (){
-           if(this.checked === true)  answer = this.value;
+           if(this.checked === true) {
+            single_judge.answer = this.value;
+            return false;
+           }  
          })
           
           // 3.3 获取分值

@@ -76,386 +76,172 @@
             "role": "212121"
         },
         {
-            "id": "1",
-            "password": "1",
-            "department": "1",
-            "role": "1"
-        },
-        {
-            "id": "13232",
-            "password": "1",
-            "department": "1",
-            "role": "1"
+            "id": "111",
+            "password": "111",
+            "department": "111",
+            "role": "111"
         }
     ],
     "exam": {
         "exam_args": {},
         "exam_list": {
             "exam_list_args": {
-                "sum": 33
+                "sum": 35
             },
             "exam_list_content": [
                 {
-                    "id": "001",
-                    "name": "1月技术考核",
-                    "time": "60",
-                    "is_start": "no",
-                    "content": {
-                        "selects": [
-                            {
-                                "sid": "1",
-                                "question": "下列哪一项为正确答案？",
-                                "options": [
-                                    "选项一",
-                                    "选项二",
-                                    "选项三"
-                                ],
-                                "answer": [
-                                    1
-                                ],
-                                "value": "2"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "下列哪一项为正确答案？",
-                                "options": [
-                                    "选项一",
-                                    "选项二",
-                                    "选项三"
-                                ],
-                                "answer": [
-                                    1,
-                                    2
-                                ],
-                                "value": "2"
-                            }
-                        ],
-                        "judges": [
-                            {
-                                "sid": "1",
-                                "question": "下列哪一项为正确答案？",
-                                "answer": 0,
-                                "value": "2"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "下列哪一项为正确答案（判断题）？",
-                                "answer": 0,
-                                "value": "2"
-                            }
-                        ],
-                        "texts": [
-                            {
-                                "sid": "1",
-                                "question": "下图问题出在哪？",
-                                "pic": "c://example.jgp",
-                                "value": "2"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "id": "002",
-                    "name": "2月技术考核",
-                    "time": "60",
-                    "is_start": "no",
-                    "content": {
-                        "selects": [
-                            {
-                                "sid": "1",
-                                "question": "下列哪一项为正确答案？",
-                                "options": [
-                                    "选项一",
-                                    "选项二",
-                                    "选项三"
-                                ],
-                                "answer": [
-                                    1
-                                ],
-                                "value": "2"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "下列哪一项为正确答案？",
-                                "options": [
-                                    "选项一",
-                                    "选项二",
-                                    "选项三"
-                                ],
-                                "answer": [
-                                    1,
-                                    2
-                                ],
-                                "value": "2"
-                            }
-                        ],
-                        "judges": [
-                            {
-                                "sid": "1",
-                                "question": "下列哪一项为正确答案？",
-                                "answer": 0,
-                                "value": "2"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "下列哪一项为正确答案（判断题）？",
-                                "answer": 0,
-                                "value": "2"
-                            }
-                        ],
-                        "texts": [
-                            {
-                                "sid": "1",
-                                "question": "下图问题出在哪？",
-                                "pic": "c://example.jgp",
-                                "value": "2"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "id": "00014",
-                    "name": "34",
-                    "time": "432",
-                    "is_start": "yes",
-                    "count": {
-                        "selects": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "judges": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "texts": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "all": {
-                            "sum": 0,
-                            "score": 0
-                        }
-                    },
-                    "content": {
-                        "selects": [],
-                        "judges": [],
-                        "texts": []
-                    }
-                },
-                {
-                    "id": "00017",
-                    "name": "34",
-                    "time": "432",
-                    "is_start": "yes",
-                    "count": {
-                        "selects": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "judges": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "texts": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "all": {
-                            "sum": 0,
-                            "score": 0
-                        }
-                    },
-                    "content": {
-                        "selects": [],
-                        "judges": [],
-                        "texts": []
-                    }
-                },
-                {
-                    "id": "00027",
-                    "name": "34",
-                    "time": "432",
-                    "is_start": "yes",
-                    "count": {
-                        "selects": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "judges": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "texts": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "all": {
-                            "sum": 0,
-                            "score": 0
-                        }
-                    },
-                    "content": {
-                        "selects": [],
-                        "judges": [],
-                        "texts": []
-                    }
-                },
-                {
-                    "id": "00028",
-                    "name": "34",
-                    "time": "432",
-                    "is_start": "yes",
-                    "count": {
-                        "selects": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "judges": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "texts": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "all": {
-                            "sum": 0,
-                            "score": 0
-                        }
-                    },
-                    "content": {
-                        "selects": [],
-                        "judges": [],
-                        "texts": []
-                    }
-                },
-                {
-                    "id": "00032",
-                    "name": "342",
-                    "time": "423",
-                    "is_start": "yes",
-                    "count": {
-                        "selects": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "judges": {
-                            "sum": 0,
-                            "score": 0
-                        },
-                        "texts": {
-                            "sum": 4,
-                            "score": 40
-                        },
-                        "all": {
-                            "sum": 4,
-                            "score": 40
-                        }
-                    },
-                    "content": {
-                        "selects": [],
-                        "judges": [],
-                        "texts": [
-                            {
-                                "sid": "1",
-                                "question": "324234",
-                                "img": {},
-                                "value": "10",
-                                "pic": ".\\uploadimages\\F0XwScFAHnK_GQoJ1ISwbxg2.jpg"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "423",
-                                "img": "undefined",
-                                "value": "10",
-                                "pic": "undefined"
-                            },
-                            {
-                                "sid": "3",
-                                "question": "423",
-                                "img": {},
-                                "value": "10",
-                                "pic": ".\\uploadimages\\nQXP5f2BWpuhj0VJSuJjCw2Y.jpg"
-                            },
-                            {
-                                "sid": "4",
-                                "question": "4234",
-                                "img": "undefined",
-                                "value": "10",
-                                "pic": "undefined"
-                            }
-                        ]
-                    }
-                },
-                {
-                    "id": "00033",
-                    "name": "一月考核",
+                    "id": "000034",
+                    "name": "一月技术考核",
                     "time": "60",
                     "is_start": "yes",
                     "count": {
                         "selects": {
                             "sum": 2,
-                            "score": 7
+                            "score": 4
                         },
                         "judges": {
-                            "sum": 1,
-                            "score": 2
+                            "sum": 2,
+                            "score": 4
                         },
                         "texts": {
                             "sum": 1,
-                            "score": 20
+                            "score": 10
                         },
                         "all": {
-                            "sum": 4,
-                            "score": 29
+                            "sum": 5,
+                            "score": 18
                         }
                     },
                     "content": {
                         "selects": [
                             {
                                 "sid": "1",
-                                "question": "111",
+                                "question": "请选择正确答案1",
                                 "options": [
-                                    "22",
-                                    "212",
-                                    "221",
-                                    "212"
+                                    "选型a",
+                                    "选型b",
+                                    "选型c",
+                                    "选型b"
                                 ],
-                                "answer": [
-                                    "b",
-                                    "c"
-                                ],
-                                "value": "5"
+                                "answer": "bc",
+                                "value": "2"
                             },
                             {
                                 "sid": "2",
-                                "question": "212",
+                                "question": "请选择正确答案2",
                                 "options": [
-                                    "2121",
-                                    "12",
-                                    "12",
-                                    "2121"
+                                    "选型a",
+                                    "选型b",
+                                    "选型c",
+                                    "选型d"
                                 ],
-                                "answer": [
-                                    "b"
-                                ],
+                                "answer": "bcd",
                                 "value": "2"
                             }
                         ],
                         "judges": [
                             {
                                 "sid": "1",
-                                "question": "21212121",
+                                "question": "1+1=2?",
+                                "answer": "true",
+                                "value": "2"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "4+6=3?",
+                                "answer": "false",
                                 "value": "2"
                             }
                         ],
                         "texts": [
                             {
                                 "sid": "1",
-                                "question": "212212",
+                                "question": "请说明下图的内容",
                                 "img": {},
-                                "value": "20",
-                                "pic": ".\\uploadimages\\Vi6hAlI9teuY691215A0JqGz.jpg"
+                                "value": "10",
+                                "pic": ".\\uploadimages\\5aVmsOQqUTQ4HpAROHeg8pOR.jpg"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "000035",
+                    "name": "一月技术考核",
+                    "time": "60",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 2,
+                            "score": 4
+                        },
+                        "judges": {
+                            "sum": 2,
+                            "score": 4
+                        },
+                        "texts": {
+                            "sum": 2,
+                            "score": 20
+                        },
+                        "all": {
+                            "sum": 6,
+                            "score": 28
+                        }
+                    },
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "请选择正确答案1",
+                                "options": [
+                                    "选型a",
+                                    "选型b",
+                                    "选型c",
+                                    "选型b"
+                                ],
+                                "answer": "bc",
+                                "value": "2"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "请选择正确答案2",
+                                "options": [
+                                    "选型a",
+                                    "选型b",
+                                    "选型c",
+                                    "选型d"
+                                ],
+                                "answer": "bcd",
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "1+1=2?",
+                                "answer": "true",
+                                "value": "2"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "4+6=3?",
+                                "answer": "false",
+                                "value": "2"
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "请说明下图的内容",
+                                "img": {},
+                                "value": "10",
+                                "pic": ".\\uploadimages\\xz771PW4k9p4l78CxQWOqw1A.jpg"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "wewewe",
+                                "img": "undefined",
+                                "value": "10",
+                                "pic": "undefined"
                             }
                         ]
                     }
@@ -467,20 +253,132 @@
         "course_args": {},
         "course_list": {
             "course_list_args": {
-                "sum": 10
+                "sum": 5
             },
             "course_list_content": [
                 {
-                    "id": "10009",
-                    "name": "cloud11.jpg",
-                    "type": "",
-                    "src": "./uploadcourses/cloud.jpg"
+                    "id": "10002",
+                    "name": "交换机知识详解56456546",
+                    "type": "交换机",
+                    "src": "./file"
                 },
                 {
-                    "id": "10010",
+                    "id": "10004",
+                    "name": "交换机知识详解56456546",
+                    "type": "交换机",
+                    "src": "./file"
+                },
+                {
+                    "id": "10001",
+                    "name": "567",
+                    "type": "",
+                    "src": "..\\public\\uploadcourses\\M5VjB5XUl_A9nOLNocK9If9O.jpg"
+                },
+                {
+                    "id": "10002",
+                    "name": "cloud.jpg",
+                    "type": "",
+                    "src": "..\\public\\uploadcourses\\K7pvWPrvRIdt4vtsiuu1FKA2.jpg"
+                },
+                {
+                    "id": "10003",
+                    "name": "234",
+                    "type": "",
+                    "src": "..\\public\\uploadcourses\\nRx5EKK4stsBiyCeYzH2zFuK.RAR"
+                },
+                {
+                    "id": "10004",
                     "name": "HTML DOM 参考手册.RAR",
                     "type": "",
-                    "src": "./uploadcourses/HTML DOM 参考手册.RAR"
+                    "src": "..\\public\\uploadcourses\\q8CHGBwWmf6F1yAdFojnOThI.RAR"
+                },
+                {
+                    "id": "10005",
+                    "name": "HTML DOM 参考手册.RAR",
+                    "type": "",
+                    "src": "..\\public\\uploadcourses\\WMvNjeScUTJHp--EFqyqWeNz.RAR"
+                }
+            ]
+        }
+    },
+    "record": {
+        "record_args": {},
+        "record_list": {
+            "record_list_args": {
+                "sum": 3
+            },
+            "record_list_content": [
+                {
+                    "id": "200001",
+                    "user_id": "111",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497281259531",
+                    "end_time": "1497281263072",
+                    "answer": {
+                        "selects": [
+                            "",
+                            ""
+                        ],
+                        "judges": [
+                            "",
+                            ""
+                        ],
+                        "texts": [
+                            ""
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "no",
+                    "score": "0"
+                },
+                {
+                    "id": "200002",
+                    "user_id": "111",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497281315296",
+                    "end_time": "1497281323791",
+                    "answer": {
+                        "selects": [
+                            "c",
+                            "a"
+                        ],
+                        "judges": [
+                            "true",
+                            "true"
+                        ],
+                        "texts": [
+                            "dsfsd "
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "no",
+                    "score": "2"
+                },
+                {
+                    "id": "200003",
+                    "user_id": "111",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497281339470",
+                    "end_time": "1497281346474",
+                    "answer": {
+                        "selects": [
+                            "",
+                            ""
+                        ],
+                        "judges": [
+                            "",
+                            ""
+                        ],
+                        "texts": [
+                            "fsdfsd\n\nfsd\nf\nsd\nf\nsd\nf\nsd"
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "no",
+                    "score": "0"
                 }
             ]
         }

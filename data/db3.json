@@ -1,0 +1,694 @@
+{
+    "admin": [
+        {
+            "id": "lee",
+            "password": "123",
+            "department": "qudao",
+            "role": "技术经理",
+            "note": "a admin"
+        }
+    ],
+    "users": [
+        {
+            "id": "34",
+            "password": "er868",
+            "department": "rewerwe",
+            "role": "erwerew34",
+        },
+        {
+            "id": "212234",
+            "password": "12343tertert",
+            "department": "渠道部",
+            "role": "技术支持"
+        },
+        {
+            "id": "2122344",
+            "password": "12343tertert",
+            "department": "12",
+            "role": "12"
+        },
+        {
+            "id": "2122344444",
+            "password": "12343tertert",
+            "department": "12",
+            "role": "12"
+        },
+        {
+            "id": "21223444444",
+            "password": "12343tertert",
+            "department": "12",
+            "role": "12"
+        },
+        {
+            "id": "2122344444444",
+            "password": "12343tertert",
+            "department": "12",
+            "role": "12"
+        },
+        {
+            "id": "21223444444444",
+            "password": "12343tertert",
+            "department": "12",
+            "role": "12"
+        },
+        {
+            "id": "2",
+            "password": "32",
+            "department": "32",
+            "role": "32"
+        },
+        {
+            "id": "67",
+            "password": "657",
+            "department": "65",
+            "role": "567"
+        },
+        {
+            "id": "1122",
+            "password": "2121",
+            "department": "212",
+            "role": "212121"
+        },
+        {
+            "id": "13232",
+            "password": "1",
+            "department": "1",
+            "role": "1"
+        }
+    ],
+    "exam": {
+        "exam_args": {},
+        "exam_list": {
+            "exam_list_args": {
+                "sum": 37
+            },
+            "exam_list_content": [
+                {
+                    "id": "001",
+                    "name": "1月技术考核",
+                    "time": "60",
+                    "is_start": "no",
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "options": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1
+                                ],
+                                "value": "2"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案？",
+                                "options": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1,
+                                    2
+                                ],
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "answer": 0,
+                                "value": "2"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案（判断题）？",
+                                "answer": 0,
+                                "value": "2"
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "下图问题出在哪？",
+                                "pic": "c://example.jgp",
+                                "value": "2"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "002",
+                    "name": "2月技术考核",
+                    "time": "60",
+                    "is_start": "no",
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "options": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1
+                                ],
+                                "value": "2"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案？",
+                                "options": [
+                                    "选项一",
+                                    "选项二",
+                                    "选项三"
+                                ],
+                                "answer": [
+                                    1,
+                                    2
+                                ],
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "下列哪一项为正确答案？",
+                                "answer": 0,
+                                "value": "2"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "下列哪一项为正确答案（判断题）？",
+                                "answer": 0,
+                                "value": "2"
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "下图问题出在哪？",
+                                "pic": "c://example.jgp",
+                                "value": "2"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "00014",
+                    "name": "34",
+                    "time": "432",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "judges": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 0,
+                            "score": 0
+                        }
+                    },
+                    "content": {
+                        "selects": [],
+                        "judges": [],
+                        "texts": []
+                    }
+                },
+                {
+                    "id": "00017",
+                    "name": "34",
+                    "time": "432",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "judges": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 0,
+                            "score": 0
+                        }
+                    },
+                    "content": {
+                        "selects": [],
+                        "judges": [],
+                        "texts": []
+                    }
+                },
+                {
+                    "id": "00027",
+                    "name": "34",
+                    "time": "432",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "judges": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 0,
+                            "score": 0
+                        }
+                    },
+                    "content": {
+                        "selects": [],
+                        "judges": [],
+                        "texts": []
+                    }
+                },
+                {
+                    "id": "00028",
+                    "name": "34",
+                    "time": "432",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "judges": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 0,
+                            "score": 0
+                        }
+                    },
+                    "content": {
+                        "selects": [],
+                        "judges": [],
+                        "texts": []
+                    }
+                },
+                {
+                    "id": "00032",
+                    "name": "342",
+                    "time": "423",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "judges": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "texts": {
+                            "sum": 4,
+                            "score": 40
+                        },
+                        "all": {
+                            "sum": 4,
+                            "score": 40
+                        }
+                    },
+                    "content": {
+                        "selects": [],
+                        "judges": [],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "324234",
+                                "img": {},
+                                "value": "10",
+                                "pic": ".\\uploadimages\\F0XwScFAHnK_GQoJ1ISwbxg2.jpg"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "423",
+                                "img": "undefined",
+                                "value": "10",
+                                "pic": "undefined"
+                            },
+                            {
+                                "sid": "3",
+                                "question": "423",
+                                "img": {},
+                                "value": "10",
+                                "pic": ".\\uploadimages\\nQXP5f2BWpuhj0VJSuJjCw2Y.jpg"
+                            },
+                            {
+                                "sid": "4",
+                                "question": "4234",
+                                "img": "undefined",
+                                "value": "10",
+                                "pic": "undefined"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "00033",
+                    "name": "一月考核",
+                    "time": "60",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 2,
+                            "score": 7
+                        },
+                        "judges": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "texts": {
+                            "sum": 1,
+                            "score": 20
+                        },
+                        "all": {
+                            "sum": 4,
+                            "score": 29
+                        }
+                    },
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "111",
+                                "options": [
+                                    "22",
+                                    "212",
+                                    "221",
+                                    "212"
+                                ],
+                                "answer": [
+                                    "b",
+                                    "c"
+                                ],
+                                "value": "5"
+                            },
+                            {
+                                "sid": "2",
+                                "question": "212",
+                                "options": [
+                                    "2121",
+                                    "12",
+                                    "12",
+                                    "2121"
+                                ],
+                                "answer": [
+                                    "b"
+                                ],
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "21212121",
+                                "value": "2"
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "212212",
+                                "img": {},
+                                "value": "20",
+                                "pic": ".\\uploadimages\\Vi6hAlI9teuY691215A0JqGz.jpg"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "00034",
+                    "name": "1111111111",
+                    "time": "11111111",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "judges": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 1,
+                            "score": 2
+                        }
+                    },
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "11111",
+                                "options": [
+                                    "1111",
+                                    "111",
+                                    "11",
+                                    "111111"
+                                ],
+                                "answer": [
+                                    "b",
+                                    "c"
+                                ],
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [],
+                        "texts": []
+                    }
+                },
+                {
+                    "id": "00035",
+                    "name": "1111111111",
+                    "time": "11111111",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "judges": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 2,
+                            "score": 4
+                        }
+                    },
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "11111",
+                                "options": [
+                                    "1111",
+                                    "111",
+                                    "11",
+                                    "111111"
+                                ],
+                                "answer": [
+                                    "b",
+                                    "c"
+                                ],
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "23233",
+                                "value": "2"
+                            }
+                        ],
+                        "texts": []
+                    }
+                },
+                {
+                    "id": "00036",
+                    "name": "22",
+                    "time": "22",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "judges": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 1,
+                            "score": 2
+                        }
+                    },
+                    "content": {
+                        "selects": [],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "2222",
+                                "answer": "false",
+                                "value": "2"
+                            }
+                        ],
+                        "texts": []
+                    }
+                },
+                {
+                    "id": "00037",
+                    "name": "33",
+                    "time": "33",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "judges": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "texts": {
+                            "sum": 0,
+                            "score": 0
+                        },
+                        "all": {
+                            "sum": 2,
+                            "score": 4
+                        }
+                    },
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "33",
+                                "options": [
+                                    "33",
+                                    "33",
+                                    "33",
+                                    "33"
+                                ],
+                                "answer": "bc",
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "33",
+                                "answer": "true",
+                                "value": "2"
+                            }
+                        ],
+                        "texts": []
+                    }
+                }
+            ]
+        }
+    },
+    "course": {
+        "course_args": {},
+        "course_list": {
+            "course_list_args": {
+                "sum": 10
+            },
+            "course_list_content": [
+                {
+                    "id": "10009",
+                    "name": "cloud11.jpg",
+                    "type": "",
+                    "src": "./uploadcourses/cloud.jpg"
+                },
+                {
+                    "id": "10010",
+                    "name": "HTML DOM 参考手册.RAR",
+                    "type": "",
+                    "src": "./uploadcourses/HTML DOM 参考手册.RAR"
+                }
+            ]
+        }
+    },
+
+    "record": {
+        "record_args":{
+
+        },
+        "record_list":{
+            "record_list_args": {
+                "sum": 0
+
+            },
+            "record_list_content": [
+                {
+                    "id": "200001",
+                    "user_id": "111",
+                    "exam_id": "111",
+                    "exam_name": "111",
+                    "start_time": "2017/6/7/3:20",
+                    "end_time": "2017/6/7/3:24",
+                    "answer": {
+                        "selects": [
+                            "ab","b","cc"
+                        ],
+                        "judges": [
+                            "true","false"
+                        ],
+                        "texts": [
+                            "323232qweqeqwe",
+                            "23232323232442"
+                        ]
+                    },
+                    "total_score": "100",
+                    "score": "64"
+
+                }
+            ]
+        }
+    }
+}

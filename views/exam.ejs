@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>博达考试系统</title>
+    <link rel='stylesheet' href='/bootstrap-3.3.7-dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
+  </head>
+  
+  <body style="background: url(/Wopop_files/login_bgx.gif)">
+    <div class="exam-content">
+      <div class="container-fluid wrap">
+
+      	<div class="panel panel-success">
+
+		  <div class="panel-heading exam-header">
+		  	<h2><%= data.name %></h2>
+		  	<div class="info">
+        		<span class="time">考试时间：<%= data.time %>分钟</span>
+        		<span class="score">总分：<%= data.count.all.score %>分</span>
+        		<span class="start_time"></span>
+        	</div>
+		  </div>
+		  <div class="panel-body">
+		  		<div class="selects">
+		  			<h4>一、选择题</h4>
+		  			<ol>
+						<% var arr=['a','b','c','d'] %>
+		  				<%for (var i = 0; i < data.content.selects.length; i++) {%>
+		  					<li>
+		  						<h5>
+		  						<%= data.content.selects[i].question%>
+		  						(<%= data.content.selects[i].value%>分)
+		  						</h5>
+								<%for (var j = 0; j < data.content.selects[i].options.length; j++) {%>
+									<div class="checkbox">
+									  <label>
+
+									    <input type="checkbox" value="<%= arr[j] %>">
+									    <%= arr[j]%>.
+									   	<%=  data.content.selects[i].options[j] %>
+
+
+									  </label>
+									</div>
+									
+
+								<%}%>
+		  					</li>
+		  				<%}%>
+		  			</ol>
+		  		</div>
+		  		<div class="judges">
+		  			<h4>二、判断题</h4>
+		  			<ol>
+		  				<%for (var i = 0; i < data.content.judges.length; i++) {%>
+		  					<li>
+		  						<h5>
+		  							<%= data.content.judges[i].question%> 
+		  							(<%= data.content.judges[i].value%>分)
+		  							<div class="judges-radio pull-right">
+			  							<label class="radio-inline">
+										  <input type="radio" name="<%= i %> " value="true"> 对
+										</label>
+										<label class="radio-inline">
+										  <input type="radio" name="<%= i %> " value="false"> 错
+										</label>
+									</div>
+		  						</h5>
+								
+		  					</li>
+		  				<%}%>
+		  			</ol>
+		  		</div>
+
+		  		<div class="texts">
+		  			<h4>三、简答题</h4>
+		  			<ol>
+		  				<%for (var i = 0; i < data.content.texts.length; i++) {%>
+		  					<li>
+		  						<h5><%= data.content.texts[i].question %>(<%= data.content.texts[i].value%>分)</h5>
+
+		  						<%if (data.content.texts[i].pic != 'undefined') {%>
+								<div class="img text-center">
+									<img src="../../<%= data.content.texts[i].pic %>" alt="说明图片">
+								</div>
+		  						<%}%>
+								<textarea class="form-control texts-answer" placeholder="回答" aria-describedby="basic-addon1" rows="5" style="resize:none;"></textarea>
+		  					</li>
+		  				<%}%>
+		  			</ol>
+		  		</div>
+		  		 <div class="panel-footer text-center">
+		  		 	<button type="button" class="btn btn-success exam-submit">结束考试</button>
+		  		 </div>
+		  		
+		  </div>
+		</div>
+        	
+       </div>
+    </div>
+    <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/javascripts/admin.js"></script>
+    <script>
+      $(function() {
+
+      	var start_time = new Date();
+        $('.start_time').html('开始时间：' + start_time.toLocaleString())
+
+        $('.exam-submit').click(function(){
+        	//comfirm('确认结束考试--'+ <%= data.name %> +'吗？')
+        	
+        	if(!confirm('确认结束考试（<%= data.name %>）吗？')) return;
+        	var end_time = new Date();
+        	if(end_time - start_time < 0 * 60 *1000){
+        		alert('必须进行考试5分钟后才能结束考试！');
+        		return;
+        	}
+
+        	var answer = {
+                selects: [
+                   
+                ],
+                judges: [
+                    
+                ],
+                texts: [
+                    
+                ]
+            }
+
+            //获取选择题答案
+            $('.selects li').each(function(index){
+            	var str = '';
+            	$(this).find('input').each(function(){
+            		if(this.checked) str += this.value;           		
+            	})
+            	answer.selects.push(str);
+            })
+
+			//获取判断题答案
+            $('.judges li').each(function(index){
+            	var str = '';
+            	$(this).find('input').each(function(){
+            		if(this.checked) str = this.value;           		
+            	})
+            	answer.judges.push(str);
+            })
+
+           //获取简答题答案
+            $('.texts li').each(function(index){
+            	var str = '';
+            	$(this).find('textarea').each(function(){
+            		str = this.value;           		
+            	})
+            	answer.texts.push(str);
+            })
+
+           
+            
+        	var record = {
+                id: "200000",
+                user_id: "<%= user_id %>",
+                exam_id: "<%= data.id %>",
+                exam_name: "<%= data.name %>",
+                start_time: start_time.getTime().toString(),
+                end_time: end_time.getTime().toString(),
+                answer: answer,
+                total_score: "<%= data.count.all.score %>",
+                //"score": "64"
+                is_check: "no"
+
+            }
+
+
+
+            var post_data = {
+            	login_id : "<%= user_id %>",
+            	login_password: "<%= user_password %>",
+            	record : JSON.stringify(record)
+            }
+
+            console.log(post_data)
+
+            $.post('./end',post_data,function(data){
+            	if(data.status == 'success'){
+            		alert('提交成功！即将关闭考试界面...');
+            		window.close();
+            	} else {
+            		alert('提交失败！请重新提交...');
+            	}
+            })
+
+
+            
+        })
+      })
+    </script>
+  </body>
+
+</html>

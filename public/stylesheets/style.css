@@ -22,6 +22,10 @@ header {
 	margin: auto;
 }
 
+img {
+	max-width: 100%;
+}
+
 /*public*/
 header h1{
 	padding: 30px 0;
@@ -153,3 +157,20 @@ header h1{
 	/*top: 200px;*/
 }
 
+
+.exam-content .wrap {
+	max-width: 900px;
+}
+
+.exam-content .exam-header {
+	text-align: center;
+}
+
+.exam-content .exam-header span{
+	font-size: 12px;
+	margin: 20px;
+}
+
+.exam-content .judges-radio input {
+	top: -2px;
+}
