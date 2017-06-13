@@ -1194,6 +1194,177 @@ return result;
     })
 
 
+    //阅卷查询按钮
+
+     // 阅卷相关操作
+    //根据get请求获取的数据来渲染列表
+    function joinCheckString(data, info) {
+      var result = '';
+      //console.log("joinString")
+      console.log(data)
+
+      if (typeof data.exam_info == 'undefined') {
+        errorInfo(info, '未获取到相关考试信息！'); return;
+      } else if (data.record.length == 0) {
+        errorInfo(info, data.exam_info.name+'暂无考试记录！');  return;
+      } else {
+        errorInfo(info, '成功获取-'+data.exam_info.name+'-考试记录，该考试总分为'+data.exam_info.count.all.score+'分，考试时间为'+data.exam_info.time+'分钟。'); 
+      }
+      
+      data.record.forEach(function(user, index) {   //此处user表示一个考试记录
+        //if(user.is_start === 'no') {}
+          //console.log(user.id)
+
+          var exam_time = Math.ceil((user.end_time * 1 - user.start_time * 1) /  60000);
+
+          var is_check = '否';
+
+          if (user.is_check == 'yes') {
+            is_check = '是（' + user.score + '分';
+          } 
+
+          result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.user_id + '</td><td>' + exam_time + '分钟</td><td>' + is_check + '</td>\
+          <td> \
+          \
+         <span class="glyphicon glyphicon-eye-open" title="阅卷" aria-hidden="true"  data-toggle="modal"></span>\
+          \
+          \
+          <div class="modal fade model-exam-check" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+          <div class="modal-dialog" role="document">\
+          <div class="modal-content">\
+          <div class="modal-header">\
+          <button type="button" class="close close-innermodel"  aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+          <h4 class="modal-title" id="myModalLabel">正在批阅--' + user.user_id + '--答卷</h4>\
+          </div>\
+          <form>\
+          <div class="modal-body">\
+          <div class="alert alert-success" role="alert">选择题和判断题已自动阅卷，合计分数为:</div>'+user.score+'\
+          <div class="input-group">\
+          <span class="input-group-addon" id="basic-addon1">新阅卷名：</span>\
+          <input type="text" name="check_new_name" class="form-control" value="' + user.score + '" aria-describedby="basic-addon1">\
+          </div>\
+          \
+          </div>\
+          <div class="modal-footer">\
+          <button type="button" class="btn btn-default close-innermodel">取消</button>\
+          <button type="button" class="btn btn-primary submit-innermodel">保存</button>\
+          </div>\
+          <input type="hidden" name="check_id" value="' + user.score + '">\
+          </form>\
+          </div>\
+          </div>\
+          \
+          </div>\
+          \
+          <span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除阅卷" ></span>\
+          <div class="modal fade model-check-remove" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+          <div class="modal-dialog" role="document">\
+          <div class="modal-content">\
+          <div class="modal-header">\
+          <button type="button" class="close close-innermodel" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+          <h4 class="modal-title" id="myModalLabel">删除阅卷</h4>\
+          </div>\
+          <div class="modal-body">\
+          确认删除阅卷（' + user.score + '）？\
+          </div>\
+          <div class="modal-footer">\
+          <button type="button" class="btn btn-default close-innermodel" >取消</button>\
+          <button type="button" class="btn btn-danger submit-innermodel" data-check-id="' + user.score + '">确认</button>\
+          </div>\
+          </div>\
+          </div>\
+          </div></td>'
+        })
+      return result;
+    }
+
+    //用来更新列表，用户，阅卷，阅卷
+    //get地址， 拼接字符串操作， 列表容器（字符串）
+    function updateCheckList(server_url, joinString, list_container, type) {
+      var data = [];
+        //console.log(admin.id)
+        //获取所用用户数据
+        console.log(server_url)
+
+        
+        
+        var info = $('.exam-check-query-info');
+        var check_exam_id = document.getElementById('check-exam-id').value;
+        //console.log(check_exam_id);
+        
+        if(! /^\d{6}$/.test(check_exam_id)){
+          errorInfo(info,'请输入合法的考试编号（6位数字）！');
+          return;
+        } 
+          
+       
+        $.get( server_url+'?login_id='+admin.id+'&login_password='+admin.password+'&check_exam_id='+check_exam_id,
+          function(data, status) {
+            var result = '';         
+            result = joinString(data, info);
+
+           console.log(result)
+            
+            //循环结束，开始插入html，更新表格
+            $( list_container + ' tbody').html('').append(result);
+
+            
+
+            // 修改阅卷    
+            innerModelHander($(list_container + ' .glyphicon-edit'),$('.model-user-change'),function(traget_model){
+             var form = $(this).parents('form')[0];
+             console.log(server_url)
+             $.post(server_url, {
+              login_id: admin.id,
+              login_password: admin.password,
+              check_id: form.check_id.value,
+              check_new_name: form.check_new_name.value,
+            },
+            function(data, status) {
+              traget_model.fadeOut();
+              setTimeout(function(){
+
+                updateCheckList(server_url,joinString, list_container);
+              }, 500)
+                    //updateCheckList()
+                  })
+           })
+            
+            //删除阅卷
+            innerModelHander($('.admin-check-list .glyphicon-remove'),$('.model-check-remove'),function(traget_model){
+               //this指向提交按钮，会有data-id属性
+               var check_id = $(this).attr('data-check-id');
+               console.log(typeof check_id)
+               $.post(server_url, {
+                login_id: admin.id,
+                login_password: admin.password,
+                delete_check_id: check_id
+              },
+              function(data, status) {
+                console.log('success')
+                traget_model.fadeOut();
+                setTimeout(function(){
+                  updateCheckList(server_url,joinString, list_container)
+                }, 300)
+                    //updateCheckList()
+                  })
+             })
+
+            
+          })
+
+      }
+    //updateCheckList  end
+
+    //用来更新列表，用户，课件，课件
+    //get地址， 拼接字符串操作， 列表容器（字符串）
+    $('.admin-exam-check-query').click(function(){
+      //console.log(22)
+      updateCheckList('./about_exam/check',joinCheckString, '.admin-exam-check');
+    });
+
+   
+
     
 
 

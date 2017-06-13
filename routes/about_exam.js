@@ -398,4 +398,39 @@ router.post('/end', function(req, res, next) {
 })
 
 
+/* GET admin listing. */
+router.get('/check', function(req, res, next) {
+  //用于获取考试信息
+  //合法的管理员和用户均可获取
+  //读取数据库文件
+
+  var db =JSON.parse(fs.readFileSync(file));
+  //console.log('checkLogin: ')
+  //console.log('checkLogin: ' + checkLogin(db.admin,'111','222'))
+  //先验证是否为管理员身份 
+  if(checkLogin(db.admin, req.query.login_id, req.query.login_password)){
+      var record_list_content = db.record.record_list.record_list_content;
+      var result = {};
+      var record_result = [];
+      record_list_content.forEach(function(item, index){
+        if(item.exam_id === req.query.check_exam_id ){
+          record_result.push(item);
+        }
+      })
+
+      result.record =  record_result;
+      result.exam_info = myFunction.getExamById(req.query.check_exam_id, db);
+      res.send(result);
+      return;
+  }
+
+  //res.send(req.query);
+  res.send('用户信息不匹配，请返回重新登录！');
+
+
+  
+});
+
+
+
 module.exports = router;

@@ -22,27 +22,27 @@
                 <a href="#admin_exam_add" aria-controls="profile" role="tab" data-toggle="tab">新增考试</a>
               </li>
               <li role="presentation">
-                <a href="#admin_exam_query" aria-controls="profile" role="tab" data-toggle="tab">成绩查询</a>
+                <a href="#admin-exam-check" aria-controls="profile" role="tab" data-toggle="tab">阅卷</a>
               </li>
             </ul>
             
             <div class="tab-content"> 
-              <!-- Tab panes  考试列表 -->
-              <div role="tabpanel" class="tab-pane active admin-exam-list" id="admin-exam-list">
-                <div class="panel panel-default">
-                  <!-- Default panel contents -->
-                  <div class="panel-heading">Panel heading</div>
-                  <!-- Table -->
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>考试编号</th>
-                        <th>考试名称</th>
-                        <th>操作</th>
-                      </tr>
-                    </thead>
-                    <tbody>
+                      <!-- Tab panes  考试列表 -->
+                      <div role="tabpanel" class="tab-pane active admin-exam-list" id="admin-exam-list">
+                        <div class="panel panel-default">
+                          <!-- Default panel contents -->
+                          <div class="panel-heading">Panel heading</div>
+                          <!-- Table -->
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>考试编号</th>
+                                <th>考试名称</th>
+                                <th>操作</th>
+                              </tr>
+                            </thead>
+                            <tbody>
                                 <!-- <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
@@ -182,18 +182,21 @@
                                 <div class="panel-heading"><h4><strong>三. 简答题</strong></h4></div>
                                 <div class="panel-body">
                                   <div class="add-texts-bottom">
-                                 <div class="alert alert-warning" role="alert">
-                                      当前已添加<strong class="texts-count-sum">0</strong>个简答题，简答题总分值为<strong class="texts-count-score">0</strong>！
-                                  </div>
+                                     <div class="alert alert-warning" role="alert">
+                                          当前已添加<strong class="texts-count-sum">0</strong>个简答题，简答题总分值为<strong class="texts-count-score">0</strong>！
+                                      </div>
 
                                  
-                                  <button type="button" class="btn btn-success btn-block add-a-text">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加一个新的简答题
-                                  </button>
+                                      <button type="button" class="btn btn-success btn-block add-a-text">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加一个新的简答题
+                                      </button>
                                    </div>
                                 </div>
                               </div>
-                            </div>
+      
+                              </div>
+                              <!-- Tab panes end 新增考试 -->
+
 
                             
                             <div class="add-exam-submit-info">
@@ -207,6 +210,58 @@
                             </div>
                           </form>
                         </div>
+
+
+                               <!-- Tab panes  考试列表 -->
+                              <div role="tabpanel" class="tab-pane admin-exam-check" id="admin-exam-check">
+                                <div class="panel panel-success">
+                                  <!-- Default panel contents -->
+                                  <div class="panel-heading">
+                                     <div class="panel-body form-horizontal">
+                                  <div class="form-group">
+                                    <label for="check-exam-id" class="col-sm-2  col-xs-12 control-label">考试编号</label>
+                                    <div class="col-sm-8 col-xs-9">
+                                      <input type="text" class="form-control"  id="check-exam-id" placeholder="请输入考试编号查询考试记录">
+                                    </div>
+                                    <div class="col-sm-2 col-xs-3">
+                                      <div class="btn btn-success admin-exam-check-query" >查询记录</div>
+                                    </div>
+                                  </div>
+
+                                 
+                                 
+                                  
+                                </div> 
+
+                                  </div>
+
+                                  <div class="exam-check-query-info"></div>
+                                  <!-- Table -->
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>考生帐号</th>
+                                        <th>考试时间</th>
+                                        <th>是否已阅卷</th>
+                                        <th>操作</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td></tr>
+                                        <tr>
+                                        -->
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                <!-- Tab panes end 考试列表 -->
                       </div>
                     </div>
                     <!-- ！Nav tabs end -->
