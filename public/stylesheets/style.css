@@ -26,6 +26,10 @@ img {
 	max-width: 100%;
 }
 
+pre {
+	margin: 10px;
+}
+
 /*public*/
 header h1{
 	padding: 30px 0;
@@ -173,4 +177,12 @@ header h1{
 
 .exam-content .judges-radio input {
 	top: -2px;
+}
+
+.exam-content h4 {
+	padding-top: 20px;
+}
+
+.exam-content .texts img {
+	margin-bottom: 15px ;
 }

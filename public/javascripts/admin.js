@@ -1215,13 +1215,41 @@ return result;
         //if(user.is_start === 'no') {}
           //console.log(user.id)
 
+
           var exam_time = Math.ceil((user.end_time * 1 - user.start_time * 1) /  60000);
 
           var is_check = '否';
 
+          
+          console.log(data.exam_info.content.texts)
+          console.log(index)
+         
+
           if (user.is_check == 'yes') {
-            is_check = '是（' + user.score + '分';
+            is_check = '是（' + user.final_score + '分)';
           } 
+
+          var question_tag = '';
+          var question_content = data.exam_info.content.texts;    //简答题内容
+          question_content.forEach(function(que, index){
+              var img_src = que.pic;
+              if(img_src != 'undefined') img_tag =  '<div class="img text-center"><img src="../../'+img_src+'" alt="说明图片"> </div>';
+              
+              var answer = user.answer.texts[index];
+              
+              if(answer === '') answer = '一个字也不写，就是任性~';
+
+              question_tag += '<li><h5>'+ (index+1) +'. '+ que.question +'('+ que.value +'分)</h5>\
+\
+                 '+ img_tag +' \
+                <pre>'+ answer +'</pre>\
+                \
+                <div class="input-group">\
+                <span class="input-group-addon" id="basic-addon1">得分：</span>\
+                <input type="number"  class="form-control check_texts_value" data-value='+que.value+' aria-describedby="basic-addon1">\
+                </div>\
+                </li>'
+          })
 
           result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.user_id + '</td><td>' + exam_time + '分钟</td><td>' + is_check + '</td>\
           <td> \
@@ -1238,16 +1266,19 @@ return result;
           </div>\
           <form>\
           <div class="modal-body">\
-          <div class="alert alert-success" role="alert">选择题和判断题已自动阅卷，合计分数为:</div>'+user.score+'\
-          <div class="input-group">\
-          <span class="input-group-addon" id="basic-addon1">新阅卷名：</span>\
-          <input type="text" name="check_new_name" class="form-control" value="' + user.score + '" aria-describedby="basic-addon1">\
+          <div class="alert alert-success" role="alert">选择题和判断题已自动阅卷，合计分数为:'+user.score+'分</div>\
+          <div class="panel panel-success">\
+            <div class="panel-heading">简答题</div>\
+            <div class="panel-body">\
+              <dl>'+question_tag+'</dl>\
+            </div>\
           </div>\
+          \
           \
           </div>\
           <div class="modal-footer">\
           <button type="button" class="btn btn-default close-innermodel">取消</button>\
-          <button type="button" class="btn btn-primary submit-innermodel">保存</button>\
+          <button type="button" class="btn btn-primary submit-innermodel" data-record-id='+user.id+'>保存</button>\
           </div>\
           <input type="hidden" name="check_id" value="' + user.score + '">\
           </form>\
@@ -1256,8 +1287,8 @@ return result;
           \
           </div>\
           \
-          <span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除阅卷" ></span>\
-          <div class="modal fade model-check-remove" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+          <span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除记录" ></span>\
+          <div class="modal fade model-record-remove" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
           <div class="modal-dialog" role="document">\
           <div class="modal-content">\
           <div class="modal-header">\
@@ -1265,11 +1296,11 @@ return result;
           <h4 class="modal-title" id="myModalLabel">删除阅卷</h4>\
           </div>\
           <div class="modal-body">\
-          确认删除阅卷（' + user.score + '）？\
+          确认删除考试记录（' + user.user_id + '）？\
           </div>\
           <div class="modal-footer">\
           <button type="button" class="btn btn-default close-innermodel" >取消</button>\
-          <button type="button" class="btn btn-danger submit-innermodel" data-check-id="' + user.score + '">确认</button>\
+          <button type="button" class="btn btn-danger submit-innermodel" data-record-id="' + user.id + '">确认</button>\
           </div>\
           </div>\
           </div>\
@@ -1303,24 +1334,51 @@ return result;
             var result = '';         
             result = joinString(data, info);
 
-           console.log(result)
+           //console.log(result)
             
             //循环结束，开始插入html，更新表格
             $( list_container + ' tbody').html('').append(result);
 
             
 
-            // 修改阅卷    
-            innerModelHander($(list_container + ' .glyphicon-edit'),$('.model-user-change'),function(traget_model){
-             var form = $(this).parents('form')[0];
-             console.log(server_url)
-             $.post(server_url, {
+            // 开始阅卷    
+            innerModelHander($(list_container + ' .glyphicon-eye-open'),$('.model-exam-check'),function(traget_model){
+             var texts_score = 0;
+             var is_error = false;
+             $(this).parents('.model-exam-check').find('.check_texts_value').each(function(index){
+              console.log(this)
+              console.log(this.getAttribute('data-value'))
+                var max_score = parseFloat(this.getAttribute('data-value'));
+                console.log(max_score)
+                var cur_score = this.value * 1;
+                if ( cur_score > max_score){
+                    alert('简答题第'+ (index+1) + '题得分已超过最高分数(' + max_score + '分)！');
+                    is_error = true;
+                    return false;
+                } else if (cur_score < 0) {
+                    alert('简答题第'+ (index+1) + '题得分不能为负数！');
+                    is_error = true;
+                    return false;
+                } else {
+                  texts_score += cur_score;
+                }
+             })
+
+             if(is_error) return;
+
+              console.log(this)
+             var record_id = this.getAttribute('data-record-id');
+
+
+             var post_data = {
               login_id: admin.id,
               login_password: admin.password,
-              check_id: form.check_id.value,
-              check_new_name: form.check_new_name.value,
-            },
+              record_id: record_id,
+              texts_score: texts_score.toFixed(1),
+            }
+             $.post(server_url, post_data,
             function(data, status) {
+              console.log(data)
               traget_model.fadeOut();
               setTimeout(function(){
 
@@ -1331,14 +1389,14 @@ return result;
            })
             
             //删除阅卷
-            innerModelHander($('.admin-check-list .glyphicon-remove'),$('.model-check-remove'),function(traget_model){
+            innerModelHander($(list_container + ' .glyphicon-remove'),$('.model-record-remove'),function(traget_model){
                //this指向提交按钮，会有data-id属性
-               var check_id = $(this).attr('data-check-id');
-               console.log(typeof check_id)
+               var record_id = $(this).attr('data-record-id');
+               console.log(typeof record_id)
                $.post(server_url, {
                 login_id: admin.id,
                 login_password: admin.password,
-                delete_check_id: check_id
+                delete_record_id: record_id
               },
               function(data, status) {
                 console.log('success')
