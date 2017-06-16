@@ -24,6 +24,9 @@
               <li role="presentation">
                 <a href="#admin-exam-check" aria-controls="profile" role="tab" data-toggle="tab">阅卷</a>
               </li>
+               <li role="presentation">
+                <a href="#admin-exam-query" aria-controls="profile" role="tab" data-toggle="tab">成绩查询</a>
+              </li>
             </ul>
             
             <div class="tab-content"> 
@@ -212,7 +215,7 @@
                         </div>
 
 
-                               <!-- Tab panes  考试列表 -->
+                               <!-- Tab panes  考试记录列表 -->
                               <div role="tabpanel" class="tab-pane admin-exam-check" id="admin-exam-check">
                                 <div class="panel panel-success">
                                   <!-- Default panel contents -->
@@ -261,7 +264,59 @@
                                   </div>
                                 </div>
 
-                                <!-- Tab panes end 考试列表 -->
+                                <!-- Tab panes end 考试记录列表 -->
+
+
+                                 <!-- Tab panes  考试成绩列表 -->
+                              <div role="tabpanel" class="tab-pane admin-exam-query" id="admin-exam-query">
+                                <div class="panel panel-success">
+                                  <!-- Default panel contents -->
+                                  <div class="panel-heading">
+                                     <div class="panel-body form-horizontal">
+                                  <div class="form-group">
+                                    <label for="query-exam-id" class="col-sm-2  col-xs-12 control-label">考试编号</label>
+                                    <div class="col-sm-8 col-xs-9">
+                                      <input type="text" class="form-control"  id="query-exam-id" placeholder="请输入考试编号查询考试记录">
+                                    </div>
+                                    <div class="col-sm-2 col-xs-3">
+                                      <div class="btn btn-success admin-exam-query-query" >查询记录</div>
+                                    </div>
+                                  </div>
+
+                                 
+                                 
+                                  
+                                </div> 
+
+                                  </div>
+
+                                  <div class="exam-query-query-info"></div>
+                                  <!-- Table -->
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>考生帐号</th>
+                                        <th>考试时间</th>
+                                        <th>分数</th>
+                                        <th>操作</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>@mdo</td></tr>
+                                        <tr>
+                                        -->
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+                                <!-- Tab panes end 考试成绩列表 -->
                       </div>
                     </div>
                     <!-- ！Nav tabs end -->

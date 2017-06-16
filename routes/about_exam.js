@@ -546,5 +546,153 @@ router.post('/check', function(req, res, next) {
 });
 
 
+/* GET admin listing. */
+router.get('/query', function(req, res, next) {
+  //用于获取考试信息
+  //合法的管理员和用户均可获取
+  //读取数据库文件
+
+  var db =JSON.parse(fs.readFileSync(file));
+  //console.log('checkLogin: ')
+  //console.log('checkLogin: ' + checkLogin(db.admin,'111','222'))
+  //先验证是否为管理员身份 
+  if(checkLogin(db.admin, req.query.login_id, req.query.login_password)){
+      var record_list_content = db.record.record_list.record_list_content;
+      var result = {};
+      var record_result = [];
+      record_list_content.forEach(function(item, index){
+        if(item.exam_id === req.query.query_exam_id ){
+          record_result.push(item);
+        }
+      })
+
+      result.record =  record_result;
+      result.exam_info = myFunction.getExamById(req.query.query_exam_id, db);
+      res.send(result);
+      return;
+  }
+
+  //res.send(req.query);
+  res.send('用户信息不匹配，请返回重新登录！');
+
+
+  
+});
+
+
+
+/* POST admin listing. */
+router.post('/query', function(req, res, next) {
+  //读取数据库文件
+  var db =JSON.parse(fs.readFileSync(file));
+  //先验证管理员身份
+  if(db.admin){
+    for(var i = 0; i < db.admin.length; i++) {
+    
+      if(req.body.login_id === db.admin[i].id && req.body.login_password === db.admin[i].password){
+        //先从数据库获取考试列表
+        var db_record_list = db.record.record_list.record_list_content; 
+        //当为发布考试操作时
+        console.log(req.body)
+        if(typeof req.body.texts_score !== 'undefined'){ 
+          console.log('正在进行阅卷(' +  req.body.record_id + ')操作')
+
+          for(var j = 0; j < db_record_list.length; j++){
+            if(db_record_list[j].id == req.body.record_id){
+              db_record_list[j].is_query = 'yes';
+              db_record_list[j].final_score = (db_record_list[j].score*1 + req.body.texts_score*1) + '';
+              break;
+            }
+
+          }
+          res.send({
+            status: 'success',
+            info: '保存' + req.body.record_id + '考试成绩成功！'
+          })
+          //res.send('exam '+ req.body.start_exam_id + ' is start!');
+          //return; //及时return，不然后续有setHeader操作会报错
+        } 
+
+       
+
+        //当为删除考试时  未完成
+        else if( typeof req.body.delete_record_id !== 'undefined'){
+          console.log('正在进行删除考试记录操作')
+          var record_list_content = db.record.record_list.record_list_content;
+          for(var j = 0; j < record_list_content.length; j++){
+              //console.log(record_list_content[j].id)
+              //console.log(req.body.delete_record_id)
+              if(record_list_content[j].id === req.body.delete_record_id){
+             
+              
+              //  删除考试的所有信息
+              record_list_content.splice(j,1);
+              
+               //console.log(record_list_content)
+              //return;
+
+
+              
+              res.send({
+                status: 'success',
+                info: 'exam '+ req.body.delete_exam_id + ' is delete!'
+              });
+
+
+            }
+          }
+
+        }
+        //当为所有操作都验证不通过时
+        else {
+          console.log('正在执行非法的操作！')
+          
+          res.send('正在执行非法的操作！');
+        }
+
+        //db.exam.exam_list.exam_list_content = db_exam_list;
+        //console.log(db.exam.exam_list.exam_list_content)
+        //写入修改后的数据
+        fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
+
+        return;
+      }
+
+      // var form = new multiparty.Form();
+      // //设置编辑
+      // form.encoding = 'utf-8';
+      // //设置文件存储路径
+      // form.uploadDir = "uploads";
+      // //设置单文件大小限制 
+      // form.maxFilesSize = 2 * 1024 * 1024;
+      // //console.log(req.body)
+      // //form.maxFields = 1000;  设置所以文件的大小总和
+      // form.parse(req, function(err, fields, files) {
+      // // console.log(files.originalFilename);
+      // // console.log(fields);
+      // // console.log(fields.ss);
+      // // console.log(typeof fields.ss[0]);
+      // // console.log(fields.ss[0].id);
+      // // console.log(files);
+      // //同步重命名文件名
+      // //fs.renameSync(files.path,files.originalFilename);
+      // res.writeHead(200, {'content-type': 'text/plain'});
+      // res.write('received upload:\n\n');
+      // res.end(util.inspect({fields: fields, files: files}));  //将一个对象转成字符串
+      // });
+    }
+  }else {
+    res.send('数据库出错！');
+    return;
+  }
+
+  //res.send(req.body);
+  res.send('用户信息不匹配，请返回重新登录！');
+
+
+  
+});
+
+
 
 module.exports = router;

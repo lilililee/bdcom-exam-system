@@ -58,6 +58,24 @@ header h1{
 	color: #C78282;
 }
 
+
+/*不同分数的状态*/
+.score-excellent {
+	color: #5CB85C;
+}
+
+.score-good {
+	color: #274BAF;
+}
+
+.score-bad {
+	color: #E6840C;
+}
+
+.score-verybad {
+	color: #F30606;
+}
+
 /*index*/
 .index-content .login .control-label {
   padding-top: 7px;

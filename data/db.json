@@ -397,30 +397,6 @@
             },
             "record_list_content": [
                 {
-                    "id": "200001",
-                    "user_id": "111",
-                    "exam_id": "000034",
-                    "exam_name": "一月技术考核",
-                    "start_time": "1497281259531",
-                    "end_time": "1497281263072",
-                    "answer": {
-                        "selects": [
-                            "",
-                            ""
-                        ],
-                        "judges": [
-                            "",
-                            ""
-                        ],
-                        "texts": [
-                            ""
-                        ]
-                    },
-                    "total_score": "18",
-                    "is_check": "no",
-                    "score": "0"
-                },
-                {
                     "id": "200002",
                     "user_id": "111",
                     "exam_id": "000034",
@@ -466,8 +442,9 @@
                         ]
                     },
                     "total_score": "18",
-                    "is_check": "no",
-                    "score": "0"
+                    "is_check": "yes",
+                    "score": "0",
+                    "final_score": "4"
                 },
                 {
                     "id": "200005",
@@ -490,8 +467,9 @@
                         ]
                     },
                     "total_score": "18",
-                    "is_check": "no",
-                    "score": "2"
+                    "is_check": "yes",
+                    "score": "2",
+                    "final_score": "8"
                 },
                 {
                     "id": "200006",
@@ -514,8 +492,9 @@
                         ]
                     },
                     "total_score": "18",
-                    "is_check": "no",
-                    "score": "2"
+                    "is_check": "yes",
+                    "score": "2",
+                    "final_score": "6"
                 },
                 {
                     "id": "200007",
@@ -538,8 +517,9 @@
                         ]
                     },
                     "total_score": "18",
-                    "is_check": "no",
-                    "score": "0"
+                    "is_check": "yes",
+                    "score": "0",
+                    "final_score": "10"
                 },
                 {
                     "id": "200008",
@@ -562,8 +542,9 @@
                         ]
                     },
                     "total_score": "18",
-                    "is_check": "no",
-                    "score": "0"
+                    "is_check": "yes",
+                    "score": "0",
+                    "final_score": "2"
                 },
                 {
                     "id": "200011",
