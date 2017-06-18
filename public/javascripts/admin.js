@@ -1033,33 +1033,7 @@ return result;
           \
           <a href="'+user.src+'" target="_blank"><span class="glyphicon glyphicon-download-alt glyphicon-course-download" title="下载课件" aria-hidden="true"  data-toggle="modal"></span></a> \
           \
-          <span class="glyphicon glyphicon-edit glyphicon-course-rename" title="修改信息" aria-hidden="true"  data-toggle="modal"></span> \
-          \
-          <div class="modal fade model-user-change" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
-          <div class="modal-dialog" role="document">\
-          <div class="modal-content">\
-          <div class="modal-header">\
-          <button type="button" class="close close-innermodel"  aria-label="Close"><span aria-hidden="true">&times;</span></button>\
-          <h4 class="modal-title" id="myModalLabel">正在修改课件--' + user.name + '</h4>\
-          </div>\
-          <form>\
-          <div class="modal-body">\
-          <div class="input-group">\
-          <span class="input-group-addon" id="basic-addon1">新课件名：</span>\
-          <input type="text" name="course_new_name" class="form-control" value="' + user.name + '" aria-describedby="basic-addon1">\
-          </div>\
-          \
-          </div>\
-          <div class="modal-footer">\
-          <button type="button" class="btn btn-default close-innermodel">取消</button>\
-          <button type="button" class="btn btn-primary submit-innermodel">保存</button>\
-          </div>\
-          <input type="hidden" name="course_id" value="' + user.id + '">\
-          </form>\
-          </div>\
-          </div>\
-          \
-          </div>\
+        \
           \
           <span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除课件" ></span>\
           <div class="modal fade model-course-remove" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
@@ -1208,7 +1182,7 @@ return result;
       } else if (data.record.length == 0) {
         errorInfo(info, data.exam_info.name+'暂无考试记录！');  return;
       } else {
-        errorInfo(info, '成功获取-'+data.exam_info.name+'-考试记录，该考试总分为'+data.exam_info.count.all.score+'分，考试时间为'+data.exam_info.time+'分钟。'); 
+        errorInfo(info, '成功获取-'+data.exam_info.name+'-考试记录，该考试总分为'+data.exam_info.count.all.score+'分，考试时间为'+data.exam_info.time+'分钟，共' + data.record.length + '条记录。'); 
       }
       
       data.record.forEach(function(user, index) {   //此处user表示一个考试记录
@@ -1435,23 +1409,21 @@ return result;
       //console.log("joinString")
       console.log(data)
 
-      if (typeof data.exam_info == 'undefined') {
-        errorInfo(info, '未获取到相关考试信息！'); return;
-      } else if (data.record.length == 0) {
-        errorInfo(info, data.exam_info.name+'暂无考试记录！');  return;
-      } else {
-        var all_score = data.exam_info.count.all.score;
-        errorInfo(info, '成功获取-'+data.exam_info.name+'-考试记录，该考试总分为'+ all_score +'分，考试时间为'+data.exam_info.time+'分钟。'); 
-      }
-
-      var checked_data = [];
-
+       var checked_data = [];
       //筛选出已阅卷的成绩
       data.record.forEach(function(item, index){
           if(item.is_check == 'yes'){
             checked_data.push(item);
           }
       })
+      if (typeof data.exam_info == 'undefined') {
+        errorInfo(info, '未获取到相关考试信息！'); return;
+      } else if (checked_data.length == 0) {
+        errorInfo(info, data.exam_info.name+'暂无考试记录！');  return;
+      } else {
+        var all_score = data.exam_info.count.all.score;
+        errorInfo(info, '成功获取-'+data.exam_info.name+'-考试记录，该考试总分为'+ all_score +'分，考试时间为'+data.exam_info.time+'分钟，共' + checked_data.length + '条记录。'); 
+      }
      
 
       //对由多个对象构成的数组排序
@@ -1500,7 +1472,7 @@ return result;
           result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.user_id + '</td><td>' + exam_time + '分钟</td><td>' + score_tag + '</td>\
           <td> \
           \
-         <span class="glyphicon glyphicon-eye-open" title="成绩查询记录" aria-hidden="true"  data-toggle="modal"></span>\
+         <span class="glyphicon glyphicon-eye-open" data-record-id="'+user.id+'" title="考试记录详情" aria-hidden="true"  data-toggle="modal"></span>\
           \
           \
           \
@@ -1528,7 +1500,7 @@ return result;
 
     //用来更新列表，用户，成绩查询记录，成绩查询记录
     //get地址， 拼接字符串操作， 列表容器（字符串）
-    function updatequeryList(server_url, joinString, list_container, type) {
+    function updateQueryList(server_url, joinString, list_container, type) {
       var data = [];
         //console.log(admin.id)
         //获取所用用户数据
@@ -1599,43 +1571,60 @@ return result;
               traget_model.fadeOut();
               setTimeout(function(){
 
-                updatequeryList(server_url,joinString, list_container);
+                updateQueryList(server_url,joinString, list_container);
               }, 500)
-                    //updatequeryList()
+                    //updateQueryList()
                   })
            })
             
             //删除成绩查询记录
             innerModelHander($(list_container + ' .glyphicon-remove'),$('.model-record-remove'),function(traget_model){
                //this指向提交按钮，会有data-id属性
-               var record_id = $(this).attr('data-record-id');
-               console.log(typeof record_id)
-               $.post(server_url, {
-                login_id: admin.id,
-                login_password: admin.password,
-                delete_record_id: record_id
-              },
-              function(data, status) {
-                console.log('success')
-                traget_model.fadeOut();
-                setTimeout(function(){
-                  updatequeryList(server_url,joinString, list_container)
-                }, 300)
-                    //updatequeryList()
-                  })
+                     var record_id = $(this).attr('data-record-id');
+                     console.log(typeof record_id)
+                     $.post(server_url, {
+                      login_id: admin.id,
+                      login_password: admin.password,
+                      delete_record_id: record_id
+                    },
+                    function(data, status) {
+                      console.log('success')
+                      traget_model.fadeOut();
+                      setTimeout(function(){
+                        updateQueryList(server_url,joinString, list_container)
+                      }, 300)
+                          //updateQueryList()
+                    })
              })
 
-            
+
+          //跳转到考试记录详情界面   
+
+          $(list_container + ' .glyphicon-eye-open').click(function(){
+             
+            //this指向提交按钮，会有data-id属性
+               var exam_id = data.exam_info.id;
+               var record_id = $(this).attr('data-record-id');
+               // console.log(typeof exam_id)
+               //此处post使用表单来实现页面跳转
+               var start_exam_form = document.getElementsByClassName('record_detail_form')[0];
+               start_exam_form.exam_id.value = exam_id;         
+               start_exam_form.record_id.value = record_id;         
+               start_exam_form.submit();
           })
 
+          })
+
+
+         
       }
-    //updatequeryList  end
+    //updateQueryList  end
 
     //用来更新列表，用户，课件，课件
     //get地址， 拼接字符串操作， 列表容器（字符串）
     $('.admin-exam-query-query').click(function(){
       //console.log(22)
-      updatequeryList('./about_exam/query',joinQueryString, '.admin-exam-query');
+      updateQueryList('./about_exam/query',joinQueryString, '.admin-exam-query');
     });
 
    

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>博达考试系统</title>
+    <link rel='stylesheet' href='/bootstrap-3.3.7-dist/css/bootstrap.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
+    <style>
+
+        .answer-info {
+            margin-bottom: 25px;
+        }
+        .error-answer {
+            color: red;
+        }
+
+        .right-answer {
+            color: green;
+        }
+    </style>
+  </head>
+  
+  <body style="background: url(/Wopop_files/login_bgx.gif)">
+    <div class="record-content exam-content">
+      <div class="container-fluid wrap">
+
+      	<div class="panel panel-success">
+
+		  <div class="panel-heading exam-header">
+		  	<h2><%= data.exam.name %>考试记录--<%= data.record.user_id %></h2>
+		  	<div class="info">
+        		<span class="time">考试时间：<%= data.exam.time %>分钟</span>
+                <span class="score">总分：<%= data.exam.count.all.score %>分</span>
+        		<span class="score">得分：<%= data.record.final_score %>分</span>  <br>
+                <span class="start_time"></span>
+                <span class="end_time"></span>
+        		<span class="during_time"></span>
+        	</div>
+		  </div>
+		  <div class="panel-body">
+		  		<div class="selects">
+		  			<h4>一、选择题</h4>
+		  			<ol>
+						<% var arr=['a','b','c','d'] %>
+		  				<%for (var i = 0; i < data.exam.content.selects.length; i++) {%>
+		  					<li>
+		  						<h5>
+		  						<%= data.exam.content.selects[i].question%>
+		  						(<%= data.exam.content.selects[i].value%>分)
+                               
+		  						</h5>
+								<%for (var j = 0; j < data.exam.content.selects[i].options.length; j++) {%>
+									<div class="checkbox">
+									  <!-- <label> -->
+
+									    <!-- <input type="checkbox" value="<%= arr[j] %>" > -->
+									    <%= arr[j]%>.
+									   	<%=  data.exam.content.selects[i].options[j] %>
+
+
+									  <!-- </label> -->
+									</div>
+								<%}%>	
+                                
+                                <% var result_class = 'error-answer' %>
+                                <%if (data.record.answer.selects[i]==data.exam.content.selects[i].answer) {%>
+                                <% var result_class = 'right-answer' %>
+                                <%}%>
+
+                                <div class="answer-info <%= result_class %>" >
+                                    考生答案：<%= data.record.answer.selects[i] %> , 
+                                    正确答案：<%= data.exam.content.selects[i].answer%> 
+                                </div>    								
+		  					</li>
+		  				<%}%>
+		  			</ol>
+		  		</div>
+		  		<div class="judges">
+		  			<h4>二、判断题</h4>
+		  			<ol>
+		  				<%for (var i = 0; i < data.exam.content.judges.length; i++) {%>
+		  					<li>
+		  						<h5>
+		  							<%= data.exam.content.judges[i].question%> 
+		  							(<%= data.exam.content.judges[i].value%>分)
+		  							<!-- <div class="judges-radio pull-right">
+			  							<label class="radio-inline">
+										  <input type="radio" name="<%= i %> " value="true"> 对
+										</label>
+										<label class="radio-inline">
+										  <input type="radio" name="<%= i %> " value="false"> 错
+										</label>
+									</div> -->
+		  						</h5>
+                
+                                <% var result_class = 'error-answer' %>
+                                <%if (data.record.answer.judges[i]==data.exam.content.judges[i].answer) {%>
+                                <% var result_class = 'right-answer' %>
+                                <%}%>
+                                <div class="answer-info <%= result_class %>" >
+                                    考生答案：
+                                    <%if (data.record.answer.judges[i]=='true' ) {%>
+                                            对
+                                    <%}else{%>
+                                            错
+                                    <%}%>, 
+                                    正确答案：
+                                    <%if (data.exam.content.judges[i].answer=='true' ) {%>
+                                            对
+                                    <%}else{%>
+                                            错
+                                    <%}%>
+                                </div>   
+								
+		  					</li>
+		  				<%}%>
+		  			</ol>
+		  		</div>
+
+		  		<div class="texts">
+		  			<h4>三、简答题</h4>
+		  			<ol>
+		  				<%for (var i = 0; i < data.exam.content.texts.length; i++) {%>
+		  					<li>
+		  						<h5><%= data.exam.content.texts[i].question %>(<%= data.exam.content.texts[i].value%>分)</h5>
+
+		  						<%if (data.exam.content.texts[i].pic != 'undefined') {%>
+								<div class="img text-center">
+									<img src="../../<%= data.exam.content.texts[i].pic %>" alt="说明图片">
+								</div>
+		  						<%}%>
+
+                                   
+								<textarea class="form-control texts-answer" placeholder="回答" aria-describedby="basic-addon1" rows="5" style="resize:none;" disabled="disabled"><%= data.record.answer.texts[i] %></textarea>
+		  					</li>
+		  				<%}%>
+		  			</ol>
+		  		</div>
+		  		 <!-- <div class="panel-footer text-center">
+		  		 	<button type="button" class="btn btn-success exam-submit">结束考试</button>
+		  		 </div> -->
+		  		
+		  </div>
+		</div>
+        	
+       </div>
+    </div>
+    <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        $(function () {
+            $('.start_time').html('开始时间：' + new Date( <%=  data.record.start_time %> ).toLocaleString())
+        })
+
+        $(function () {
+            $('.end_time').html('结束时间：' + new Date( <%=  data.record.end_time %> ).toLocaleString())
+        })
+    </script>
+    
+  </body>
+
+</html>
+
+

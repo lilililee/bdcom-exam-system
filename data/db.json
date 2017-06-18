@@ -251,88 +251,6 @@
                             }
                         ]
                     }
-                },
-                {
-                    "id": "000036",
-                    "name": "二月技术考核",
-                    "time": "60",
-                    "is_start": "yes",
-                    "count": {
-                        "selects": {
-                            "sum": 2,
-                            "score": 4
-                        },
-                        "judges": {
-                            "sum": 2,
-                            "score": 4
-                        },
-                        "texts": {
-                            "sum": 2,
-                            "score": 20
-                        },
-                        "all": {
-                            "sum": 6,
-                            "score": 28
-                        }
-                    },
-                    "content": {
-                        "selects": [
-                            {
-                                "sid": "1",
-                                "question": "选择下面的正确选型",
-                                "options": [
-                                    "选型a",
-                                    "选型b",
-                                    "选型c",
-                                    "选型d"
-                                ],
-                                "answer": "a",
-                                "value": "2"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "选择下面的正确选型222",
-                                "options": [
-                                    "选型aa",
-                                    "选型bb",
-                                    "选型cc",
-                                    "选型dd"
-                                ],
-                                "answer": "b",
-                                "value": "2"
-                            }
-                        ],
-                        "judges": [
-                            {
-                                "sid": "1",
-                                "question": "1+1=2?",
-                                "answer": "true",
-                                "value": "2"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "3+5=9?",
-                                "answer": "false",
-                                "value": "2"
-                            }
-                        ],
-                        "texts": [
-                            {
-                                "sid": "1",
-                                "question": "下图说了什么？",
-                                "img": {},
-                                "value": "10",
-                                "pic": ".\\uploadimages\\9Yw5HRFwEWiDqdh8W13tnHu_.jpg"
-                            },
-                            {
-                                "sid": "2",
-                                "question": "arp原理",
-                                "img": "undefined",
-                                "value": "10",
-                                "pic": "undefined"
-                            }
-                        ]
-                    }
                 }
             ]
         }
@@ -393,7 +311,7 @@
         "record_args": {},
         "record_list": {
             "record_list_args": {
-                "sum": 11
+                "sum": 18
             },
             "record_list_content": [
                 {
@@ -420,31 +338,6 @@
                     "is_check": "yes",
                     "score": "2",
                     "final_score": "12"
-                },
-                {
-                    "id": "200003",
-                    "user_id": "111",
-                    "exam_id": "000034",
-                    "exam_name": "一月技术考核",
-                    "start_time": "1497281339470",
-                    "end_time": "1497281346474",
-                    "answer": {
-                        "selects": [
-                            "",
-                            ""
-                        ],
-                        "judges": [
-                            "",
-                            ""
-                        ],
-                        "texts": [
-                            "fsdfsd\n\nfsd\nf\nsd\nf\nsd\nf\nsd"
-                        ]
-                    },
-                    "total_score": "18",
-                    "is_check": "yes",
-                    "score": "0",
-                    "final_score": "4"
                 },
                 {
                     "id": "200005",
@@ -522,31 +415,6 @@
                     "final_score": "10"
                 },
                 {
-                    "id": "200008",
-                    "user_id": "111",
-                    "exam_id": "000034",
-                    "exam_name": "一月技术考核",
-                    "start_time": "1497536023987",
-                    "end_time": "1497536026650",
-                    "answer": {
-                        "selects": [
-                            "",
-                            ""
-                        ],
-                        "judges": [
-                            "",
-                            ""
-                        ],
-                        "texts": [
-                            ""
-                        ]
-                    },
-                    "total_score": "18",
-                    "is_check": "yes",
-                    "score": "0",
-                    "final_score": "2"
-                },
-                {
                     "id": "200011",
                     "user_id": "111",
                     "exam_id": "000036",
@@ -571,6 +439,130 @@
                     "is_check": "yes",
                     "score": "4",
                     "final_score": "16"
+                },
+                {
+                    "id": "200012",
+                    "user_id": "111",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497770673177",
+                    "end_time": "1497770684989",
+                    "answer": {
+                        "selects": [
+                            "bc",
+                            ""
+                        ],
+                        "judges": [
+                            "true",
+                            "true"
+                        ],
+                        "texts": [
+                            "dsd"
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "yes",
+                    "score": "4",
+                    "final_score": "6"
+                },
+                {
+                    "id": "200013",
+                    "user_id": "111",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497770690397",
+                    "end_time": "1497770695389",
+                    "answer": {
+                        "selects": [
+                            "ab",
+                            ""
+                        ],
+                        "judges": [
+                            "true",
+                            "true"
+                        ],
+                        "texts": [
+                            "ds"
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "yes",
+                    "score": "2",
+                    "final_score": "2"
+                },
+                {
+                    "id": "200014",
+                    "user_id": "111",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497770729780",
+                    "end_time": "1497770751518",
+                    "answer": {
+                        "selects": [
+                            "ab",
+                            "d"
+                        ],
+                        "judges": [
+                            "true",
+                            "true"
+                        ],
+                        "texts": [
+                            "432423"
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "no",
+                    "score": "2"
+                },
+                {
+                    "id": "200015",
+                    "user_id": "111",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497779385870",
+                    "end_time": "1497779405528",
+                    "answer": {
+                        "selects": [
+                            "bc",
+                            "bcd"
+                        ],
+                        "judges": [
+                            "true",
+                            "false"
+                        ],
+                        "texts": [
+                            ""
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "yes",
+                    "score": "8",
+                    "final_score": "18"
+                },
+                {
+                    "id": "200016",
+                    "user_id": "222",
+                    "exam_id": "000034",
+                    "exam_name": "一月技术考核",
+                    "start_time": "1497786638623",
+                    "end_time": "1497786648843",
+                    "answer": {
+                        "selects": [
+                            "bc",
+                            "cd"
+                        ],
+                        "judges": [
+                            "true",
+                            "true"
+                        ],
+                        "texts": [
+                            "eeeee"
+                        ]
+                    },
+                    "total_score": "18",
+                    "is_check": "yes",
+                    "score": "4",
+                    "final_score": "8"
                 }
             ]
         }

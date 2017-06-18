@@ -9,6 +9,9 @@ function initUser (id,password){
 $(function () {
 	$('[data-toggle="popover"]').popover();
 
+  function errorInfo(traget, info){
+    traget.html('<div class="alert alert-warning" role="alert">'+ info +'</div>');
+  }
 
 	function innerModelHander( show_controller, traget_model, post_fn) {
 
@@ -183,12 +186,15 @@ return result;
             //开始考试
             innerModelHander($('.admin-exam-list .glyphicon-pencil'),$('.model-exam-start'),function(traget_model){
                //this指向提交按钮，会有data-id属性
+               traget_model.fadeOut();
                var exam_id = $(this).attr('data-exam-id');
                // console.log(typeof exam_id)
                //此处post使用表单来实现页面跳转
                var start_exam_form = document.getElementsByClassName('start_exam_form')[0];
                start_exam_form.exam_id.value = exam_id;         
                start_exam_form.submit();
+
+               
               
            })
 
@@ -204,5 +210,156 @@ return result;
     	updateExamList('./about_exam',joinExamString, '.admin-exam-list');
     });
 
+
+
+
+     //成绩查询记录查询按钮
+
+     // 成绩查询记录相关操作
+    //根据get请求获取的数据来渲染列表
+    function joinQueryString(data, info) {
+      var result = '';
+      //console.log("joinString")
+      //console.log(data)
+      var checked_data = [];
+
+      //筛选出已阅卷的成绩
+      data.record.forEach(function(item, index){
+          if(item.is_check == 'yes'){
+            checked_data.push(item);
+          }
+      })
+      if (typeof data.exam_info == 'undefined') {
+        errorInfo(info, '未获取到相关考试信息！'); return;
+      } else if (checked_data.length == 0) {
+        errorInfo(info, data.exam_info.name+'暂无考试记录！');  return;
+      } else {
+        var all_score = data.exam_info.count.all.score;
+        errorInfo(info, '成功获取-'+data.exam_info.name+'-考试记录，该考试总分为'+ all_score +'分，考试时间为'+data.exam_info.time+'分钟。'); 
+      }
+
+     
+
+     
+
+      //对由多个对象构成的数组排序
+      //根据对象数组的某个字段排序,升序
+      function sortObjectArray (arr, pro_name){   //对象数组，  属性名 (数字为内容的字符)
+          var len = arr.length;       
+          for( var i = 0; i < len-1; i ++ ){
+              for ( var j = 0; j < len - i -1; j++ ){              
+                if( parseFloat(arr[j][pro_name]) > parseFloat(arr[j+1][pro_name]) ){
+                    var temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;                     
+                }
+              }
+          }
+      }
+
+      sortObjectArray(checked_data, 'final_score');
+      
+      checked_data.reverse();
+
+      
+      checked_data.forEach(function(user, index) {   //此处user表示一个考试记录
+        //if(user.is_start === 'no') {}
+          //console.log(user.id)
+
+
+          var exam_time = Math.ceil((user.end_time * 1 - user.start_time * 1) /  60000);
+
+          var score_class = '';
+        
+          if ( parseFloat(user.final_score) >= parseFloat(all_score) * 0.8 ) {
+            score_class = 'score-excellent';
+          } else if ( parseFloat(user.final_score) >= parseFloat(all_score) * 0.6 ){
+            score_class = 'score-good';
+          } else if ( parseFloat(user.final_score) >= parseFloat(all_score) * 0.4 ){
+            score_class = 'score-bad';
+          } else {
+            score_class = 'score-verybad';
+          }
+
+          var score_tag = '<span class="' + score_class + '">'+ user.final_score +'分</span>';
+
+          
+
+          result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.user_id + '</td><td>' + exam_time + '分钟</td><td>' + score_tag + '</td>\
+          <td> \
+          \
+         <span class="glyphicon glyphicon-eye-open" data-record-id="'+user.id+'" title="考试记录详情" aria-hidden="true"  data-toggle="modal"></span>\
+          \
+          \
+          \
+          </td>'
+        })
+      return result;
+    }
+
+    //用来更新列表，用户，成绩查询记录，成绩查询记录
+    //get地址， 拼接字符串操作， 列表容器（字符串）
+    function updateQueryList(server_url, joinString, list_container, type) {
+      var data = [];
+        //console.log(admin.id)
+        //获取所用用户数据
+        console.log(server_url)
+
+        
+        
+        var info = $('.exam-query-query-info');
+        var query_exam_id = document.getElementById('query-exam-id').value;
+        //console.log(query_exam_id);
+        
+        if(! /^\d{6}$/.test(query_exam_id)){
+          errorInfo(info,'请输入合法的考试编号（6位数字）！');
+          return;
+        } 
+          
+       
+        $.get( server_url+'?login_id='+user.id+'&login_password='+user.password+'&query_exam_id='+query_exam_id,
+          function(data, status) {
+            var result = '';         
+            result = joinString(data, info);
+
+           //console.log(result)
+            
+            //循环结束，开始插入html，更新表格
+            $( list_container + ' tbody').html('').append(result);
+
+
+          //跳转到考试记录详情界面   
+
+          $(list_container + ' .glyphicon-eye-open').click(function(){
+              console.log(data)
+            //this指向提交按钮，会有data-id属性
+               var exam_id = data.exam_info.id; 
+
+               var record_id = $(this).attr('data-record-id');
+               // console.log(typeof exam_id)
+               //此处post使用表单来实现页面跳转
+               var start_exam_form = document.getElementsByClassName('record_detail_form')[0];
+               start_exam_form.exam_id.value = exam_id;         
+               start_exam_form.record_id.value = record_id;         
+               start_exam_form.submit();
+          })
+
+          })
+
+
+         
+      }
+    //updateQueryList  end
+
+    //用来更新列表，用户，课件，课件
+    //get地址， 拼接字符串操作， 列表容器（字符串）
+    $('.user-exam-query-query').click(function(){
+      //console.log(22)
+      updateQueryList('./about_exam/query',joinQueryString, '.user-exam-record');
+    });
+
+   
+
+ 
 
 })

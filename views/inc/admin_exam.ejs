@@ -34,7 +34,7 @@
                       <div role="tabpanel" class="tab-pane active admin-exam-list" id="admin-exam-list">
                         <div class="panel panel-default">
                           <!-- Default panel contents -->
-                          <div class="panel-heading">Panel heading</div>
+                          <div class="panel-heading">以下为所有考试信息。</div>
                           <!-- Table -->
                           <table class="table">
                             <thead>
@@ -331,3 +331,11 @@
               </div>
             </div>
           </div>
+
+<!-- 为查看考试记录详情设置的表单 -->
+<form action="./about_exam/record/detail" method="post" class="record_detail_form " target="_blank" method="post" style="display: none;">
+  <input type="text" name="login_id" value="<%= data.id %>">
+  <input type="text" name="login_password" value="<%= data.password %>">
+  <input type="text" name="exam_id" value="">
+  <input type="text" name="record_id" value="">
+</form>

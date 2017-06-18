@@ -49,6 +49,23 @@ router.post('/', function(req, res, next) {
            for(var j = 0; j < db.users.length; j++){
              if(db.users[j].id === req.body.delete_user_id){
               db.users.splice(j,1);
+
+               //删除该用户对应的考试记录
+              var record_list_content = db.record.record_list.record_list_content;
+              var temp_record = [];   
+              record_list_content.forEach(function(item,index){
+                if( item.user_id !== req.body.delete_user_id){
+                     temp_record.push(item);
+                     //console.log(item)
+                } else {
+                  console.log(4444444444)
+                  console.log(item)
+                }
+              })
+             
+              db.record.record_list.record_list_content = temp_record;
+              
+
               break;
             }
             

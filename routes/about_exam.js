@@ -145,13 +145,25 @@ router.post('/', function(req, res, next) {
                    // 2. 当为文件时，直接删除 
                    else {
                     fs.unlinkSync(url);
-                  }
+                    }
 
-                }else{
-                  console.log("给定的路径不存在，请给出正确的路径");
-                }
-              };
+                  }else{
+                    console.log("给定的路径不存在，请给出正确的路径");
+                  }
+                };
               //deleteFolderRecursive("./test");
+
+               //3. 删除改考试对应的考试记录
+              var record_list_content = db.record.record_list.record_list_content;
+              var temp_record = [];   
+              record_list_content.forEach(function(item,index){
+                if( item.exam_id !== req.body.delete_exam_id){
+                     temp_record.push(item);
+                }
+              })
+              db.record.record_list.record_list_content = temp_record;
+
+            
 
               res.send({
                 status: 'success',
@@ -160,6 +172,8 @@ router.post('/', function(req, res, next) {
 
 
             }
+
+
           }
 
         }
@@ -296,6 +310,7 @@ router.post('/upload',function(req, res, next) {
 })
 
 
+//考试界面
 router.post('/start', function(req, res, next) {
   console.log('请求路径信息: ./about_exam/start');
    var db =JSON.parse(fs.readFileSync(file));
@@ -444,7 +459,7 @@ router.post('/check', function(req, res, next) {
       if(req.body.login_id === db.admin[i].id && req.body.login_password === db.admin[i].password){
         //先从数据库获取考试列表
         var db_record_list = db.record.record_list.record_list_content; 
-        //当为发布考试操作时
+        //当为阅卷操作时
         console.log(req.body)
         if(typeof req.body.texts_score !== 'undefined'){ 
           console.log('正在进行阅卷(' +  req.body.record_id + ')操作')
@@ -467,23 +482,17 @@ router.post('/check', function(req, res, next) {
 
        
 
-        //当为删除考试时  未完成
+        //当为删除考试记录时 
         else if( typeof req.body.delete_record_id !== 'undefined'){
           console.log('正在进行删除考试记录操作')
           var record_list_content = db.record.record_list.record_list_content;
           for(var j = 0; j < record_list_content.length; j++){
-              //console.log(record_list_content[j].id)
-              //console.log(req.body.delete_record_id)
+           
               if(record_list_content[j].id === req.body.delete_record_id){
              
               
               //  删除考试的所有信息
               record_list_content.splice(j,1);
-              
-               //console.log(record_list_content)
-              //return;
-
-
               
               res.send({
                 status: 'success',
@@ -572,10 +581,27 @@ router.get('/query', function(req, res, next) {
       return;
   }
 
+  if(checkLogin(db.users, req.query.login_id, req.query.login_password)){
+      var record_list_content = db.record.record_list.record_list_content;
+      var result = {};
+      var record_result = [];
+      record_list_content.forEach(function(item, index){
+        if(item.exam_id === req.query.query_exam_id && item.user_id === req.query.login_id){
+          record_result.push(item);
+        }
+      })
+
+      result.record =  record_result;
+      result.exam_info = myFunction.getExamById(req.query.query_exam_id, db);
+      res.send(result);
+      return;
+  }
+
+
   //res.send(req.query);
   res.send('用户信息不匹配，请返回重新登录！');
 
-
+  return;
   
 });
 
@@ -615,7 +641,7 @@ router.post('/query', function(req, res, next) {
 
        
 
-        //当为删除考试时  未完成
+        //当为删除考试记录时
         else if( typeof req.body.delete_record_id !== 'undefined'){
           console.log('正在进行删除考试记录操作')
           var record_list_content = db.record.record_list.record_list_content;
@@ -625,7 +651,7 @@ router.post('/query', function(req, res, next) {
               if(record_list_content[j].id === req.body.delete_record_id){
              
               
-              //  删除考试的所有信息
+              //  删除对应考试记录的所有信息
               record_list_content.splice(j,1);
               
                //console.log(record_list_content)
@@ -692,6 +718,64 @@ router.post('/query', function(req, res, next) {
 
   
 });
+
+
+
+
+
+//考试详情界面
+router.post('/record/detail', function(req, res, next) {
+  console.log('请求路径信息: ./about_exam/record/detail');
+   var db =JSON.parse(fs.readFileSync(file));
+  //console.log('checkLogin: ')
+  //console.log('checkLogin: ' + checkLogin(db.admin,'111','222'))
+ 
+  var exam_list_content = db.exam.exam_list.exam_list_content;
+  var record_list_content = db.record.record_list.record_list_content;
+ 
+      //res.send(db.exam.exam_list.exam_list_content);
+    if ( typeof req.body.exam_id != 'undefined' && typeof req.body.record_id != 'undefined' ){
+        var is_error = true;
+        var page_data = {};
+        exam_list_content.forEach(function( item , index){
+          if ( item.id === req.body.exam_id){
+            //console.log(req.body.login_id + '正在进行考试（' + req.body.exam_id + '）');
+            page_data.exam = item;
+            is_error = false;
+            return false;
+          }
+        });
+
+        if(is_error){
+          res.send('当前查询考试已不存在！');
+          return;
+        }
+
+        is_error = true;
+        record_list_content.forEach(function( item , index){
+          if ( item.id === req.body.record_id){
+            //console.log(req.body.login_id + '正在进行考试（' + req.body.record_id + '）');
+            page_data.record = item;        
+            is_error = false;
+            return false;
+          }
+        })
+
+        if(is_error){
+          res.send('当前查询考试记录已不存在！');
+          return;
+        }
+
+        console.log(page_data);
+        res.render('record', { 
+          data: page_data
+         
+        });
+
+    }
+    return;
+})
+
 
 
 
