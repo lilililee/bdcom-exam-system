@@ -43,6 +43,153 @@ $(function () {
 
 
 
+    //用户相关操作
+      //密码修改函数：
+     function submitPassInfo(submit_button) {
+      submit_button.click(function(e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        var items = form.find('input,textarea');
+        var submit_result = form.find('.submit-result');
+           console.log(items);
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].value === '') {
+            console.log(items[i]);
+            submit_result.html('<div class="alert alert-warning" role="alert">请正确填写密码信息！</div>') ;
+            return;
+          }
+        }
+        for (var k=1;k<4;k++) {
+          if(/^\w{3,16}$/.test(items[k].value)){
+            console.log('密码校验成功');
+          }else{
+            submit_result.html('<div class="alert alert-warning" role="alert">密码长度必须在3到16位，且为数字或者字母！</div>') ;
+            return;
+          }
+        }
+        if(items[1].value != user.password)
+        {
+          console.log(items[1].value);
+          console.log(user.password);
+           submit_result.html('<div class="alert alert-warning" role="alert">原密码输入错误，请重新输入</div>') ;  
+           return;
+        }
+         if(items[2].value != items[3].value){
+          console.log(items[2].value);
+          console.log(items[3].value);
+          submit_result.html('<div class="alert alert-warning" role="alert">两次输入的新密码不一致，请重新输入</div>') ;
+          return;
+        }else{
+          console.log('两次输入的一致');
+        }
+        var pass_data = {};
+        pass_data.login_id = user.id;
+        pass_data.login_password = user.password;
+        for (var i = 0; i < items.length; i++) {
+          pass_data[items[i].name] = items[i].value;
+        }
+        console.log(pass_data);
+        $.post('./users/password', pass_data,
+          function(data, status) {
+
+            if (typeof data.status != 'undefined' && data.status == 'success') {
+              submit_result.html('<div class="alert alert-success" role="alert">' + data.info + '</div>');
+            } else {
+              submit_result.html('<div class="alert alert-danger" role="alert">' + data.info + '</div>');
+            }
+
+              })
+
+      })
+
+        //点击取消按钮时 删除提交信息
+        $('.add-password-reset').click(function() {
+          $(this).parents('form').find('.submit-result').html('')
+
+        })
+
+      }
+      submitPassInfo($('.add-password-submit'));
+      
+      
+      
+      
+      
+    //留言提交函数：
+    function submitMessageInfo(submit_button) {
+      submit_button.click(function(e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        var items = form.find('input,textarea');
+        var submit_result = form.find('.submit-result');
+        var data =getNowFormatDate();
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].value === '') {
+            submit_result.html('<div class="alert alert-warning" role="alert">请完善留言信息！</div>') ;
+            return;
+          }
+        }
+        var message_data = {};
+        message_data.login_id = user.id;
+        message_data.login_password = user.password;
+        message_data.postTime = data;
+        for (var i = 0; i < items.length; i++) {
+          message_data[items[i].name] = items[i].value;
+        }
+        $.post('./users/message', message_data,
+          function(data, status) {
+           if (typeof data.status != 'undefined' && data.status == 'success') {
+              submit_result.html('<div class="alert alert-success" role="alert">' + data.info + '</div>');
+            } else {
+              submit_result.html('<div class="alert alert-danger" role="alert">' + data.info + '</div>');
+            }
+
+        });
+
+      })
+        $('.add-message-reset').click(function() {
+           $(this).parents('form').find('.submit-result').html('')
+  
+         })
+      };
+      
+     submitMessageInfo($('.add-message-submit'));
+     
+     //获取当前时间
+     function getNowFormatDate() {
+      var date = new Date();
+      var seperator1 = "-";
+      var seperator2 = ":";
+      var month = date.getMonth() + 1;
+      var strDate = date.getDate();
+      var strHour = date.getHours();
+      var strMinutes = date.getMinutes();
+      var strSeconds = date.getSeconds();
+      if(month >= 1 && month <= 9) {
+        month = "0" + month;
+      }
+      if(strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+      }
+        if(strHour >= 0 && strHour <= 9) {
+        strHour = "0" + strHour;
+      } 
+      if(strMinutes >= 0 && strMinutes <= 9) {
+        strMinutes = "0" + strMinutes;
+      }
+      if(strSeconds >= 0 && strSeconds <= 9) {
+        strSeconds = "0" + strSeconds;
+      }   
+  var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate +
+        " " + strHour + seperator2 + strMinutes +
+        seperator2 + strSeconds;
+      return currentdate;
+    }
+      
+       
+ //用户相关的操作结束
+
+
    // 考试相关操作
     //根据get请求获取的数据来渲染列表
     function joinExamString(data) {
@@ -358,6 +505,100 @@ return result;
       updateQueryList('./about_exam/query',joinQueryString, '.user-exam-record');
     });
 
+
+
+    //课程列表部分
+    function joinCourseString(data) {
+      var result = '';
+      //console.log("joinString")
+      console.log(data)
+
+      data.forEach(function(user, index) {
+        //if(user.is_start === 'no') {}
+          //console.log(user.id)
+
+
+          result += '<tr><th scope="row">' + (index + 1) + '</th><td>' + user.name + '</td>\
+          <td> \
+          \
+          <a href="'+user.src+'" target="_blank"><span class="glyphicon glyphicon-download-alt glyphicon-course-download" title="下载课件" aria-hidden="true"  data-toggle="modal"></span></a> \
+          \
+   </td>'
+        })
+      return result;
+    }
+      function updateCourseList(server_url, joinString, list_container, type) {
+      var data = [];
+        console.log(user.id)
+        //获取所用用户数据
+        console.log(server_url)
+        $.get( server_url+'?login_id='+user.id+'&login_password='+user.password,
+          function(data, status) {
+            var result = '';
+            console.log(data);
+            if (Array.isArray(data)) {
+              result = joinString(data);
+
+            } else {
+              console.log('返回数据错误，应为数组！')
+            }
+            
+            //循环结束，开始插入html，更新表格
+            $( list_container + ' tbody').html('').append(result);
+
+            
+
+            // 修改课件    
+            innerModelHander($(list_container + ' .glyphicon-edit'),$('.model-user-change'),function(traget_model){
+             var form = $(this).parents('form')[0];
+             console.log(server_url)
+             $.post(server_url, {
+              login_id: admin.id,
+              login_password: admin.password,
+              course_id: form.course_id.value,
+              course_new_name: form.course_new_name.value,
+            },
+            function(data, status) {
+              traget_model.fadeOut();
+              setTimeout(function(){
+
+                updateCourseList(server_url,joinString, list_container);
+              }, 500)
+                    //updateCourseList()
+                  })
+           })
+            
+            //删除课件
+            innerModelHander($('.admin-course-list .glyphicon-remove'),$('.model-course-remove'),function(traget_model){
+               //this指向提交按钮，会有data-id属性
+               var course_id = $(this).attr('data-course-id');
+               console.log(typeof course_id)
+               $.post(server_url, {
+                login_id: admin.id,
+                login_password: admin.password,
+                delete_course_id: course_id
+              },
+              function(data, status) {
+                console.log('success')
+                traget_model.fadeOut();
+                setTimeout(function(){
+                  updateCourseList(server_url,joinString, list_container)
+                }, 300)
+                    //updateCourseList()
+                  })
+             })
+
+            
+          })
+
+      }
+
+     //用来更新列表，用户，课件，课件 
+    //get地址， 拼接字符串操作， 列表容器（字符串）
+    $('.admin-menu-course,.course-list-nav-tab').click(function(){
+      console.log(22);
+      updateCourseList('./about_course',joinCourseString, '.admin-course-list');
+    });
    
 
  

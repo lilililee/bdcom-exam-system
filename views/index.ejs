@@ -11,21 +11,29 @@
   .login {
     /*overflow: hidden;*/
   }
-	.login h1 {
-		padding-bottom: 30px;
-		font-size: 24px;
-		text-align: center;
-	}
+  .login h1 {
+    padding-bottom: 30px;
+    font-size: 24px;
+    text-align: center;
+  }
 
-	.login input {
-		font-weight: normal;
-	}
-	.login .form-group {
-		padding-top: 20px;
-	}
+  .login input {
+    font-weight: normal;
+  }
+  .login .form-group {
+    padding-top: 20px;
+  }
 
   label {
     display: block;
+  }
+  .alert-danger{
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    margin-bottom: 0;
+    padding-left: 20px;
+    margin-top: 10px;
   }
 </style>
 <!-- <link rel="stylesheet" type="text/css" href="/Wopop_files/jquery.ui.all.css"> -->
@@ -41,20 +49,21 @@
 <div class="login_padding" id="login_model">
 
   <h2>用户名</h2>
-  <form class="form-horizontal" role="form" name="login_form" method="post">
+  <form class="form-horizontal" role="form"  name="login_form" method="post">
   <label>
-    <input type="text"  name="login_id" id="username" class="txt_input txt_input2" onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}" value="Your name">
+    <input type="text"  name="login_id" id="username" class="txt_input txt_input2"  placeholder="请输入用户名">
   </label>
   <h2>密码</h2>
   <label>
-    <input type="password" name="login_password" id="userpwd" class="txt_input" onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}" onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}" value="******">
+    <input type="password" name="login_password" id="userpwd" class="txt_input" placeholder="请输入密码">
   </label>
+  <div class="submit-result"></div>
  <div class="form-group">
     <div class="col-xs-6">
-      <button type="submit" class="btn btn-info pull-right" onclick="login_form.action='./users';login_form.submit()">考生登录</button>
+      <div  data-path='./users' class="btn btn-info pull-right" onclick="submitLogonInfo(this)">考生登录</div>
     </div>
     <div class="col-xs-6">
-      <button type="submit" class="btn btn-success" onclick="login_form.action='./admin';login_form.submit()">管理员登录</button>
+      <div data-path='./admin' class="btn btn-success" onclick="submitLogonInfo(this)">管理员登录</div>
     </div>
   </div>
  </form>
@@ -108,8 +117,31 @@
 </div><!--login_m end-->
  <br> <br>
 <!-- <p align="center"> More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p> -->
-
-
-
+ <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+  function submitLogonInfo(thiz){
+          var data = {};
+          var form = $(thiz).parents('form');
+            var items = form.find('input,textarea');
+            var submit_result = form.find('.submit-result');
+          for (var i = 0; i < items.length; i++) {
+              if (items[i].value === '') {
+                    submit_result.html('<div class="alert alert-danger" role="alert">请填写完整信息！</div>') ;
+                    return;
+                  }else{
+                    data[items[i].name] = items[i].value;
+                  }
+                }
+          $.post(thiz.getAttribute('data-path'),data,function(data, status) {
+                  if (data.status == 'false') {                 
+                    submit_result.html('<div class="alert alert-danger" role="alert">' + data.info + '</div>');
+                  } else {
+                    form[0].action = thiz.getAttribute('data-path');
+                    form[0].submit();
+                  }   
+                });         
+           return false;  
+  }
+</script>
 </body>
 </html>

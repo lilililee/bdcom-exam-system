@@ -4,34 +4,28 @@ var fs = require('fs');
 var file ="../data/db.json";
 var multiparty = require('multiparty');
 var util = require('util');
+var checkLogin = require('./inc/checkLogin');
+
 
 
 /* GET admin listing. */
 router.get('/', function(req, res, next) {
   //读取数据库文件
   var db =JSON.parse(fs.readFileSync(file));
-  //先验证管理员身份
-  if(db.admin){
-    for(var i = 0; i < db.admin.length; i++) {
-      
-      // console.log(req.query.login_id)
-      // console.log(db.admin[i].id)
-      if(req.query.login_id == db.admin[i].id && req.query.login_password == db.admin[i].password){
-        res.send(db.course.course_list.course_list_content);
-        return;
-      }
-    }
-  }else {
-    res.send('数据库出错！');
-    return;
+  //验证管理员身份
+  if(checkLogin(db.admin, req.query.login_id, req.query.login_password)){
+      res.send(db.course.course_list.course_list_content);
+      return;
   }
-
+  //验证用户登录
+  if(checkLogin(db.users, req.query.login_id, req.query.login_password)){
+      res.send(db.course.course_list.course_list_content);
+      return;
+  }
   //res.send(req.query);
   res.send('用户信息不匹配，请返回重新登录！');
-
-
-  
 });
+
 
 
 /* POST admin listing. */

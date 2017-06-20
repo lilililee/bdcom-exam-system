@@ -5,6 +5,7 @@
     <title>博达考试系统</title>
     <link rel='stylesheet' href='/bootstrap-3.3.7-dist/css/bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/animate.css' />
     
   </head>
   
@@ -36,6 +37,11 @@
     <script>
       $(function() {
         initAdmin('<%= data.id %>', '<%= data.password %>');
+
+        setTimeout(function(){
+          $('.animated').removeClass('animated')
+        },2000)
+        
       })
     </script>
   </body>

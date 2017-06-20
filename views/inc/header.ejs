@@ -1,17 +1,52 @@
- 
 <header>
- <h1 class="text-center text-primary">bdcom考试系统</h1>
-    
-  
+	<h1 class="text-center text-primary animated flipInY">bdcom考试系统</h1>
 
-  <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">基本信息</h3>
-  </div>
-  <div class="panel-body">
-  <p><%= identity %>：<%= data.id %>  </p>
-  <p> 部门：<%= data.department %></p>
-  <p> 职位：<%= data.role %></p>
-  </div>
-</div>
+	<div class="panel panel-success col-sm-5 animated bounceInLeft" style="padding: 0px;">
+		<div class="panel-heading">
+			<h3 class="panel-title">基本信息</h3>
+		</div>
+		<div class="panel-body">
+			<p>
+				<%= identity %>：
+				<%= data.id %> </p>
+			<p> 部门：
+				<%= data.department %>
+			</p>
+			<p> 职位：
+				<%= data.role %>
+			</p>
+		</div>
+	</div>
+	<div class="panel panel-success col-sm-5 col-sm-offset-2  animated bounceInRight" style="padding:0px;">
+		<div class="panel-heading">
+			<h3 class="panel-title">公告信息
+		        <% if(identity === "管理员"){%>
+		     	 <span class="glyphicon glyphicon-edit pull-right" title="修改信息" aria-hidden="true" data-toggle="modal" data-target="#note_public"></span>
+				   <div class="modal fade" tabindex="-1" role="dialog" id="note_public">
+						  <div class="modal-dialog" role="document">
+								<div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								        <h4 class="modal-title">发布公告:</h4>
+								      </div>
+								      <form>
+									      <div class="modal-body">
+					                         <textarea class="form-control" rows="8"maxlength="1000" name="admin_note"  style="overflow-x: hidden;overflow-y: auto;resize:none"><%= note %></textarea>
+									      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+								        <button type="button" class="btn btn-primary  note-add-submit" data-dismiss="modal">发  布</button>
+								      </div>
+								    </form>
+							    </div>
+						  </div>
+					</div>
+		        <%}%>
+           </h3>
+		</div>
+		<div class="panel-body" style="height: 120px;overflow-x: hidden;overflow-y: auto;" >
+			<p id="note_up" style="word-wrap:break-word; word-break:normal; "><%= note %></p>
+			<p id="note_time" style="float: right;"><%= time %></p>
+		</div>
+	</div>
 </header>

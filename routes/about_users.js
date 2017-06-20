@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var file ="../data/db.json";
+var checkLogin = require('./inc/checkLogin');
 
 
 /* GET admin listing. */
@@ -123,5 +124,49 @@ router.post('/', function(req, res, next) {
 
   
 });
+
+
+
+
+router.get('/message', function(req, res, next) {
+  //读取数据库文件
+  console.log('2222222211111111111111111111');
+  var db =JSON.parse(fs.readFileSync(file));
+  //先验证管理员身份
+    if(checkLogin(db.admin, req.query.login_id, req.query.login_password)){
+      console.log('11111111111111111111');
+      res.send(db.message.message_list.message_list_content);
+      return;
+  }
+  //res.send(req.query);
+  res.send('用户信息不匹配，请返回重新登录！');
+});
+
+router.post('/message',function(req, res,next){
+    var db =JSON.parse(fs.readFileSync(file));
+    
+    if(db.admin){
+    for(var i = 0; i < db.admin.length; i++) {
+      if(req.body.login_id == db.admin[i].id && req.body.login_password == db.admin[i].password){
+          console.log('2222222222222222222');
+           for(var j = 0; j < db.message.message_list.message_list_content.length; j++){
+             if(db.message.message_list.message_list_content[j].id === req.body.delete_message_id){
+              db.message.message_list.message_list_content.splice(j,1);
+              break;
+            } 
+          }
+         fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));
+          res.send({
+            status:"success",
+            info:"成功"
+          });
+          
+      }
+    }
+  }
+      
+})
+
+
 
 module.exports = router;

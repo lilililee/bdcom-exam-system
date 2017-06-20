@@ -1,84 +1,78 @@
 <!-- Modal1 -->
-          <div class="col-xs-12 col-md-4">
-            <button type="button" class="btn btn-primary btn-lg admin-menu admin-menu-users" data-toggle="modal" data-target="#myModal-users">信息管理</button>
-            <div class="modal fade" id="myModal-users" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog modal-lg modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<div class="col-xs-12 col-md-4 animated bounceInUp">
+  <button type="button" class="btn btn-primary btn-lg admin-menu admin-menu-users" data-toggle="modal" data-target="#myModal-users">信息管理</button>
+  <div class="modal fade" id="myModal-users" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">信息管理</h4></div>
-                  <div class="modal-body">
-                    <!-- model-content -->
-                    <!-- ！Nav tabs -->
-                    
-                    <div>
-                      
-                      <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active user-list-nav-tab">
-                          <a href="#admin-users-list" aria-controls="home" role="tab" data-toggle="tab">修改密码</a></li>
-                        <li role="presentation">
-                          <a href="#admin_users_add" aria-controls="profile" role="tab" data-toggle="tab">提交留言</a></li>
-                      </ul>
-                      <!-- Tab panes -->
-                      <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active admin-users-list" id="admin-users-list">
-                          <div class="panel panel-default">
-                            <!-- Default panel contents -->
-                            <div class="panel-heading">Panel heading</div>
-                            <!-- Table -->
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>用户名</th>
-                                  <th>部门</th>
-                                  <th>职位</th>
-                                  <th>操作</th></tr>
-                              </thead>
-                              <tbody>
-                                <!-- <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td></tr>
-                                <tr>
-                                -->
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane admin_users_add" id="admin_users_add">
-                          <form method="post">
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon1" >帐 号：</span>
-                              <input type="text" name="user_id" class="form-control" aria-describedby="basic-addon1" ></div>
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon1">密 码：</span>
-                              <input type="text" name="user_password" class="form-control" aria-describedby="basic-addon1"></div>
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon2">部 门：</span>
-                              <input type="text" name="user_department" class="form-control" aria-describedby="basic-addon2"></div>
-                            <div class="input-group">
-                              <span class="input-group-addon" id="basic-addon3">职 位：</span>
-                              <input type="text" name="user_role" class="form-control" aria-describedby="basic-addon3"></div>
-                            <input type="hidden" name="add_user" value="yes">
-                            <div class="submit-result"></div>
-                            <div class="text-center add-user-button">
-                              <input type="reset" class="btn btn-default add-user-reset" value="重 置"></input>
-                              <input type="submit" class="btn btn-danger add-user-submit" value="确 认"></input>
-                            </div>
-                          </form>
-                        </div>
+          <h4 class="modal-title" id="myModalLabel">信息管理</h4></div>
+        <div class="modal-body">
+          <!-- model-content -->
+          <!-- ！Nav tabs -->
+
+          <div>
+
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active user-list-nav-tab">
+                <a href="#admin-users-list" aria-controls="home" role="tab" data-toggle="tab">修改密码</a>
+              </li>
+              <li role="presentation">
+                <a href="#admin_users_add" aria-controls="profile" role="tab" data-toggle="tab">提交留言</a>
+              </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active admin-users-list" id="admin-users-list">
+                    <form method="post">
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"> 用  户  名 ：&nbsp;&nbsp;</span>
+                        <input type="text" name="user_id" class="form-control" aria-describedby="basic-addon1" value="<%= data.id %>" readonly="readonly">
                       </div>
-                    </div>
-                    <!-- ！Nav tabs end --></div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭窗口</button>
-                    <!-- <button type="button" class="btn btn-primary">Save change</button> --></div>
-                </div>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2"> 原  密  码 ：&nbsp;&nbsp;</span>
+                        <input type="password" name="user_password" class="form-control" aria-describedby="basic-addon2" maxlength="16"></div>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3"> 新  密 码 ：&nbsp;&nbsp;</span>
+                        <input type="password" name="user_newpassword" class="form-control" aria-describedby="basic-addon3" maxlength="16"></div>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon4">确认新密码 :</span>
+                        <input type="password" name="confirm_password" class="form-control" aria-describedby="basic-addon4" maxlength="16"></div>
+                      <input type="hidden" name="add_user" value="yes">
+                      <div class="submit-result"></div>
+                      <div class="text-center add-user-button">
+                        <input type="reset" class="btn btn-default add-password-reset" value="重    置"></input>
+                        <input type="submit" class="btn btn-danger add-password-submit" value="提    交"></input>
+                      </div>
+                    </form>
               </div>
+               <div role="tabpane1" class="tab-pane admin_users_add" id="admin_users_add">
+                    <form method="post" style="padding: 1rem;">
+                       <div class="form-group">
+                          <label for="messageTitle">留言标题:</label>
+                          <input type="text" class="form-control" id="messageTitle" placeholder="留言标题" name='messageTitle'>
+                        </div>
+                        <div class="form-group">
+                          <label for="messageContents">留言内容:</label>
+                             <textarea class="form-control" id="messageContents" rows="5" maxlength="500" placeholder="请留下您宝贵的意见" style="resize: none;overflow-x: hidden;overflow-y: auto;" name="messageContents"></textarea>
+                        </div>
+                      <div class="submit-result"></div>
+                      <div class="text-center add-user-button">
+                        <input type="reset" class="btn btn-default add-message-reset"   value="重   置"></input>
+                        <input type="submit" class="btn btn-danger add-message-submit"  value="提   交"></input>
+                      </div>
+                    </form>
+                </div>
             </div>
           </div>
-          <!-- Modal1 end -->
+          <!-- ！Nav tabs end -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">关闭窗口</button>
+          <!-- <button type="button" class="btn btn-primary">Save change</button> --></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal1 end -->

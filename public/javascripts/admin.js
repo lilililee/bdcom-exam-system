@@ -37,6 +37,162 @@ $(function() {
         })
     }
 
+
+
+    
+  //发布公告开始：
+      function submit_noteInfo(submit_button){
+       submit_button.click(function(e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        var items = form.find('textarea');
+        var submit_result = form.find('.submit-result');
+        var dataTime =getNowFormatDate();
+        var post_noteData = {};
+        post_noteData.login_id = admin.id;
+        post_noteData.login_password = admin.password;
+        post_noteData.postTime = dataTime;
+        post_noteData[items[0].name] = items[0].value;
+        console.log(post_noteData);
+        $.post('./admin/publicNote', post_noteData,
+          function(data, status) {
+            $("#note_up").html(items[0].value); 
+            $("#note_time").html(dataTime);
+        })
+
+      });
+    } 
+      submit_noteInfo($('.note-add-submit'));
+       //获取当前系统时间
+      function getNowFormatDate() {
+          var date = new Date();
+          var seperator1 = "-";
+          var month = date.getMonth() + 1;
+          var strDate = date.getDate();
+          if(month >= 1 && month <= 9) {
+            month = "0" + month;
+          }
+          if(strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+          } 
+      var currentdate =date.getFullYear()+seperator1+month + seperator1 + strDate 
+          return currentdate;
+        }
+  //发布公告结束
+  
+  
+  
+  //留言内容开始
+     //根据get请求获取的数据来渲染留言列表
+     function joinMessageString(data) {
+      var result = '';
+      data.forEach(function(user, index) {
+        result += '<tr><th scope="row">' + (index + 1) + '</th><td>'+user.name+'</td><td>' + user.title + '</td><td>' + user.time + '</td>\
+        <td> <span class="glyphicon  glyphicon-eye-open" title="查看详情" aria-hidden="true"  data-toggle="modal"></span> \
+        \
+        <div class="modal fade model-user-lookMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+        <div class="modal-dialog" role="document">\
+        <div class="modal-content">\
+        <div class="modal-header">\
+        <button type="button" class="close close-innermodel"  aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+        <h4 class="modal-title" id="myModalLabel">用户留言</h4>\
+        </div>\
+        <form>\
+        <div class="modal-body">\
+        <div class="form-group">\
+        <label for="messageTitle">留言标题:</label>\
+        <input type="text" class="form-control" value="' + user.title + '" id="messageTitle" readonly>\
+        </div>\
+        <div class="form-group">\
+        <label for="lookMessageContents">留言内容:</label>\
+        <textarea class="form-control" rows="5" style="resize: none;overflow-x: hidden;overflow-y: auto;" readonly id="lookMessageContents">' + user.content + '</textarea>\
+        </div>\
+        </div>\
+        <div class="modal-footer">\
+        <button type="button" class="btn btn-primary close-innermodel">关闭窗口</button>\
+        </div>\
+        <input type="hidden" name="user_id" value="' + user.id + '">\
+        </form>\
+        </div>\
+        </div>\
+        \
+        </div><span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除留言" ></span>\
+        <div class="modal fade model-user-message" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+        <div class="modal-dialog" role="document">\
+        <div class="modal-content">\
+        <div class="modal-header">\
+        <button type="button" class="close close-innermodel" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
+        <h4 class="modal-title" id="myModalLabel">删除留言</h4>\
+        </div>\
+        <div class="modal-body">\
+        确认删除信息？\
+        </div>\
+        <div class="modal-footer">\
+        <button type="button" class="btn btn-default close-innermodel" >取消</button>\
+        <button type="button" class="btn btn-danger submit-innermodel" data-message-id="' + user.id + '">确认</button>\
+        </div>\
+        </div>\
+        </div>\
+        </div></td>'
+      })
+      return result;
+    }
+  
+       //更新留言
+     function updateMessageList(server_url, joinString, list_container) {
+         var data = [];
+        //获取所用留言信息
+        $.get( server_url+'?login_id='+admin.id+'&login_password='+admin.password,
+          function(data, status) {
+             var result = '';
+            if (Array.isArray(data)){
+              result = joinString(data);
+
+            } else {
+              console.log('返回数据错误，应为数组！')
+            }
+            
+            //循环结束，开始插入html，更新表格
+            $( list_container + ' tbody').html('').append(result);
+       
+            //删除留言
+            innerModelHander($('.user-message-list .glyphicon-remove'),$('.model-user-message'),function(traget_model){
+               //this指向提交按钮，会有data-id属性
+               var message_id = $(this).attr('data-message-id');
+               $.post(server_url, {
+                login_id: admin.id,
+                login_password: admin.password,
+                delete_message_id: message_id
+              },
+              function(data, status) {
+               traget_model.fadeOut();
+                     setTimeout(function(){
+                      updateMessageList(server_url,joinString, list_container)
+                    }, 300);
+                  })
+             });
+             //查看留言 
+              innerModelHander($('.user-message-list .glyphicon-eye-open'),$('.model-user-lookMessage'),function(traget_model){
+                  console.log('33333333333');     
+               }); 
+             
+          })
+
+    }
+    
+     $('.admin-menu-users,.user-message-nav-tab').click(function(){
+        updateMessageList('./about_users/message',joinMessageString, '.user-message-list');
+    });
+    
+    $('[data-toggle="popover"]').popover();
+       
+       
+       
+       
+       
+    
+  //留言内容结束
+
     //根据get请求获取的数据来渲染列表
     function joinUserString(data) {
       var result = '';
