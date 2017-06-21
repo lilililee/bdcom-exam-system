@@ -3,204 +3,242 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
-/*public*/
-.wrap {
-  max-width: 1200px;
-  margin: auto;
+ /*public*/
+ .wrap {
+ 	max-width: 1200px;
+ 	margin: auto;
 
-}
+ }
 
-html,body {
-	height: 100%;
-	width: 100%;
-	font-family: "微软雅黑",Arial;
-	
-}
+ html,body {
+ 	height: 100%;
+ 	width: 100%;
+ 	font-family: "微软雅黑",Arial;
 
-header {
-	max-width: 1108px;
-	margin: auto;
-}
+ }
 
-img {
-	max-width: 100%;
-}
+ header {
+ 	max-width: 1108px;
+ 	margin: auto;
+ }
 
-pre {
-	margin: 10px;
-}
+ img {
+ 	max-width: 100%;
+ }
 
-/*public*/
-header h1{
-	padding: 30px 0;
-}
+ pre {
+ 	margin: 10px;
+ }
 
-.glyphicon-edit {
-	color: #3D79D2;
-}
+ /*public*/
+ header {
+ 	margin-bottom: 18%;
+ }
 
-.glyphicon-remove {
-	color: #EA4949;
-}
-.glyphicon-ban-circle{
-	color: #7B7777;
-}
+ @media (max-width: 768px){
+ 	header {
+ 		margin-bottom: auto;
+ 	}
+ }
 
-.glyphicon-ok-sign {
-	color: #2DB965;
-}
+ header h1{
+ 	padding: 30px 0;
+ }
 
-.glyphicon-download-alt {
-	color: #555;
-}
+ .glyphicon-edit {
+ 	color: #3D79D2;
+ }
 
-.glyphicon-pencil {
-	color: #C78282;
-}
+ .glyphicon-remove {
+ 	color: #EA4949;
+ }
+ .glyphicon-ban-circle{
+ 	color: #7B7777;
+ }
 
+ .glyphicon-ok-sign {
+ 	color: #2DB965;
+ }
 
-/*不同分数的状态*/
-.score-excellent {
-	color: #5CB85C;
-}
+ .glyphicon-download-alt {
+ 	color: #555;
+ }
 
-.score-good {
-	color: #274BAF;
-}
-
-.score-bad {
-	color: #E6840C;
-}
-
-.score-verybad {
-	color: #F30606;
-}
-
-/*index*/
-.index-content .login .control-label {
-  padding-top: 7px;
-  text-align: right;
-  color: #eee;
-}
-
-.index-content h1 {
-	padding: 50px 0;
-	color: #b5b5b5;
-}
-
-.submit-result {
-	padding: 0 10px;
-}
+ .glyphicon-pencil {
+ 	color: #C78282;
+ }
 
 
-/*admin*/
-.admin-content .admin-menu {
-	display: block;
-	width: 90%;
-	margin: 20px auto;
-	height: 200px;
-	border: none;
-	box-shadow: 2px 2px 10px #aaa;
-	-webkit-transition: transform .3s linear;
-	-moz-transition: transform .3s linear;
-	-o-transition: transform .3s linear;
-	transition: transform .3s linear;
-	/*text-align: center;*/
-}
-.admin-content .admin-menu:hover {
-	-webkit-transform:translateY(-10px);	
-	-moz-transform:translateY(-10px);
-	transform:translateY(-10px);
-	box-shadow: 3px 3px 10px #999;
-}
+ /*不同分数的状态*/
+ .score-excellent {
+ 	color: #5CB85C;
+ }
 
-.admin-content .admin-menu:focus {
-	outline: none;
-}
+ .score-good {
+ 	color: #274BAF;
+ }
 
-.admin-content .admin-menu-users{
-	background: url(../images/menu4.jpg) center center no-repeat;
-	background-size: cover;
-}
-.admin-content .admin-menu-exam{
-	background: url(../images/menu1.jpg) center center no-repeat;
-	background-size: cover;
-}
-.admin-content .admin-menu-course{
-	background: url(../images/menu3.jpg) center center no-repeat;
-	background-size: cover;
-}
+ .score-bad {
+ 	color: #E6840C;
+ }
+
+ .score-verybad {
+ 	color: #F30606;
+ }
+
+ /*index*/
+ .index-content .login .control-label {
+ 	padding-top: 7px;
+ 	text-align: right;
+ 	color: #eee;
+ }
+
+ .index-content h1 {
+ 	padding: 50px 0;
+ 	color: #b5b5b5;
+ }
+
+ .submit-result {
+ 	padding: 0 10px;
+ }
 
 
-.admin-content .admin-menu-users:focus {
-	color: #fff;
-	border: none;
-}
-
-.admin-content  .glyphicon{
-	vertical-align: -3px;
-	cursor: pointer;
-}
-
-.admin-content  .input-group{
-	margin: 10px;
-}
-
-/*admin-user*/
-.admin-content .add-user-button input,
-.admin-content .add-user-button button {
-	margin: 0 10px;
-}
-
-/*admin-exam*/
-.admin-content .admin_exam_add .glyphicon{
-	vertical-align: 0;
-	margin: 4px 10px 7px 10px;
-}
-
-.admin-content .admin_exam_add .single-select-bottom .form-group {
-	margin-left: 20px;
-}
-
-.admin-content .admin_exam_add .single-select-bottom input[type="checkbox"]{
-	vertical-align: -3px;
-}
-
-.admin-content .admin_exam_add .single-judge-bottom input[type="radio"]{
-	vertical-align: -3px;
-}
-
-.admin-content .admin_exam_add .single-text-bottom input[type="file"]{
-	display: inline-block;
-}
+ /*admin*/
+ .admin-content .admin-menu {
+ 	display: block;
+ 	width: 90%;
+ 	margin: 20px auto;
+ 	height: 200px;
+ 	border: none;
+ 	box-shadow: 2px 2px 10px #aaa;
+ 	-webkit-transition: transform .3s linear;
+ 	-moz-transition: transform .3s linear;
+ 	-o-transition: transform .3s linear;
+ 	transition: transform .3s linear;
+ 	/*text-align: center;*/
+ }
 
 
-.admin-content .model-user-remove {
-	/*top: 200px;*/
-}
+ @media (max-width: 768px){
+ 	.admin-content .admin-menu  {
+ 		width: 100%;
+ 	}
+ }
+
+ .admin-content .admin-menu:hover {
+ 	-webkit-transform:translateY(-10px);	
+ 	-moz-transform:translateY(-10px);
+ 	transform:translateY(-10px);
+ 	box-shadow: 3px 3px 10px #999;
+ }
+
+ .admin-content .admin-menu:focus {
+ 	outline: none;
+ }
+
+ .admin-content .admin-menu-users{
+ 	background: url(../images/menu4.jpg) center center no-repeat;
+ 	background-size: cover;
+ }
+ .admin-content .admin-menu-exam{
+ 	background: url(../images/menu1.jpg) center center no-repeat;
+ 	background-size: cover;
+ }
+ .admin-content .admin-menu-course{
+ 	background: url(../images/menu3.jpg) center center no-repeat;
+ 	background-size: cover;
+ }
 
 
-.exam-content .wrap {
-	max-width: 900px;
-}
+ .admin-content .admin-menu-users:focus {
+ 	color: #fff;
+ 	border: none;
+ }
 
-.exam-content .exam-header {
-	text-align: center;
-}
+ .admin-content  .glyphicon{
+ 	vertical-align: -3px;
+ 	cursor: pointer;
+ }
 
-.exam-content .exam-header span{
-	font-size: 12px;
-	margin: 20px;
-}
+ .admin-content  .input-group{
+ 	margin: 10px;
+ }
 
-.exam-content .judges-radio input {
-	top: -2px;
-}
+ /*admin-user*/
+ .admin-content .add-user-button input,
+ .admin-content .add-user-button button {
+ 	margin: 0 10px;
+ }
 
-.exam-content h4 {
-	padding-top: 20px;
-}
+ /*admin-exam*/
+ .admin-content .admin_exam_add .glyphicon{
+ 	vertical-align: 0;
+ 	margin: 4px 10px 7px 10px;
+ }
 
-.exam-content .texts img {
-	margin-bottom: 15px ;
-}
+ .admin-content .admin_exam_add .single-select-bottom .form-group {
+ 	margin-left: 20px;
+ }
+
+ .admin-content .admin_exam_add .single-select-bottom input[type="checkbox"]{
+ 	vertical-align: -3px;
+ }
+
+ .admin-content .admin_exam_add .single-judge-bottom input[type="radio"]{
+ 	vertical-align: -3px;
+ }
+
+ .admin-content .admin_exam_add .single-text-bottom input[type="file"]{
+ 	display: inline-block;
+ }
+
+
+ .admin-content .model-user-remove {
+ 	/*top: 200px;*/
+ }
+
+
+ .exam-content .wrap {
+ 	max-width: 900px;
+ }
+
+ .exam-content .exam-header {
+ 	text-align: center;
+ }
+
+ .exam-content .exam-header span{
+ 	font-size: 12px;
+ 	margin: 20px;
+ }
+
+ .exam-content .judges-radio input {
+ 	top: -2px;
+ }
+
+ .exam-content h4 {
+ 	padding-top: 20px;
+ }
+
+ .exam-content .texts img {
+ 	margin-bottom: 15px ;
+ }
+
+ .stop-click-shadow {
+ 	width: 100%;
+ 	height: 100%;
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+ 	z-index: 9999;
+ }
+
+
+
+ /*调节用户界面图标字体居中*/
+ .users-content .glyphicon-pencil{
+ 	margin-left: 20px;
+ }
+
+ .users-content .glyphicon-download-alt{
+ 	margin-left: 6px;
+ }

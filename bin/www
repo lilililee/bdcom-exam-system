@@ -19,13 +19,28 @@ app.set('port', port);
  * Create HTTP server.
  */
 
+function getIPAdress(){  
+    var interfaces = require('os').networkInterfaces();  
+    for(var devName in interfaces){  
+          var iface = interfaces[devName];  
+          for(var i=0;i<iface.length;i++){  
+               var alias = iface[i];  
+               if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){  
+                     return alias.address;  
+               }  
+          }  
+    }  
+} 
+
+var myIp = getIPAdress();
+
 var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, myIp);
 server.on('error', onError);
 server.on('listening', onListening);
 

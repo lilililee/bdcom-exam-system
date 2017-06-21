@@ -32,6 +32,7 @@ router.get('/', function(req, res, next) {
       }
     })
     res.send(result);
+     res.setHeader('Content-Type', 'text/plain');
     return;
   }
 

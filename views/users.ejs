@@ -37,6 +37,10 @@
       </div>
     </div>
     
+    
+    <div class="stop-click-shadow"></div>
+
+
 
     <script src="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js"></script>
     <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -46,8 +50,10 @@
       $(function() {
         initUser('<%= data.id %>', '<%= data.password %>');
          setTimeout(function(){
-           $('.animated').removeClass('animated')
-          },2000)
+           $('.animated').removeClass('animated');
+           $('.stop-click-shadow').css('display','none');
+
+          },1500)
       })
     </script>
   </body>
