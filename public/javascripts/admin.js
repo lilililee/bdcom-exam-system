@@ -86,6 +86,7 @@ $(function() {
      //根据get请求获取的数据来渲染留言列表
      function joinMessageString(data) {
       var result = '';
+      console.log(data)
       data.forEach(function(user, index) {
         result += '<tr><th scope="row">' + (index + 1) + '</th><td>'+user.name+'</td><td>' + user.title + '</td><td>' + user.time + '</td>\
         <td> <span class="glyphicon  glyphicon-eye-open" title="查看详情" aria-hidden="true"  data-toggle="modal"></span> \
@@ -1132,7 +1133,7 @@ return result;
         var formdata = new FormData();
         formdata.append('new_exam', JSON.stringify(temp_exam))
         for (var i = 0; i < temp_exam.content.texts.length; i++ ){
-          console.log(temp_exam.content.texts.img)
+          // console.log(temp_exam.content.texts.img)
           formdata.append('texts_img'+ (i+1), temp_exam.content.texts[i].img);
         }
         //console.log(formdata)

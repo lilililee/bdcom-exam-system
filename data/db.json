@@ -14,41 +14,187 @@
             "time": "2017-06-21"
         }
     ],
-    "users": [],
+    "users": [
+        {
+            "id": "张惠奇",
+            "password": "1234",
+            "department": "123",
+            "role": "123"
+        },
+        {
+            "id": "112",
+            "password": "1212",
+            "department": "2121",
+            "role": "1212"
+        },
+        {
+            "id": "123",
+            "password": "123",
+            "department": "123",
+            "role": "123"
+        }
+    ],
     "exam": {
         "exam_args": {},
         "exam_list": {
             "exam_list_args": {
-                "sum": 37
+                "sum": 4
             },
-            "exam_list_content": []
+            "exam_list_content": [
+                {
+                    "id": "000004",
+                    "name": "技术考核",
+                    "time": "30",
+                    "is_start": "yes",
+                    "count": {
+                        "selects": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "judges": {
+                            "sum": 1,
+                            "score": 2
+                        },
+                        "texts": {
+                            "sum": 1,
+                            "score": 10
+                        },
+                        "all": {
+                            "sum": 3,
+                            "score": 14
+                        }
+                    },
+                    "content": {
+                        "selects": [
+                            {
+                                "sid": "1",
+                                "question": "1+1=（）",
+                                "options": [
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4"
+                                ],
+                                "answer": "b",
+                                "value": "2"
+                            }
+                        ],
+                        "judges": [
+                            {
+                                "sid": "1",
+                                "question": "太阳是宇宙的中心吗（）",
+                                "answer": "true",
+                                "value": "2"
+                            }
+                        ],
+                        "texts": [
+                            {
+                                "sid": "1",
+                                "question": "你怎么看待一带一路？",
+                                "img": {},
+                                "value": "10",
+                                "pic": ".\\uploadimages\\TPpVu0qc2Cwo_ZddgQ27Og_M.jpg"
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     },
     "course": {
         "course_args": {},
         "course_list": {
             "course_list_args": {
-                "sum": 10
+                "sum": 1
             },
-            "course_list_content": []
+            "course_list_content": [
+                {
+                    "id": "100001",
+                    "name": "HTML DOM 参考手册.RAR",
+                    "type": "13213",
+                    "src": "./uploadcourses/HTML DOM 参考手册.RAR"
+                }
+            ]
         }
     },
     "record": {
         "record_args": {},
         "record_list": {
             "record_list_args": {
-                "sum": 18
+                "sum": 2
             },
-            "record_list_content": []
+            "record_list_content": [
+                {
+                    "id": "200001",
+                    "user_id": "123",
+                    "exam_id": "000004",
+                    "exam_name": "技术考核",
+                    "start_time": "1498060819082",
+                    "end_time": "1498060843764",
+                    "answer": {
+                        "selects": [
+                            "b"
+                        ],
+                        "judges": [
+                            "true"
+                        ],
+                        "texts": [
+                            "乔沃维奇无若群二额"
+                        ]
+                    },
+                    "total_score": "14",
+                    "is_check": "yes",
+                    "score": "4",
+                    "final_score": "9"
+                },
+                {
+                    "id": "200002",
+                    "user_id": "123",
+                    "exam_id": "000004",
+                    "exam_name": "技术考核",
+                    "start_time": "1498061123782",
+                    "end_time": "1498061136093",
+                    "answer": {
+                        "selects": [
+                            "c"
+                        ],
+                        "judges": [
+                            "true"
+                        ],
+                        "texts": [
+                            "卫生工"
+                        ]
+                    },
+                    "total_score": "14",
+                    "is_check": "yes",
+                    "score": "2",
+                    "final_score": "4"
+                }
+            ]
         }
     },
     "message": {
         "message_args": {},
         "message_list": {
             "message_list_args": {
-                "sum": 19
+                "sum": 22
             },
-            "message_list_content": []
+            "message_list_content": [
+                {
+                    "id": "50020",
+                    "title": "121",
+                    "content": "21212",
+                    "time": "2017-06-21 23:48:15",
+                    "name": "123"
+                },
+                {
+                    "id": "50022",
+                    "title": "312",
+                    "content": "312",
+                    "time": "2017-06-21 23:54:29",
+                    "name": "123"
+                }
+            ]
         }
     }
 }
