@@ -18,6 +18,10 @@
         .right-answer {
             color: green;
         }
+
+        textarea {
+        	margin-bottom: 10px;
+        }
     </style>
   </head>
   
@@ -70,7 +74,8 @@
 
                                 <div class="answer-info <%= result_class %>" >
                                     考生答案：<%= data.record.answer.selects[i] %> , 
-                                    正确答案：<%= data.exam.content.selects[i].answer%> 
+                                    正确答案：<%= data.exam.content.selects[i].answer%> ,
+                                    得分：<%= data.record.count.selects[i]%>分。
                                 </div>    								
 		  					</li>
 		  				<%}%>
@@ -110,7 +115,8 @@
                                             对
                                     <%}else{%>
                                             错
-                                    <%}%>
+                                    <%}%>,
+                                    得分：<%= data.record.count.judges[i]%>分。
                                 </div>   
 								
 		  					</li>
@@ -133,6 +139,15 @@
 
                                    
 								<textarea class="form-control texts-answer" placeholder="回答" aria-describedby="basic-addon1" rows="5" style="resize:none;" disabled="disabled"><%= data.record.answer.texts[i] %></textarea>
+								
+								<% var result_class = 'error-answer' %>
+                                <%if (data.record.count.texts[i]!='0') {%>
+                                <% var result_class = 'right-answer' %>
+                                <%}%>
+								<div class="answer-info <%= result_class %>" >
+                                    
+                                    得分：<%= data.record.count.texts[i]%>分。
+                                </div>   
 		  					</li>
 		  				<%}%>
 		  			</ol>

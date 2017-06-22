@@ -223,6 +223,10 @@
  	margin-bottom: 15px ;
  }
 
+ .exam-content .texts li {
+ 	margin-bottom: 20px;
+ }
+
  .stop-click-shadow {
  	width: 100%;
  	height: 100%;

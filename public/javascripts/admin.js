@@ -8,7 +8,11 @@ function initAdmin (id,password){
 
 $(function() {
 
-
+    
+    $(document).on('focus','input,textarea',function(){
+     // alert(11)
+      $('.submit-result').html('');
+    })
     function innerModelHander( show_controller, traget_model, post_fn) {
 
       // var uesrs_glyphicon_edit = $('.admin-users-list .glyphicon-edit'); //所有修改按钮  show_controller
@@ -174,7 +178,7 @@ $(function() {
              });
              //查看留言 
               innerModelHander($('.user-message-list .glyphicon-eye-open'),$('.model-user-lookMessage'),function(traget_model){
-                  console.log('33333333333');     
+                  //console.log('33333333333');     
                }); 
              
           })
@@ -225,6 +229,7 @@ $(function() {
         <span class="input-group-addon" id="basic-addon3">职位：</span>\
         <input type="text" name="user_role" class="form-control" value="' + user.role + '" aria-describedby="basic-addon3">\
         </div>\
+        <div class="submit-result"></div>\
         </div>\
         <div class="modal-footer">\
         <button type="button" class="btn btn-default close-innermodel">取消</button>\
@@ -281,6 +286,11 @@ $(function() {
             // 修改用户
             innerModelHander($('.admin-users-list .glyphicon-edit'),$('.model-user-change'),function(traget_model){
              var form = $(this).parents('form')[0];
+
+             if( !(/^\w{3,16}$/).test(form.user_password.value)){
+               $(form).find('.submit-result').html('<div class="alert alert-warning" role="alert">密码必须为3到16位字符！</div>')
+                return;
+             }
 
              $.post(server_url, {
               login_id: admin.id,
@@ -361,10 +371,15 @@ $(function() {
             switch( type ){
               case 'number': 
               if(!(/^(0|[1-9]\d*)$/).test(items[i].value)) {
-                info = items[i].getAttribute('data-validate-name') + '必须为正整数！';
-                break;
+                info = items[i].getAttribute('data-validate-name') + '必须为正整数！';        
               }
-
+              break;
+              case 'password':
+              if(!(/^\w{3,16}$/).test(items[i].value)) {
+                info = items[i].getAttribute('data-validate-name') + '必须为3到16位字符！';
+                
+              }
+              break;
             }
             if( info !== '') {
               submit_result.html('<div class="alert alert-warning" role="alert">'+info+'</div>') ;

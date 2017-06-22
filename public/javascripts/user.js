@@ -9,6 +9,8 @@ function initUser (id,password){
 $(function () {
 	$('[data-toggle="popover"]').popover();
 
+
+
   function errorInfo(traget, info){
     traget.html('<div class="alert alert-warning" role="alert">'+ info +'</div>');
   }
@@ -71,13 +73,13 @@ $(function () {
         {
           console.log(items[1].value);
           console.log(user.password);
-           submit_result.html('<div class="alert alert-warning" role="alert">原密码输入错误，请重新输入</div>') ;  
+           submit_result.html('<div class="alert alert-warning" role="alert">原密码输入不匹配，请重新输入！</div>') ;  
            return;
         }
          if(items[2].value != items[3].value){
           console.log(items[2].value);
           console.log(items[3].value);
-          submit_result.html('<div class="alert alert-warning" role="alert">两次输入的新密码不一致，请重新输入</div>') ;
+          submit_result.html('<div class="alert alert-warning" role="alert">两次输入的新密码不一致，请重新输入！</div>') ;
           return;
         }else{
           console.log('两次输入的一致');
@@ -93,7 +95,9 @@ $(function () {
           function(data, status) {
 
             if (typeof data.status != 'undefined' && data.status == 'success') {
-              submit_result.html('<div class="alert alert-success" role="alert">' + data.info + '</div>');
+              // submit_result.html('<div class="alert alert-success" role="alert">' + data.info + '</div>');
+              alert(data.info);
+              window.location.href = '/';
             } else {
               submit_result.html('<div class="alert alert-danger" role="alert">' + data.info + '</div>');
             }

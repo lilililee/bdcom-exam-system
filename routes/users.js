@@ -45,7 +45,7 @@ router.post('/password', function(req, res, next) {
         fs.writeFileSync('../data/db.json',JSON.stringify(db));
         res.send({
               status:"success",
-              info: "密码修改成功,请记住你的密码。下次请使用新密码登录。"
+              info: "密码修改成功,请重新登录！"
             });
       }
     }
