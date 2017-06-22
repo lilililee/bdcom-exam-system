@@ -115,7 +115,7 @@
         	
         	if(!confirm('确认结束考试（<%= data.name %>）吗？')) return;
         	var end_time = new Date();
-        	if(end_time - start_time < 5 * 60 *1000){
+        	if(end_time - start_time < 0 * 60 *1000){
         		alert('必须进行考试5分钟后才能结束考试！');
         		return;
         	}

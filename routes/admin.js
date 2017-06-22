@@ -40,7 +40,7 @@ router.post('/publicNote',function(req, res, next){
       if(req.body.login_id == db.admin[i].id && req.body.login_password == db.admin[i].password){
            db.public_note[0].content = req.body.admin_note;
            db.public_note[0].time =req.body.postTime;
-           fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));
+           fs.writeFileSync('../data/db.json',JSON.stringify(db));
            res.send({
               status:"success",
               info: "发布成功"

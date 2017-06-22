@@ -355,7 +355,7 @@ $(function() {
 
 
           var type = items[i].getAttribute('data-validate-type');
-          console.log(type)
+          //console.log(type)
           if(typeof type !== 'undefied'){
             var info = '';
             switch( type ){
@@ -1475,12 +1475,14 @@ return result;
             // 开始阅卷    
             innerModelHander($(list_container + ' .glyphicon-eye-open'),$('.model-exam-check'),function(traget_model){
              var texts_score = 0;
+             var texts_score_count = [];
              var is_error = false;
              $(this).parents('.model-exam-check').find('.check_texts_value').each(function(index){
-              console.log(this)
-              console.log(this.getAttribute('data-value'))
+              //console.log(this)
+              //console.log(this.getAttribute('data-value'))
                 var max_score = parseFloat(this.getAttribute('data-value'));
-                console.log(max_score)
+                //console.log(max_score)
+                
                 var cur_score = this.value * 1;
                 if ( cur_score > max_score){
                     alert('简答题第'+ (index+1) + '题得分已超过最高分数(' + max_score + '分)！');
@@ -1492,12 +1494,13 @@ return result;
                     return false;
                 } else {
                   texts_score += cur_score;
+                  texts_score_count.push(cur_score.toString())
                 }
              })
 
              if(is_error) return;
 
-              console.log(this)
+              //console.log(this)
              var record_id = this.getAttribute('data-record-id');
 
 
@@ -1506,8 +1509,11 @@ return result;
               login_password: admin.password,
               record_id: record_id,
               texts_score: texts_score.toFixed(1),
+              texts_score_count: JSON.stringify(texts_score_count)
             }
-             $.post(server_url, post_data,
+
+            //console.log(post_data)
+             $.post(server_url, post_data ,
             function(data, status) {
               console.log(data)
               traget_model.fadeOut();

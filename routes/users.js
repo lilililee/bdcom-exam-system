@@ -42,7 +42,7 @@ router.post('/password', function(req, res, next) {
       if(req.body.login_id == db.users[i].id && req.body.login_password == db.users[i].password){
     
         db.users[i].password = req.body.user_newpassword;
-        fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));
+        fs.writeFileSync('../data/db.json',JSON.stringify(db));
         res.send({
               status:"success",
               info: "密码修改成功,请记住你的密码。下次请使用新密码登录。"
@@ -84,7 +84,7 @@ router.post('/message', function(req, res, next) {
     
     db.message.message_list.message_list_content.push(new_message);   
         
-    fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));  
+    fs.writeFileSync('../data/db.json',JSON.stringify(db));  
         res.send({
               status:"success",
               info: "留言提交成功"

@@ -188,7 +188,7 @@ router.post('/', function(req, res, next) {
         //db.exam.exam_list.exam_list_content = db_exam_list;
         //console.log(db.exam.exam_list.exam_list_content)
         //写入修改后的数据
-        fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
+        fs.writeFileSync('../data/db.json',JSON.stringify(db));    
 
         return;
       }
@@ -291,7 +291,7 @@ router.post('/upload',function(req, res, next) {
       // 2. 加入数据库
       db.exam.exam_list.exam_list_content.push(new_exam);
       // 3. 写入修改后的数据
-      fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));   
+      fs.writeFileSync('../data/db.json',JSON.stringify(db));   
       res.send({
         status: 'success',
         info: '添加考试（'+ new_exam.id +'）成功！<br>题目总共为'+new_exam.count.all.sum+'个，总分为'+ new_exam.count.all.score + '分！<br>如需继续添加考试，请刷新界面！'
@@ -377,7 +377,11 @@ router.post('/end', function(req, res, next) {
       //console.log(db_exam);
       
       var score = 0;
-
+      var score_count = {   //记录每一题的得分
+        selects: [],
+        judges: [],
+        texts: []
+      };
 
       console.log('开始统计选择题')
       record.answer.selects.forEach(function(item, index){
@@ -386,6 +390,9 @@ router.post('/end', function(req, res, next) {
         // console.log(cur_select.answer)
         if(item === cur_select.answer){
           score += cur_select.value * 1;
+          score_count.selects.push(cur_select.value);
+        } else {
+          score_count.selects.push('0');
         }
       });
 
@@ -396,14 +403,18 @@ router.post('/end', function(req, res, next) {
         // console.log(cur_judge.answer)
         if(item === cur_judge.answer){
           score += cur_judge.value * 1;
+          score_count.judges.push(cur_judge.value);       
+        } else {
+          score_count.judges.push('0');
         }
       })
       //console.log(score)
       record.score = score + '';
-      //console.log(record)
+      record.count = score_count;
+      console.log(record)
 
       db.record.record_list.record_list_content.push(record);
-      fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));   
+      fs.writeFileSync('../data/db.json',JSON.stringify(db));   
 
       res.send({
         status: 'success',
@@ -454,6 +465,8 @@ router.post('/check', function(req, res, next) {
   //读取数据库文件
   var db =JSON.parse(fs.readFileSync(file));
   //先验证管理员身份
+
+
   if(db.admin){
     for(var i = 0; i < db.admin.length; i++) {
     
@@ -469,6 +482,7 @@ router.post('/check', function(req, res, next) {
             if(db_record_list[j].id == req.body.record_id){
               db_record_list[j].is_check = 'yes';
               db_record_list[j].final_score = (db_record_list[j].score*1 + req.body.texts_score*1) + '';
+              db_record_list[j].count.texts = JSON.parse(req.body.texts_score_count);
               break;
             }
 
@@ -515,7 +529,7 @@ router.post('/check', function(req, res, next) {
         //db.exam.exam_list.exam_list_content = db_exam_list;
         //console.log(db.exam.exam_list.exam_list_content)
         //写入修改后的数据
-        fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
+        fs.writeFileSync('../data/db.json',JSON.stringify(db));    
 
         return;
       }
@@ -620,7 +634,7 @@ router.post('/query', function(req, res, next) {
         //先从数据库获取考试列表
         var db_record_list = db.record.record_list.record_list_content; 
         //当为发布考试操作时
-        console.log(req.body)
+        //console.log(req.body)
         if(typeof req.body.texts_score !== 'undefined'){ 
           console.log('正在进行阅卷(' +  req.body.record_id + ')操作')
 
@@ -680,7 +694,7 @@ router.post('/query', function(req, res, next) {
         //db.exam.exam_list.exam_list_content = db_exam_list;
         //console.log(db.exam.exam_list.exam_list_content)
         //写入修改后的数据
-        fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
+        fs.writeFileSync('../data/db.json',JSON.stringify(db));    
 
         return;
       }

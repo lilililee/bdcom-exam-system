@@ -59,8 +59,7 @@ router.post('/', function(req, res, next) {
                      temp_record.push(item);
                      //console.log(item)
                 } else {
-                  console.log(4444444444)
-                  console.log(item)
+                 
                 }
               })
              
@@ -108,7 +107,7 @@ router.post('/', function(req, res, next) {
           res.send(db);
         }
         //写入修改后的数据
-        fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
+        fs.writeFileSync('../data/db.json',JSON.stringify(db));    
   			//res.send(db);
   			return;
   		}
@@ -130,11 +129,11 @@ router.post('/', function(req, res, next) {
 
 router.get('/message', function(req, res, next) {
   //读取数据库文件
-  console.log('2222222211111111111111111111');
+  //console.log('2222222211111111111111111111');
   var db =JSON.parse(fs.readFileSync(file));
   //先验证管理员身份
     if(checkLogin(db.admin, req.query.login_id, req.query.login_password)){
-      console.log('11111111111111111111');
+      //console.log('11111111111111111111');
       res.send(db.message.message_list.message_list_content);
       return;
   }
@@ -148,14 +147,14 @@ router.post('/message',function(req, res,next){
     if(db.admin){
     for(var i = 0; i < db.admin.length; i++) {
       if(req.body.login_id == db.admin[i].id && req.body.login_password == db.admin[i].password){
-          console.log('2222222222222222222');
+          //console.log('2222222222222222222');
            for(var j = 0; j < db.message.message_list.message_list_content.length; j++){
              if(db.message.message_list.message_list_content[j].id === req.body.delete_message_id){
               db.message.message_list.message_list_content.splice(j,1);
               break;
             } 
           }
-         fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));
+         fs.writeFileSync('../data/db.json',JSON.stringify(db));
           res.send({
             status:"success",
             info:"成功"

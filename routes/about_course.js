@@ -93,7 +93,7 @@ router.post('/', function(req, res, next) {
           console.log("正在执行非法操作！");
         }
         //写入修改后的数据
-        fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));    
+        fs.writeFileSync('../data/db.json',JSON.stringify(db));    
   			//res.send(db);
   			return;
   		}
@@ -172,7 +172,7 @@ router.post('/upload',function(req, res, next) {
       // 2. 加入数据库
       db.course.course_list.course_list_content.push(new_course);
       // 3. 写入修改后的数据
-      fs.writeFileSync('../data/db.json',JSON.stringify(db, null, 4));   
+      fs.writeFileSync('../data/db.json',JSON.stringify(db));   
       res.send({
         status: 'success',
         info: '添加课件（'+ new_course.name +'）成功！'
