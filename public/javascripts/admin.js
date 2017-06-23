@@ -1379,6 +1379,7 @@ return result;
           var question_content = data.exam_info.content.texts;    //简答题内容
           question_content.forEach(function(que, index){
               var img_src = que.pic;
+              var img_tag = '';
               if(img_src != 'undefined') img_tag =  '<div class="img text-center"><img src="../../'+img_src+'" alt="说明图片"> </div>';
               
               var answer = user.answer.texts[index];

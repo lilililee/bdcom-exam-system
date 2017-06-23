@@ -3,6 +3,8 @@
   
   <head>
     <title>博达考试系统</title>
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no" />
+    <link rel="icon" href="/images/logo.ico" type="image/x-ico" /> 
     <link rel='stylesheet' href='/bootstrap-3.3.7-dist/css/bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/animate.css' />
@@ -44,7 +46,7 @@
         initAdmin('<%= data.id %>', '<%= data.password %>');
 
         setTimeout(function(){
-          $('.animated').removeClass('animated');
+          $('.animated').removeClass('animated').removeClass('bounceInUp').removeClass('bounceInRight').removeClass('bounceInLeft');
            $('.stop-click-shadow').css('display','none');
 
         },1500)

@@ -3,6 +3,8 @@
   
   <head>
     <title>博达考试系统</title>
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no" />
+    <link rel="icon" href="/images/logo.ico" type="image/x-ico" /> 
     <link rel='stylesheet' href='/bootstrap-3.3.7-dist/css/bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     
@@ -187,7 +189,7 @@
 
             $.post('./end',post_data,function(data){
             	if(data.status == 'success'){
-            		alert('提交成功！即将关闭考试界面...');
+            		alert('提交成功！');
             		window.close();
             	} else {
             		alert('提交失败！请重新提交...');
